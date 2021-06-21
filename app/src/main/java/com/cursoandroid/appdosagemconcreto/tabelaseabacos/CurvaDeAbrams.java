@@ -138,7 +138,7 @@ public class CurvaDeAbrams implements Serializable {
     }
 
     public Double[][] getCurva28DiasCP44() {
-        curva28DiasCP44[0][0] = 48.6;
+        curva28DiasCP44[0][0] = 48.60;
         curva28DiasCP44[0][1] = 0.4;
         curva28DiasCP44[1][0] = 42.1;
         curva28DiasCP44[1][1] = 0.45;
