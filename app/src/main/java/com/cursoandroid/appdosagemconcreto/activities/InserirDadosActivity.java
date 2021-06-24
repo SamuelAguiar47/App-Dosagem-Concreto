@@ -41,6 +41,7 @@ public class InserirDadosActivity extends AppCompatActivity {
 
     // Classes de calculo
     private Dosagem dosagem = new Dosagem();
+    String acao;
 
 
 
@@ -48,6 +49,11 @@ public class InserirDadosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inserir_dados);
+
+        // Recuperar dados da Intent
+        Bundle dados = getIntent().getExtras();
+        acao = dados.getString("acao");
+        Toast.makeText(this, acao, Toast.LENGTH_SHORT).show();
 
         // Caixas de Texto
         textInputFck = findViewById(R.id.textInputFck);
@@ -67,17 +73,30 @@ public class InserirDadosActivity extends AppCompatActivity {
         carregarDadosSpinner();
 
         // pré-configuração de teste
-        textInputFck.setText("20");
-        textInputAbatimento.setText("70");
-        textInputMassaEspecificaCimento.setText("3100");
-        textInputModuloDeFinuraAreia.setText("2.4");
-        textInputMassaEspecificaAreia.setText("2650");
-        textInputMassaUnitariaAreia.setText("1450");
-        textInputDiametroMaximoBrita.setText("25");
-        textInputMassaEspecificaBrita.setText("2750");
-        textInputMassaUnitariaCompBrita.setText("1550");
-        textInputMassaUnitariaBrita.setText("1430");
-
+        if (acao.equals("calcularNovoTraco")) {
+            textInputFck.setText("20");
+            textInputAbatimento.setText("70");
+            textInputMassaEspecificaCimento.setText("3100");
+            textInputModuloDeFinuraAreia.setText("2.4");
+            textInputMassaEspecificaAreia.setText("2650");
+            textInputMassaUnitariaAreia.setText("1450");
+            textInputDiametroMaximoBrita.setText("25");
+            textInputMassaEspecificaBrita.setText("2750");
+            textInputMassaUnitariaCompBrita.setText("1550");
+            textInputMassaUnitariaBrita.setText("1430");
+        } else if (acao.equals("editarTracoSalvo")) {
+            dosagem = (Dosagem) dados.getSerializable("dosagem");
+            /*textInputFck.setText(dosagem.concreto.getFck().toString());
+            textInputAbatimento.setText(dosagem.concreto.getAbatimento().toString());
+            textInputMassaEspecificaCimento.setText(dosagem.cimento.getMassaEspecifica().toString());
+            textInputModuloDeFinuraAreia.setText(dosagem.areia.getModuloDefinura().toString());
+            textInputMassaEspecificaAreia.setText(dosagem.areia.getMassaEspecifica().toString());
+            textInputMassaUnitariaAreia.setText(dosagem.areia.getMassaUnitaria().toString());
+            textInputDiametroMaximoBrita.setText(dosagem.brita.getDiametroMaximo().toString());
+            textInputMassaEspecificaBrita.setText(dosagem.brita.getMassaEspecifica().toString());
+            textInputMassaUnitariaCompBrita.setText(dosagem.brita.getMassaUnitariaComp().toString());
+            textInputMassaUnitariaBrita.setText(dosagem.brita.getMassaUnitaria().toString());*/
+        }
 
         buttonCalcularTraco = findViewById(R.id.buttonCalcularTraco);
         buttonCalcularTraco.setOnClickListener(new View.OnClickListener() {

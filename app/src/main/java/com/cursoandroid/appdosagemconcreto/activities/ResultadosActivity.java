@@ -396,6 +396,8 @@ public class ResultadosActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intentAbrirInserirDadosActivity = new Intent(getApplicationContext(), InserirDadosActivity.class);
+                    intentAbrirInserirDadosActivity.putExtra("acao", "editarTracoSalvo");
+                    //intentAbrirInserirDadosActivity.putExtra("dosagem", dosagem);
                     startActivity(intentAbrirInserirDadosActivity);
                 }
             });

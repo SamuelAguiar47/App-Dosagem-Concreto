@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentAbrirInserirDadosActivity = new Intent(getApplicationContext(), InserirDadosActivity.class);
+                intentAbrirInserirDadosActivity.putExtra("acao", "calcularNovoTraco");
                 startActivity(intentAbrirInserirDadosActivity);
             }
         });
