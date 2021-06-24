@@ -1100,7 +1100,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
@@ -1118,6 +1118,13 @@
             android:layout_weight="1"
             android:onClick="abrirDialogDescartar"
             android:text="Descartar" />
+
+        <Button
+            android:id="@+id/buttonEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="editar" />
 
         <Button
             android:id="@+id/buttonSalvar"

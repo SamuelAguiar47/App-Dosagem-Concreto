@@ -34,7 +34,6 @@ public class InserirDadosActivity extends AppCompatActivity {
 
     // Materiais
     private Cimento cimento = new Cimento();
-    private String tipoCimento;
     private Areia areia = new Areia();
     private Brita brita = new Brita();
     private Agua agua = new Agua();

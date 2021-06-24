@@ -35,6 +35,7 @@ public class ResultadosActivity extends AppCompatActivity {
 
     private Button buttonExibirMemoriaDeCalculo;
     private LinearLayout linearLayoutMemoriaDeCalculo;
+    private Button buttonEditar, buttonSalvar, buttonDescartar;
 
     // Classes de cálculo
     private Dosagem dosagem = new Dosagem();
@@ -58,6 +59,9 @@ public class ResultadosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados);
 
+
+
+
         // Recuperar dados da Intent
         Bundle dados = getIntent().getExtras();
 
@@ -71,6 +75,9 @@ public class ResultadosActivity extends AppCompatActivity {
 
 
         // Carregar elementos de interface
+        buttonSalvar = findViewById(R.id.buttonSalvar);
+        buttonDescartar = findViewById(R.id.buttonDescartar);
+        buttonEditar = findViewById(R.id.buttonEditar);
         buttonExibirMemoriaDeCalculo = findViewById(R.id.buttonExibirMemoriaDeCalculo);
         linearLayoutMemoriaDeCalculo = findViewById(R.id.linearLayoutMemoriaDeCalculo);
 
@@ -358,7 +365,6 @@ public class ResultadosActivity extends AppCompatActivity {
         });
 
         // Configurar botão de salvar
-        Button buttonSalvar = findViewById(R.id.buttonSalvar);
         buttonSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -367,13 +373,27 @@ public class ResultadosActivity extends AppCompatActivity {
         });
 
         // Configurar botão de descartar
-        Button buttonDescartar = findViewById(R.id.buttonDescartar);
         buttonDescartar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 abrirDialogDescartar(view);
             }
         });
+
+        //Configuração botão de editar
+        if (acao.equals("calcularNovoTraco")) {
+            buttonEditar.setVisibility(View.GONE);
+        }
+
+        if (acao.equals("abrirTracoSalvo")) {
+            buttonEditar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intentAbrirInserirDadosActivity = new Intent(getApplicationContext(), InserirDadosActivity.class);
+                    startActivity(intentAbrirInserirDadosActivity);
+                }
+            });
+        }
 
     }
 
@@ -404,7 +424,7 @@ public class ResultadosActivity extends AppCompatActivity {
         AlertDialog.Builder dialogSalvar = new AlertDialog.Builder( this );
 
         // Configurar título e mensagem
-        //dialogSalvar.setTitle("Nome do traço:");
+        dialogSalvar.setTitle("Salvar Traço");
 
         // Configurar cancelameto
         dialogSalvar.setCancelable(false);
