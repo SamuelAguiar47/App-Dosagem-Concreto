@@ -61,9 +61,6 @@ public class ResultadosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados);
 
-
-
-
         // Recuperar dados da Intent
         Bundle dados = getIntent().getExtras();
 
@@ -397,8 +394,9 @@ public class ResultadosActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent intentAbrirInserirDadosActivity = new Intent(getApplicationContext(), InserirDadosActivity.class);
                     intentAbrirInserirDadosActivity.putExtra("acao", "editarTracoSalvo");
-                    //intentAbrirInserirDadosActivity.putExtra("dosagem", dosagem);
+                    intentAbrirInserirDadosActivity.putExtra("position", position);
                     startActivity(intentAbrirInserirDadosActivity);
+                    finish();
                 }
             });
         }

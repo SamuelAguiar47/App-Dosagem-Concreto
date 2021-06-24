@@ -16,12 +16,16 @@ import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.Dosagem;
+import com.cursoandroid.appdosagemconcreto.helper.TracoDAO;
 import com.cursoandroid.appdosagemconcreto.materiais.Agua;
 import com.cursoandroid.appdosagemconcreto.materiais.Areia;
 import com.cursoandroid.appdosagemconcreto.materiais.Brita;
 import com.cursoandroid.appdosagemconcreto.materiais.Cimento;
 import com.cursoandroid.appdosagemconcreto.materiais.Concreto;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InserirDadosActivity extends AppCompatActivity {
 
@@ -42,7 +46,8 @@ public class InserirDadosActivity extends AppCompatActivity {
     // Classes de calculo
     private Dosagem dosagem = new Dosagem();
     String acao;
-
+    int position;
+    private List<Dosagem> listaDosagens = new ArrayList<>();
 
 
     @Override
@@ -53,7 +58,6 @@ public class InserirDadosActivity extends AppCompatActivity {
         // Recuperar dados da Intent
         Bundle dados = getIntent().getExtras();
         acao = dados.getString("acao");
-        Toast.makeText(this, acao, Toast.LENGTH_SHORT).show();
 
         // Caixas de Texto
         textInputFck = findViewById(R.id.textInputFck);
@@ -84,10 +88,48 @@ public class InserirDadosActivity extends AppCompatActivity {
             textInputMassaEspecificaBrita.setText("2750");
             textInputMassaUnitariaCompBrita.setText("1550");
             textInputMassaUnitariaBrita.setText("1430");
+
         } else if (acao.equals("editarTracoSalvo")) {
-            dosagem = (Dosagem) dados.getSerializable("dosagem");
-            /*textInputFck.setText(dosagem.concreto.getFck().toString());
+            position = dados.getInt("position");
+            //Listar dosagens
+            TracoDAO tracoDAO = new TracoDAO( getApplicationContext() );
+            listaDosagens = tracoDAO.listar();
+
+            //Recuperar dosagem
+            dosagem = listaDosagens.get(position);
+            textInputFck.setText(dosagem.concreto.getFck().toString());
             textInputAbatimento.setText(dosagem.concreto.getAbatimento().toString());
+            Double desvioPadrao = dosagem.concreto.getDesvioPadrao();
+            int spinnerPosition = 0;
+            if (desvioPadrao.equals(4.0)) {
+                spinnerPosition = 0;
+            } else if (desvioPadrao.equals(5.5)){
+                spinnerPosition = 1;
+            } else if (desvioPadrao.equals(7.0)){
+                spinnerPosition = 2;
+            }
+            spinnerDesvioPadrao.setSelection(spinnerPosition);
+
+            String tipoDeCimento = dosagem.cimento.getEspecificacoes();
+            spinnerPosition = 0;
+            if (tipoDeCimento.equals("CP29")) {
+                spinnerPosition = 0;
+            } else if (tipoDeCimento.equals("CP32")){
+                spinnerPosition = 1;
+            } else if (tipoDeCimento.equals("CP35")){
+                spinnerPosition = 2;
+            } else if (tipoDeCimento.equals("CP38")){
+                spinnerPosition = 3;
+            } else if (tipoDeCimento.equals("CP41")){
+                spinnerPosition = 4;
+            } else if (tipoDeCimento.equals("CP44")){
+                spinnerPosition = 5;
+            } else if (tipoDeCimento.equals("CP47")){
+                spinnerPosition = 6;
+            } else if (tipoDeCimento.equals("CP50")){
+                spinnerPosition = 7;
+            }
+            spinnerTipoDeCimento.setSelection(spinnerPosition);
             textInputMassaEspecificaCimento.setText(dosagem.cimento.getMassaEspecifica().toString());
             textInputModuloDeFinuraAreia.setText(dosagem.areia.getModuloDefinura().toString());
             textInputMassaEspecificaAreia.setText(dosagem.areia.getMassaEspecifica().toString());
@@ -95,7 +137,7 @@ public class InserirDadosActivity extends AppCompatActivity {
             textInputDiametroMaximoBrita.setText(dosagem.brita.getDiametroMaximo().toString());
             textInputMassaEspecificaBrita.setText(dosagem.brita.getMassaEspecifica().toString());
             textInputMassaUnitariaCompBrita.setText(dosagem.brita.getMassaUnitariaComp().toString());
-            textInputMassaUnitariaBrita.setText(dosagem.brita.getMassaUnitaria().toString());*/
+            textInputMassaUnitariaBrita.setText(dosagem.brita.getMassaUnitaria().toString());
         }
 
         buttonCalcularTraco = findViewById(R.id.buttonCalcularTraco);
@@ -119,7 +161,7 @@ public class InserirDadosActivity extends AppCompatActivity {
                     (textInputMassaUnitariaBrita.getText().toString() == null || textInputMassaUnitariaBrita.getText().toString().equals(""))
                 ) {
                     Toast.makeText(InserirDadosActivity.this, "Por favor preencha todos os campos", Toast.LENGTH_LONG).show();
-                } else {
+                } else if (acao.equals("calcularNovoTraco")) {
 
                     inserirDados();
                     dosagem.inserirInformacoesIncicias(concreto, cimento, areia, brita, agua);
@@ -130,6 +172,21 @@ public class InserirDadosActivity extends AppCompatActivity {
                     // Passar dados
                     intentAbrirResultadosActivity.putExtra("dosagem", dosagem);
                     intentAbrirResultadosActivity.putExtra("ação", "calcularNovoTraco");
+
+                    // Iniciar a Activity dos Resultados
+                    startActivity(intentAbrirResultadosActivity);
+                    finish();
+                } else if (acao.equals("editarTracoSalvo")) {
+                    inserirDados();
+                    dosagem.inserirInformacoesIncicias(concreto, cimento, areia, brita, agua);
+
+                    // Criar Intent
+                    Intent intentAbrirResultadosActivity = new Intent(getApplicationContext(), ResultadosActivity.class);
+
+                    // Passar dados
+                    intentAbrirResultadosActivity.putExtra("dosagem", dosagem);
+                    intentAbrirResultadosActivity.putExtra("ação", "abrirTracoSalvo");
+                    intentAbrirResultadosActivity.putExtra("position", position);
 
                     // Iniciar a Activity dos Resultados
                     startActivity(intentAbrirResultadosActivity);
