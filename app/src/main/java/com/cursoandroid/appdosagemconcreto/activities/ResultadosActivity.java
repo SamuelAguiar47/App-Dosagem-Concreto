@@ -37,6 +37,8 @@ public class ResultadosActivity extends AppCompatActivity {
     private LinearLayout linearLayoutMemoriaDeCalculo;
     private Button buttonEditar, buttonSalvar, buttonDescartar;
 
+    String tipoDeSalvamento;
+
     // Classes de cálculo
     private Dosagem dosagem = new Dosagem();
     private String acao;
@@ -368,7 +370,11 @@ public class ResultadosActivity extends AppCompatActivity {
         buttonSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                abrirDialogSalvar(view);
+                if (acao.equals("abrirTracoSalvo")) {
+                    abrirDialogSalvar(view);
+                } else {
+                    abrirDialogSalvarNovoTraco(view);
+                }
             }
         });
 
@@ -418,31 +424,70 @@ public class ResultadosActivity extends AppCompatActivity {
         dosagem.determinarTracoEmMassa();
     }
 
-    public void abrirDialogSalvar(View view) {
+    public void abrirDialogSalvar(final View view) {
 
         // Instanciar AlertDialog
         AlertDialog.Builder dialogSalvar = new AlertDialog.Builder( this );
 
         // Configurar título e mensagem
         dialogSalvar.setTitle("Salvar Traço");
+        dialogSalvar.setMessage("Deseja salvar como um novo traço ou sobrescrever o traço existente?");
 
         // Configurar cancelameto
         dialogSalvar.setCancelable(false);
 
+        // Configurar ações para sim e não
+        dialogSalvar.setPositiveButton("Novo", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                abrirDialogSalvarNovoTraco(view);
+            }
+        });
+
+        dialogSalvar.setNegativeButton("Sobrescrever", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                tipoDeSalvamento = "sobrescrever";
+            }
+        });
+
+        dialogSalvar.setNeutralButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+
+        // Criar e exibir AlertDialog
+        dialogSalvar.create();
+        dialogSalvar.show();
+
+    }
+
+    public void abrirDialogSalvarNovoTraco(View view) {
+
+        // Instanciar AlertDialog
+        AlertDialog.Builder dialogSalvarNovoTraco = new AlertDialog.Builder( this );
+
+        // Configurar título e mensagem
+        dialogSalvarNovoTraco.setTitle("Salvar Traço");
+
+        // Configurar cancelameto
+        dialogSalvarNovoTraco.setCancelable(false);
+
         // Configurar caixa de texto
-        final View viewSalvarContainer = LayoutInflater.from(this).inflate(
+        final View viewSalvarNovoTracoContainer = LayoutInflater.from(this).inflate(
                 R.layout.alert_dialog_salvar,
                 (LinearLayout) findViewById(R.id.alertDialogSalvarContainer)
         );
 
-        dialogSalvar.setView(viewSalvarContainer);
+        dialogSalvarNovoTraco.setView(viewSalvarNovoTracoContainer);
 
         // Configurar ações para sim e não
-        dialogSalvar.setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
+        dialogSalvarNovoTraco.setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                TextInputEditText textInputNomeDoTraco = viewSalvarContainer.findViewById(R.id.textInputNomeDoTraco);
+                TextInputEditText textInputNomeDoTraco = viewSalvarNovoTracoContainer.findViewById(R.id.textInputNomeDoTraco);
                 String nomeDoTraco = textInputNomeDoTraco.getText().toString();
                 if ( nomeDoTraco == null || nomeDoTraco.equals("")) {
                     dosagem.traco.setNomeDoTraco("Traço sem nome");
@@ -461,15 +506,15 @@ public class ResultadosActivity extends AppCompatActivity {
             }
         });
 
-        dialogSalvar.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        dialogSalvarNovoTraco.setNeutralButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
             }
         });
 
         // Criar e exibir AlertDialog
-        dialogSalvar.create();
-        dialogSalvar.show();
+        dialogSalvarNovoTraco.create();
+        dialogSalvarNovoTraco.show();
 
     }
 
