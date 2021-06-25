@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.Dosagem;
+import com.cursoandroid.appdosagemconcreto.classesdecalculo.Traco;
 import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
 import com.cursoandroid.appdosagemconcreto.helper.TracoDAO;
 import com.cursoandroid.appdosagemconcreto.materiais.Agua;
@@ -451,7 +452,13 @@ public class ResultadosActivity extends AppCompatActivity {
         dialogSalvar.setNegativeButton("Sobrescrever", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                tipoDeSalvamento = "sobrescrever";
+                TracoDAO tracoDAO = new TracoDAO(getApplicationContext());
+                if (tracoDAO.atualizar(dosagem)) {
+                    Toast.makeText(getApplicationContext(), "Sucesso ao atualizar traço!", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Erro ao atualizar traço!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -498,13 +505,17 @@ public class ResultadosActivity extends AppCompatActivity {
                 } else {
                     dosagem.traco.setNomeDoTraco(nomeDoTraco);
                 }
-                Toast.makeText(getApplicationContext(), "Salvando...", Toast.LENGTH_SHORT).show();
+
 
                 TracoDAO tracoDAO = new TracoDAO(getApplicationContext());
-                tracoDAO.salvar(dosagem);
+                try {
+                    tracoDAO.salvar(dosagem);
+                    Toast.makeText(getApplicationContext(), "Traço salvo com sucesso", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Erro ao salvar traço!", Toast.LENGTH_SHORT).show();
+                }
 
                 Intent intentAbrirTracosSalvosActivity = new Intent(getApplicationContext(), TracosSalvosActivity.class);
-                Intent intentFecharInserirDadosActivity = new Intent(getApplicationContext(), InserirDadosActivity.class);
                 startActivity(intentAbrirTracosSalvosActivity);
                 setResult(codigosDeActivity.inserirDadosActivity);
                 finish();

@@ -67,7 +67,39 @@ public class TracoDAO implements ITracoDAO{
 
     @Override
     public boolean atualizar(Dosagem dosagem) {
-        return false;
+
+        ContentValues cv = new ContentValues();
+        cv.put("nomeDoTraco", dosagem.traco.getNomeDoTraco());
+        cv.put("tracoExibido", dosagem.traco.getTracoExibido());
+        cv.put("tipoTraco", dosagem.traco.getTipoDeTraco());
+        cv.put("dataDoTraco", dosagem.traco.getDataDoTraco());
+
+        cv.put("desvioPadrao", dosagem.concreto.getDesvioPadrao());
+        cv.put("fck", dosagem.concreto.getFck());
+        cv.put("abatimento", dosagem.concreto.getAbatimento());
+
+        cv.put("tipoDeCimento", dosagem.cimento.getEspecificacoes());
+        cv.put("massaEspecificaCimento", dosagem.cimento.getMassaEspecifica());
+
+        cv.put("moduloDeFinuraAreia", dosagem.areia.getModuloDefinura());
+        cv.put("massaEspecificaAreia", dosagem.areia.getMassaEspecifica());
+        cv.put("massaUnitariaAreia", dosagem.areia.getMassaUnitaria());
+
+        cv.put("diametroMaximoBrita", dosagem.brita.getDiametroMaximo());
+        cv.put("massaEspecificaBrita", dosagem.brita.getMassaEspecifica());
+        cv.put("massaUnitariaCompBrita", dosagem.brita.getMassaUnitariaComp());
+        cv.put("massaUnitariaBrita", dosagem.brita.getMassaUnitaria());
+
+        try {
+            String[] args = {dosagem.getId().toString()};
+            escreve.update(DbHelper.TABELA_TRACOS, cv, "id=?", args);
+            Log.i("INFO", "Sucesso ao atualizar traço");
+        } catch (Exception e) {
+            Log.i("INFO", "Erro ao atualizar traço" + e.getMessage());
+            return false;
+        }
+
+        return true;
     }
 
     @Override
