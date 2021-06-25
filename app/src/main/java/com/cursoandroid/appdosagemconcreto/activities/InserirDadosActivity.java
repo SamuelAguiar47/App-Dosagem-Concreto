@@ -51,6 +51,9 @@ public class InserirDadosActivity extends AppCompatActivity {
     int position;
     private List<Dosagem> listaDosagens = new ArrayList<>();
 
+    // Helper
+    CodigosDeActivity codigosDeActivity = new CodigosDeActivity();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,7 +179,7 @@ public class InserirDadosActivity extends AppCompatActivity {
                     intentAbrirResultadosActivity.putExtra("ação", "calcularNovoTraco");
 
                     // Iniciar a Activity dos Resultados
-                    startActivityForResult(intentAbrirResultadosActivity, 1234);
+                    startActivityForResult(intentAbrirResultadosActivity, codigosDeActivity.inserirDadosActivity);
                 } else if (acao.equals("editarTracoSalvo")) {
                     inserirDados();
                     dosagem.inserirInformacoesIncicias(concreto, cimento, areia, brita, agua);
@@ -191,6 +194,7 @@ public class InserirDadosActivity extends AppCompatActivity {
 
                     // Iniciar a Activity dos Resultados
                     startActivity(intentAbrirResultadosActivity);
+                    setResult(codigosDeActivity.resultadosActivity);
                     finish();
                 }
             }
@@ -241,10 +245,10 @@ public class InserirDadosActivity extends AppCompatActivity {
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        CodigosDeActivity.
-        if (requestCode == ) {
-            if (resultCode == 1234) {
-                Intent i = getIntent();
+
+        if (requestCode == codigosDeActivity.inserirDadosActivity) {
+            if (resultCode == codigosDeActivity.inserirDadosActivity) {
+                //Intent i = getIntent();
                 //overridePendingTransition(0,0);
                 //i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 finish();

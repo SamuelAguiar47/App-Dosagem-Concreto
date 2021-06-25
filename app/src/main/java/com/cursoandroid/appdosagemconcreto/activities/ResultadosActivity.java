@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.Dosagem;
+import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
 import com.cursoandroid.appdosagemconcreto.helper.TracoDAO;
 import com.cursoandroid.appdosagemconcreto.materiais.Agua;
 import com.cursoandroid.appdosagemconcreto.materiais.Areia;
@@ -56,6 +57,9 @@ public class ResultadosActivity extends AppCompatActivity {
 
     SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
     Date data = new Date();
+
+    // Helper
+    CodigosDeActivity codigosDeActivity = new CodigosDeActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -396,8 +400,7 @@ public class ResultadosActivity extends AppCompatActivity {
                     Intent intentAbrirInserirDadosActivity = new Intent(getApplicationContext(), InserirDadosActivity.class);
                     intentAbrirInserirDadosActivity.putExtra("acao", "editarTracoSalvo");
                     intentAbrirInserirDadosActivity.putExtra("position", position);
-                    startActivity(intentAbrirInserirDadosActivity);
-                    finish();
+                    startActivityForResult(intentAbrirInserirDadosActivity, codigosDeActivity.resultadosActivity);
                 }
             });
         }
@@ -503,7 +506,7 @@ public class ResultadosActivity extends AppCompatActivity {
                 Intent intentAbrirTracosSalvosActivity = new Intent(getApplicationContext(), TracosSalvosActivity.class);
                 Intent intentFecharInserirDadosActivity = new Intent(getApplicationContext(), InserirDadosActivity.class);
                 startActivity(intentAbrirTracosSalvosActivity);
-                setResult(1234);
+                setResult(codigosDeActivity.inserirDadosActivity);
                 finish();
 
             }
@@ -556,6 +559,19 @@ public class ResultadosActivity extends AppCompatActivity {
         // Criar e exibir AlertDialog
         dialogDescartar.create();
         dialogDescartar.show();
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+        if (requestCode == codigosDeActivity.resultadosActivity) {
+            if (resultCode == codigosDeActivity.resultadosActivity) {
+                //Intent i = getIntent();
+                //overridePendingTransition(0,0);
+                //i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                finish();
+            }
+        }
 
     }
 
