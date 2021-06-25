@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         buttonNovoTraco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentAbrirInserirDadosActivity = new Intent(getApplicationContext(), InserirDadosActivity.class);
+                Intent intentAbrirInserirDadosActivity = new Intent(MainActivity.this, InserirDadosActivity.class);
                 intentAbrirInserirDadosActivity.putExtra("acao", "calcularNovoTraco");
                 startActivity(intentAbrirInserirDadosActivity);
             }

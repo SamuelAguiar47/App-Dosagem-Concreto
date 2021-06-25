@@ -3,6 +3,7 @@ package com.cursoandroid.appdosagemconcreto.activities;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -500,7 +501,9 @@ public class ResultadosActivity extends AppCompatActivity {
                 tracoDAO.salvar(dosagem);
 
                 Intent intentAbrirTracosSalvosActivity = new Intent(getApplicationContext(), TracosSalvosActivity.class);
+                Intent intentFecharInserirDadosActivity = new Intent(getApplicationContext(), InserirDadosActivity.class);
                 startActivity(intentAbrirTracosSalvosActivity);
+                setResult(1234);
                 finish();
 
             }
@@ -544,7 +547,7 @@ public class ResultadosActivity extends AppCompatActivity {
             }
         });
 
-        dialogDescartar.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        dialogDescartar.setNeutralButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
             }

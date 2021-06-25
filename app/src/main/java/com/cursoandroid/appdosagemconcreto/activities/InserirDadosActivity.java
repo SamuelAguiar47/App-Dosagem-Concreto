@@ -1,5 +1,6 @@
 package com.cursoandroid.appdosagemconcreto.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.Dosagem;
+import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
 import com.cursoandroid.appdosagemconcreto.helper.TracoDAO;
 import com.cursoandroid.appdosagemconcreto.materiais.Agua;
 import com.cursoandroid.appdosagemconcreto.materiais.Areia;
@@ -174,8 +176,7 @@ public class InserirDadosActivity extends AppCompatActivity {
                     intentAbrirResultadosActivity.putExtra("ação", "calcularNovoTraco");
 
                     // Iniciar a Activity dos Resultados
-                    startActivity(intentAbrirResultadosActivity);
-                    finish();
+                    startActivityForResult(intentAbrirResultadosActivity, 1234);
                 } else if (acao.equals("editarTracoSalvo")) {
                     inserirDados();
                     dosagem.inserirInformacoesIncicias(concreto, cimento, areia, brita, agua);
@@ -238,4 +239,17 @@ public class InserirDadosActivity extends AppCompatActivity {
 
     }
 
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        CodigosDeActivity.
+        if (requestCode == ) {
+            if (resultCode == 1234) {
+                Intent i = getIntent();
+                //overridePendingTransition(0,0);
+                //i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                finish();
+            }
+        }
+
+    }
 }
