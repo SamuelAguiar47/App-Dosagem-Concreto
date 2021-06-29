@@ -10,11 +10,13 @@ import android.os.Bundle;
 import android.transition.Transition;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.R;
@@ -36,8 +38,11 @@ public class InserirDadosActivity extends AppCompatActivity {
     // Elementos da interface
     private TextInputEditText textInputFck, textInputAbatimento, textInputMassaEspecificaCimento,
             textInputModuloDeFinuraAreia, textInputMassaEspecificaAreia, textInputMassaUnitariaAreia,
-            textInputDiametroMaximoBrita, textInputMassaEspecificaBrita, textInputMassaUnitariaCompBrita, textInputMassaUnitariaBrita;
-    private Spinner spinnerTipoDeCimento, spinnerDesvioPadrao;
+            textInputDiametroMaximoBrita, textInputMassaEspecificaBrita, textInputMassaUnitariaCompBrita,
+            textInputMassaUnitariaBrita;
+    private Spinner spinnerTipoDeCimento, spinnerDesvioPadrao, spinnerTipoDeTraco,
+            spinnerUnidadeCimento, spinnerUnidadeAreia, spinnerUnidadeBrita, spinnerUnidadeAgua;
+    private TextView textViewUnidadesTraco, textViewUnidadesCimento, textViewUnidadesAreia, textViewUnidadesBrita, textViewUnidadesAgua;
     private Button buttonCalcularTraco;
 
     // Materiais
@@ -78,10 +83,55 @@ public class InserirDadosActivity extends AppCompatActivity {
         textInputMassaUnitariaCompBrita = findViewById(R.id.textInputMassaUnitariaCompBrita);
         textInputMassaUnitariaBrita = findViewById(R.id.textInputMassaUnitariaBrita);
 
+        // Text Views
+        textViewUnidadesTraco = findViewById(R.id.textViewUnidadesTraco);
+        textViewUnidadesCimento = findViewById(R.id.textViewUnidadesCimento);
+        textViewUnidadesAreia = findViewById(R.id.textViewUnidadesAreia);
+        textViewUnidadesBrita = findViewById(R.id.textViewUnidadesBrita);
+        textViewUnidadesAgua = findViewById(R.id.textViewUnidadesAgua);
+
         //Spinners
         spinnerTipoDeCimento = findViewById(R.id.spinnerTipoDeCimento);
         spinnerDesvioPadrao = findViewById(R.id.spinnerDesvioPadrao);
+        spinnerTipoDeTraco = findViewById(R.id.spinnerTipoDeTraco);
+
+        spinnerUnidadeCimento = findViewById(R.id.spinnerUnidadeCimento);
+        spinnerUnidadeAreia = findViewById(R.id.spinnerUnidadeAreia);
+        spinnerUnidadeBrita = findViewById(R.id.spinnerUnidadeBrita);
+        spinnerUnidadeAgua = findViewById(R.id.spinnerUnidadeAgua);
         carregarDadosSpinner();
+        spinnerTipoDeTraco.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if ( i==0 ) {
+                    textViewUnidadesTraco.setVisibility(View.GONE);
+                    textViewUnidadesCimento.setVisibility(View.GONE);
+                    textViewUnidadesAreia.setVisibility(View.GONE);
+                    textViewUnidadesBrita.setVisibility(View.GONE);
+                    textViewUnidadesAgua.setVisibility(View.GONE);
+                    spinnerUnidadeCimento.setVisibility(View.GONE);
+                    spinnerUnidadeAreia.setVisibility(View.GONE);
+                    spinnerUnidadeBrita.setVisibility(View.GONE);
+                    spinnerUnidadeAgua.setVisibility(View.GONE);
+                } else if ( i==1 ) {
+                    textViewUnidadesTraco.setVisibility(View.VISIBLE);
+                    textViewUnidadesCimento.setVisibility(View.VISIBLE);
+                    textViewUnidadesAreia.setVisibility(View.VISIBLE);
+                    textViewUnidadesBrita.setVisibility(View.VISIBLE);
+                    textViewUnidadesAgua.setVisibility(View.VISIBLE);
+                    spinnerUnidadeCimento.setVisibility(View.VISIBLE);
+                    spinnerUnidadeAreia.setVisibility(View.VISIBLE);
+                    spinnerUnidadeBrita.setVisibility(View.VISIBLE);
+                    spinnerUnidadeAgua.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         // pré-configuração de teste
         if (acao.equals("calcularNovoTraco")) {
@@ -223,6 +273,18 @@ public class InserirDadosActivity extends AppCompatActivity {
 
     private void carregarDadosSpinner() {
 
+        // Spinner Desvio Padrão
+        String[] desviosPadrao = new String[]{
+                "4.0", "5.5", "7.0"
+        };
+        ArrayAdapter<String> arrayAdapterDesviosPadrao = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item,
+                desviosPadrao
+        );
+        arrayAdapterDesviosPadrao.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDesvioPadrao.setAdapter(arrayAdapterDesviosPadrao);
+
+        // Spinner Tipo de Cimento
         String[] tiposDeCimento = new String[]{
                 "CP29", "CP32", "CP35", "CP38", "CP41", "CP44", "CP47", "CP50"
         };
@@ -233,15 +295,60 @@ public class InserirDadosActivity extends AppCompatActivity {
         arrayAdapterTiposDeCimento.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTipoDeCimento.setAdapter(arrayAdapterTiposDeCimento);
 
-        String[] desviosPadrao = new String[]{
-                "4.0", "5.5", "7.0"
+        // Spinner Tipo de Traço
+        String[] tiposDeTraco = new String[]{
+                "Traço em massa", "Traço personalizado"
         };
-        ArrayAdapter<String> arrayAdapterDesviosPadrao = new ArrayAdapter<String>(
+        ArrayAdapter<String> arrayAdapterTiposDeTraco = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item,
-                desviosPadrao
+                tiposDeTraco
         );
-        arrayAdapterDesviosPadrao.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDesvioPadrao.setAdapter(arrayAdapterDesviosPadrao);
+        arrayAdapterTiposDeTraco.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTipoDeTraco.setAdapter(arrayAdapterTiposDeTraco);
+
+        // Spinner Unidades Cimento
+        String[] unidadesCimento = new String[]{
+                "Quilograma (Kg)", "Saco (50 Kg)", "Metros cúbicos (m³)"
+        };
+        ArrayAdapter<String> arrayAdapterUnidadesCimento = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item,
+                unidadesCimento
+        );
+        arrayAdapterUnidadesCimento.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUnidadeCimento.setAdapter(arrayAdapterUnidadesCimento);
+
+        // Spinner Unidades Areia
+        String[] unidadesAreia = new String[]{
+                "Quilograma (Kg)", "Metros cúbicos (m³)"
+        };
+        ArrayAdapter<String> arrayAdapterUnidadesAreia = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item,
+                unidadesAreia
+        );
+        arrayAdapterUnidadesAreia.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUnidadeAreia.setAdapter(arrayAdapterUnidadesAreia);
+
+        // Spinner Unidades Brita
+        String[] unidadesBrita = new String[]{
+                "Quilograma (Kg)", "Metros cúbicos (m³)"
+        };
+        ArrayAdapter<String> arrayAdapterUnidadesBrita = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item,
+                unidadesAreia
+        );
+        arrayAdapterUnidadesBrita.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUnidadeBrita.setAdapter(arrayAdapterUnidadesBrita);
+
+        // Spinner Unidades Água
+        String[] unidadesÁgua = new String[]{
+                "Litros (l)", "Metros cúbicos (m³)"
+        };
+        ArrayAdapter<String> arrayAdapterUnidadesAgua = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item,
+                unidadesÁgua
+        );
+        arrayAdapterUnidadesAgua.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUnidadeAgua.setAdapter(arrayAdapterUnidadesAgua);
 
     }
 

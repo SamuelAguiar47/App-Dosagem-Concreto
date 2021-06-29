@@ -212,6 +212,114 @@
                 android:inputType="numberDecimal"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="Traço"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:text="Tipo de traço:"
+            android:textColor="@color/colorTituloHint"
+            android:textSize="12sp" />
+
+        <Spinner
+            android:id="@+id/spinnerTipoDeTraco"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/textViewUnidadesTraco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="- Unidades do traço personalizado -"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewUnidadesCimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:text="Unidade para o cimento:"
+            android:textColor="@color/colorTituloHint"
+            android:textSize="12sp" />
+
+        <Spinner
+            android:id="@+id/spinnerUnidadeCimento"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/textViewUnidadesAreia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:text="Unidade para a areia:"
+            android:textColor="@color/colorTituloHint"
+            android:textSize="12sp" />
+
+        <Spinner
+            android:id="@+id/spinnerUnidadeAreia"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/textViewUnidadesBrita"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:text="Unidade para a brita:"
+            android:textColor="@color/colorTituloHint"
+            android:textSize="12sp" />
+
+        <Spinner
+            android:id="@+id/spinnerUnidadeBrita"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/textViewUnidadesAgua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:text="Unidade para a agua:"
+            android:textColor="@color/colorTituloHint"
+            android:textSize="12sp" />
+
+        <Spinner
+            android:id="@+id/spinnerUnidadeAgua"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="8dp" />
+
         <Button
             android:id="@+id/buttonCalcularTraco"
             android:layout_width="match_parent"
