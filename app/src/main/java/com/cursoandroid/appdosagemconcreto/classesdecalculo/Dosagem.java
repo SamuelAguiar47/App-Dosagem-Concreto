@@ -116,8 +116,10 @@ public class Dosagem implements Serializable {
 
     }
 
-    public void recalcularTraco() {
+    public void recalcularTraco(String unidadeCimento,String unidadeAreia, String unidadeBrita, String unidadeAgua) {
+        if (unidadeCimento.equals("kg")) {
 
+        }
     }
 
     public void nomearTraco(String nomeDoTraco) {

@@ -36,9 +36,12 @@ import java.util.Date;
 
 public class ResultadosActivity extends AppCompatActivity {
 
+    //Elementos de Interface
     private Button buttonExibirMemoriaDeCalculo;
     private LinearLayout linearLayoutMemoriaDeCalculo;
     private Button buttonEditar, buttonSalvar, buttonDescartar;
+    private Button buttonExibirCurvaDeAbrams, buttonExibirTabelaAbatXDmax, buttonExibirTabelaDmaxXMF;
+    private LinearLayout tabelaAbatXDmax, tabelaDmaxXMF;
 
     String tipoDeSalvamento;
 
@@ -85,6 +88,10 @@ public class ResultadosActivity extends AppCompatActivity {
         buttonEditar = findViewById(R.id.buttonEditar);
         buttonExibirMemoriaDeCalculo = findViewById(R.id.buttonExibirMemoriaDeCalculo);
         linearLayoutMemoriaDeCalculo = findViewById(R.id.linearLayoutMemoriaDeCalculo);
+        buttonExibirTabelaAbatXDmax = findViewById(R.id.buttonVisualizarAbatXDmax);
+        tabelaAbatXDmax = findViewById(R.id.tabelaAbatXDmax);
+        buttonExibirTabelaDmaxXMF = findViewById(R.id.buttonVisualizarDmaxXMF);
+        tabelaDmaxXMF = findViewById(R.id.tabelaDmaxXMF);
 
         // Memória de cálculo
 
@@ -365,6 +372,40 @@ public class ResultadosActivity extends AppCompatActivity {
                 } else {
                     linearLayoutMemoriaDeCalculo.setVisibility(View.GONE);
                     buttonExibirMemoriaDeCalculo.setText("Exibir memória de cálculo");
+                }
+            }
+        });
+
+        // Configurar buttonExibirTabelaAbatXDmax
+
+        tabelaAbatXDmax.setVisibility(View.GONE);
+
+        buttonExibirTabelaAbatXDmax.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              if (tabelaAbatXDmax.getVisibility() == View.GONE) {
+                  tabelaAbatXDmax.setVisibility(View.VISIBLE);
+                  buttonExibirTabelaAbatXDmax.setText("Ocultar tabela (ABAT. X Dmax)");
+              } else {
+                  tabelaAbatXDmax.setVisibility(View.GONE);
+                  buttonExibirTabelaAbatXDmax.setText("Visualizar tabela (ABAT. X Dmax)");
+              }
+            }
+        });
+
+        // Configurar buttonExibirTabelaAbatXDmax
+
+        tabelaDmaxXMF.setVisibility(View.GONE);
+
+        buttonExibirTabelaDmaxXMF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (tabelaDmaxXMF.getVisibility() == View.GONE) {
+                    tabelaDmaxXMF.setVisibility(View.VISIBLE);
+                    buttonExibirTabelaDmaxXMF.setText("Ocultar tabela (Dmax. X M.F.)");
+                } else {
+                    tabelaDmaxXMF.setVisibility(View.GONE);
+                    buttonExibirTabelaDmaxXMF.setText("Vizualizar tabela (Dmax. X M.F.)");
                 }
             }
         });
