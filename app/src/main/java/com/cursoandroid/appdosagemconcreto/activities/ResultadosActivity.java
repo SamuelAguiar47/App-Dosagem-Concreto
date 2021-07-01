@@ -92,6 +92,7 @@ public class ResultadosActivity extends AppCompatActivity {
         tabelaAbatXDmax = findViewById(R.id.tabelaAbatXDmax);
         buttonExibirTabelaDmaxXMF = findViewById(R.id.buttonVisualizarDmaxXMF);
         tabelaDmaxXMF = findViewById(R.id.tabelaDmaxXMF);
+        marcarTabelas();
 
         // Memória de cálculo
 
@@ -624,6 +625,101 @@ public class ResultadosActivity extends AppCompatActivity {
                 finish();
             }
         }
+
+    }
+
+    public void marcarTabelas() {
+
+        // Tabela Abat x Diam. Max.
+        String cel = null;
+
+        Double abat = dosagem.concreto.getAbatimento();
+        if (abat >= 40 && abat <= 60) {
+            TextView t1Abat40a60 = findViewById(R.id.t1Abat40a60);
+            t1Abat40a60.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel = "0";
+        } else if (abat > 60 && abat <= 80) {
+            TextView t1Abat60a80 = findViewById(R.id.t1Abat60a80);
+            t1Abat60a80.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel = "1";
+        } else if (abat >= 80 && abat <= 100) {
+            TextView t1Abat80a100 = findViewById(R.id.t1Abat80a100);
+            t1Abat80a100.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel = "2";
+        }
+
+        Double dim = dosagem.brita.getDiametroMaximo();
+        if (dim <= 9.5) {
+            TextView t1Dim9e5 = findViewById(R.id.t1Dim9e5);
+            t1Dim9e5.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel += "0";
+        } else if (dim <= 19) {
+            TextView t1Dim19 = findViewById(R.id.t1Dim19);
+            t1Dim19.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel += "1";
+        } else if (dim <= 25) {
+            TextView t1Dim25 = findViewById(R.id.t1Dim25);
+            t1Dim25.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel += "2";
+        } else if (dim <= 32) {
+            TextView t1Dim32 = findViewById(R.id.t1Dim32);
+            t1Dim32.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel += "3";
+        } else if (dim <= 38) {
+            TextView t1Dim38 = findViewById(R.id.t1Dim38);
+            t1Dim38.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel += "4";
+        }
+
+        if (cel.equals("00")) {
+            TextView t1c00 = findViewById(R.id.t1c00);
+            t1c00.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("01")) {
+            TextView t1c01 = findViewById(R.id.t1c01);
+            t1c01.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("02")) {
+            TextView t1c02 = findViewById(R.id.t1c02);
+            t1c02.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("03")) {
+            TextView t1c03 = findViewById(R.id.t1c03);
+            t1c03.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("04")) {
+            TextView t1c04 = findViewById(R.id.t1c04);
+            t1c04.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("10")) {
+            TextView t1c10 = findViewById(R.id.t1c10);
+            t1c10.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("11")) {
+            TextView t1c11 = findViewById(R.id.t1c11);
+            t1c11.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("12")) {
+            TextView t1c12 = findViewById(R.id.t1c12);
+            t1c12.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("13")) {
+            TextView t1c13 = findViewById(R.id.t1c13);
+            t1c13.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("14")) {
+            TextView t1c14 = findViewById(R.id.t1c14);
+            t1c14.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("20")) {
+            TextView t1c20 = findViewById(R.id.t1c20);
+            t1c20.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("21")) {
+            TextView t1c21 = findViewById(R.id.t1c21);
+            t1c21.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("22")) {
+            TextView t1c22 = findViewById(R.id.t1c22);
+            t1c22.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("23")) {
+            TextView t1c23 = findViewById(R.id.t1c23);
+            t1c23.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("24")) {
+            TextView t1c24 = findViewById(R.id.t1c24);
+            t1c24.setTextColor(getResources().getColor(R.color.colorAccent));
+        }
+
+
+
 
     }
 
