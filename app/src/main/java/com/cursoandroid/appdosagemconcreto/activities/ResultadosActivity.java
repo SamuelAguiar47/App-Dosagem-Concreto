@@ -144,7 +144,7 @@ public class ResultadosActivity extends AppCompatActivity {
 
         // Determinação do fator a/c
         TextView textViewDeterminacaoFatorAC = findViewById(R.id.textViewDeterminacaoFatorAC);
-        textViewDeterminacaoFatorAC.setText("a/c = " + arred3.format(dosagem.concreto.getFatorAguaCimento()));
+        textViewDeterminacaoFatorAC.setText("a/c = " + arred2x.format(dosagem.concreto.getFatorAguaCimento()));
 
         // Determinação do consumo de água
         TextView textViewDeterminacaoCA = findViewById(R.id.textViewDeterminacaoCA);
@@ -171,7 +171,7 @@ public class ResultadosActivity extends AppCompatActivity {
         // Cálculo do volume de areia
         TextView textViewVolumeDeAreiaCalculo = findViewById(R.id.textViewVolumeDeAreiaCalculo);
         textViewVolumeDeAreiaCalculo.setText("Vareia =  1 - (" + arred3.format(dosagem.cimento.getVolumeDeCimento()) +
-                                            " + " + arred3.format(dosagem.brita.getVolumeDeBrita()) + " + " + arred3.format(dosagem.agua.getVolumeDeAgua()) + ")");
+                " + " + arred3.format(dosagem.brita.getVolumeDeBrita()) + " + " + arred3.format(dosagem.agua.getVolumeDeAgua()) + ")");
 
         TextView textViewVolumeDeAreiaResultado = findViewById(R.id.textViewVolumeDeAreiaResultado);
         textViewVolumeDeAreiaResultado.setText("Vareia = " + arred3.format(dosagem.areia.getVolumeDeAreia()) + " m³/m³");
@@ -211,15 +211,14 @@ public class ResultadosActivity extends AppCompatActivity {
 
         TextView textViewTracoEmMassaResultado = findViewById(R.id.textViewTracoEmMassaResultado);
         textViewTracoEmMassaResultado.setText(arred2x.format(dosagem.getTracoEmMassa()[0]) + " : "
-                                            + arred2x.format(dosagem.getTracoEmMassa()[1]) + " : "
-                                            + arred2x.format(dosagem.getTracoEmMassa()[2]) + " : "
-                                            + arred2x.format(dosagem.getTracoEmMassa()[3]));
+                + arred2x.format(dosagem.getTracoEmMassa()[1]) + " : "
+                + arred2x.format(dosagem.getTracoEmMassa()[2]) + " : "
+                + arred2x.format(dosagem.getTracoEmMassa()[3]));
 
         dosagem.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
         dosagem.traco.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
         dosagem.traco.setTipoDeTraco("Traco em massa");
         dosagem.traco.setDataDoTraco(formataData.format(data));
-
 
 
         final TextView editTextTracoExibidoCimento = findViewById(R.id.editTextTracoExibidoCimento);
@@ -232,10 +231,10 @@ public class ResultadosActivity extends AppCompatActivity {
         editTextTracoExibidoAgua.setText(arred2x.format(dosagem.getTracoEmMassa()[3]));
 
         final Double[] tracoProporcao = new Double[4];
-        tracoProporcao[0] = Double.parseDouble(editTextTracoExibidoCimento.getText().toString().replace(",","."));
-        tracoProporcao[1] = Double.parseDouble(editTextTracoExibidoAreia.getText().toString().replace(",","."));
-        tracoProporcao[2] = Double.parseDouble(editTextTracoExibidoBrita.getText().toString().replace(",","."));
-        tracoProporcao[3] = Double.parseDouble(editTextTracoExibidoAgua.getText().toString().replace(",","."));
+        tracoProporcao[0] = Double.parseDouble(editTextTracoExibidoCimento.getText().toString().replace(",", "."));
+        tracoProporcao[1] = Double.parseDouble(editTextTracoExibidoAreia.getText().toString().replace(",", "."));
+        tracoProporcao[2] = Double.parseDouble(editTextTracoExibidoBrita.getText().toString().replace(",", "."));
+        tracoProporcao[3] = Double.parseDouble(editTextTracoExibidoAgua.getText().toString().replace(",", "."));
 
 
         editTextTracoExibidoCimento.addTextChangedListener(new TextWatcher() {
@@ -246,20 +245,20 @@ public class ResultadosActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    if (editTextTracoExibidoCimento.hasFocus()) {
-                        Double tracoCimentoInput;
-                        if (editTextTracoExibidoCimento.getText().toString().isEmpty()) {
-                            tracoCimentoInput = 0.0;
-                        } else {
-                            tracoCimentoInput = Double.parseDouble(editTextTracoExibidoCimento.getText().toString().replace(",", "."));
-                        }
-                        Double tracoAreiaMultiplicado = tracoCimentoInput * tracoProporcao[1];
-                        Double tracoBritaMultiplicado = tracoCimentoInput * tracoProporcao[2];
-                        Double tracoAguaMultiplicado = tracoCimentoInput * tracoProporcao[3];
-                        editTextTracoExibidoAreia.setText(arred2x.format(tracoAreiaMultiplicado));
-                        editTextTracoExibidoBrita.setText(arred2x.format(tracoBritaMultiplicado));
-                        editTextTracoExibidoAgua.setText(arred2x.format(tracoAguaMultiplicado));
+                if (editTextTracoExibidoCimento.hasFocus()) {
+                    Double tracoCimentoInput;
+                    if (editTextTracoExibidoCimento.getText().toString().isEmpty()) {
+                        tracoCimentoInput = 0.0;
+                    } else {
+                        tracoCimentoInput = Double.parseDouble(editTextTracoExibidoCimento.getText().toString().replace(",", "."));
                     }
+                    Double tracoAreiaMultiplicado = tracoCimentoInput * tracoProporcao[1];
+                    Double tracoBritaMultiplicado = tracoCimentoInput * tracoProporcao[2];
+                    Double tracoAguaMultiplicado = tracoCimentoInput * tracoProporcao[3];
+                    editTextTracoExibidoAreia.setText(arred2x.format(tracoAreiaMultiplicado));
+                    editTextTracoExibidoBrita.setText(arred2x.format(tracoBritaMultiplicado));
+                    editTextTracoExibidoAgua.setText(arred2x.format(tracoAguaMultiplicado));
+                }
             }
 
             @Override
@@ -276,20 +275,20 @@ public class ResultadosActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    if (editTextTracoExibidoAreia.hasFocus()) {
-                        Double tracoAreiaInput;
-                        if (editTextTracoExibidoAreia.getText().toString().isEmpty()) {
-                            tracoAreiaInput = 0.0;
-                        } else {
-                            tracoAreiaInput = Double.parseDouble(editTextTracoExibidoAreia.getText().toString().replace(",", "."));
-                        }
-                        Double tracoCimentoMultiplicado = tracoAreiaInput * tracoProporcao[0] / tracoProporcao[1];
-                        Double tracoBritaMultiplicado = tracoAreiaInput * tracoProporcao[2] / tracoProporcao[1];
-                        Double tracoAguaMultiplicado = tracoAreiaInput * tracoProporcao[3] / tracoProporcao[1];
-                        editTextTracoExibidoCimento.setText(arred2x.format(tracoCimentoMultiplicado));
-                        editTextTracoExibidoBrita.setText(arred2x.format(tracoBritaMultiplicado));
-                        editTextTracoExibidoAgua.setText(arred2x.format(tracoAguaMultiplicado));
+                if (editTextTracoExibidoAreia.hasFocus()) {
+                    Double tracoAreiaInput;
+                    if (editTextTracoExibidoAreia.getText().toString().isEmpty()) {
+                        tracoAreiaInput = 0.0;
+                    } else {
+                        tracoAreiaInput = Double.parseDouble(editTextTracoExibidoAreia.getText().toString().replace(",", "."));
                     }
+                    Double tracoCimentoMultiplicado = tracoAreiaInput * tracoProporcao[0] / tracoProporcao[1];
+                    Double tracoBritaMultiplicado = tracoAreiaInput * tracoProporcao[2] / tracoProporcao[1];
+                    Double tracoAguaMultiplicado = tracoAreiaInput * tracoProporcao[3] / tracoProporcao[1];
+                    editTextTracoExibidoCimento.setText(arred2x.format(tracoCimentoMultiplicado));
+                    editTextTracoExibidoBrita.setText(arred2x.format(tracoBritaMultiplicado));
+                    editTextTracoExibidoAgua.setText(arred2x.format(tracoAguaMultiplicado));
+                }
             }
 
             @Override
@@ -333,7 +332,6 @@ public class ResultadosActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
-
 
 
             @Override
@@ -384,13 +382,13 @@ public class ResultadosActivity extends AppCompatActivity {
         buttonExibirTabelaAbatXDmax.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              if (tabelaAbatXDmax.getVisibility() == View.GONE) {
-                  tabelaAbatXDmax.setVisibility(View.VISIBLE);
-                  buttonExibirTabelaAbatXDmax.setText("Ocultar tabela (ABAT. X Dmax)");
-              } else {
-                  tabelaAbatXDmax.setVisibility(View.GONE);
-                  buttonExibirTabelaAbatXDmax.setText("Visualizar tabela (ABAT. X Dmax)");
-              }
+                if (tabelaAbatXDmax.getVisibility() == View.GONE) {
+                    tabelaAbatXDmax.setVisibility(View.VISIBLE);
+                    buttonExibirTabelaAbatXDmax.setText("Ocultar tabela (ABAT. X Dmax)");
+                } else {
+                    tabelaAbatXDmax.setVisibility(View.GONE);
+                    buttonExibirTabelaAbatXDmax.setText("Visualizar tabela (ABAT. X Dmax)");
+                }
             }
         });
 
@@ -474,7 +472,7 @@ public class ResultadosActivity extends AppCompatActivity {
     public void abrirDialogSalvar(final View view) {
 
         // Instanciar AlertDialog
-        AlertDialog.Builder dialogSalvar = new AlertDialog.Builder( this );
+        AlertDialog.Builder dialogSalvar = new AlertDialog.Builder(this);
 
         // Configurar título e mensagem
         dialogSalvar.setTitle("Salvar Traço");
@@ -519,7 +517,7 @@ public class ResultadosActivity extends AppCompatActivity {
     public void abrirDialogSalvarNovoTraco(View view) {
 
         // Instanciar AlertDialog
-        AlertDialog.Builder dialogSalvarNovoTraco = new AlertDialog.Builder( this );
+        AlertDialog.Builder dialogSalvarNovoTraco = new AlertDialog.Builder(this);
 
         // Configurar título e mensagem
         dialogSalvarNovoTraco.setTitle("Salvar Traço");
@@ -542,7 +540,7 @@ public class ResultadosActivity extends AppCompatActivity {
 
                 TextInputEditText textInputNomeDoTraco = viewSalvarNovoTracoContainer.findViewById(R.id.textInputNomeDoTraco);
                 String nomeDoTraco = textInputNomeDoTraco.getText().toString();
-                if ( nomeDoTraco == null || nomeDoTraco.equals("")) {
+                if (nomeDoTraco == null || nomeDoTraco.equals("")) {
                     dosagem.traco.setNomeDoTraco("Traço sem nome");
                 } else {
                     dosagem.traco.setNomeDoTraco(nomeDoTraco);
@@ -580,7 +578,7 @@ public class ResultadosActivity extends AppCompatActivity {
     public void abrirDialogDescartar(View view) {
 
         // Instanciar AlertDialog
-        AlertDialog.Builder dialogDescartar = new AlertDialog.Builder( this );
+        AlertDialog.Builder dialogDescartar = new AlertDialog.Builder(this);
 
         // Configurar título e mensagem
         dialogDescartar.setTitle("Deseja realmente descartar este traço?");
@@ -594,7 +592,7 @@ public class ResultadosActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
 
                 TracoDAO tracoDAO = new TracoDAO(getApplicationContext());
-                if ( tracoDAO.deletar(dosagem) ) {
+                if (tracoDAO.deletar(dosagem)) {
                     Toast.makeText(getApplicationContext(), "Sucesso ao excluir traço!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Erro ao excluir traço!", Toast.LENGTH_SHORT).show();
@@ -764,8 +762,6 @@ public class ResultadosActivity extends AppCompatActivity {
             cel = "9";
         }
 
-
-
         dim = dosagem.brita.getDiametroMaximo();
         if (dim <= 9.5) {
             TextView t2Dim9e5 = findViewById(R.id.t2Dim9e5);
@@ -789,11 +785,160 @@ public class ResultadosActivity extends AppCompatActivity {
             cel += "4";
         }
 
-
+        if (cel.equals("00")) {
+            TextView t2c00 = findViewById(R.id.t2c00);
+            t2c00.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("01")) {
+            TextView t2c01 = findViewById(R.id.t2c01);
+            t2c01.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("02")) {
+            TextView t2c02 = findViewById(R.id.t2c02);
+            t2c02.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("03")) {
+            TextView t2c03 = findViewById(R.id.t2c03);
+            t2c03.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("04")) {
+            TextView t2c04 = findViewById(R.id.t2c04);
+            t2c04.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("10")) {
+            TextView t2c10 = findViewById(R.id.t2c10);
+            t2c10.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("11")) {
+            TextView t2c11 = findViewById(R.id.t2c11);
+            t2c11.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("12")) {
+            TextView t2c12 = findViewById(R.id.t2c12);
+            t2c12.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("13")) {
+            TextView t2c13 = findViewById(R.id.t2c13);
+            t2c13.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("14")) {
+            TextView t2c14 = findViewById(R.id.t2c14);
+            t2c14.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("20")) {
+            TextView t2c20 = findViewById(R.id.t2c20);
+            t2c20.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("21")) {
+            TextView t2c21 = findViewById(R.id.t2c21);
+            t2c21.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("22")) {
+            TextView t2c22 = findViewById(R.id.t2c22);
+            t2c22.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("23")) {
+            TextView t2c23 = findViewById(R.id.t2c23);
+            t2c23.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("24")) {
+            TextView t2c24 = findViewById(R.id.t2c24);
+            t2c24.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("30")) {
+            TextView t2c30 = findViewById(R.id.t2c30);
+            t2c30.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("31")) {
+            TextView t2c31 = findViewById(R.id.t2c31);
+            t2c31.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("32")) {
+            TextView t2c32 = findViewById(R.id.t2c32);
+            t2c32.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("33")) {
+            TextView t2c33 = findViewById(R.id.t2c33);
+            t2c33.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("34")) {
+            TextView t2c34 = findViewById(R.id.t2c34);
+            t2c34.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("40")) {
+            TextView t2c40 = findViewById(R.id.t2c40);
+            t2c40.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("41")) {
+            TextView t2c41 = findViewById(R.id.t2c41);
+            t2c41.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("42")) {
+            TextView t2c42 = findViewById(R.id.t2c42);
+            t2c42.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("43")) {
+            TextView t2c43 = findViewById(R.id.t2c43);
+            t2c43.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("44")) {
+            TextView t2c44 = findViewById(R.id.t2c44);
+            t2c44.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("50")) {
+            TextView t2c50 = findViewById(R.id.t2c50);
+            t2c50.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("51")) {
+            TextView t2c51 = findViewById(R.id.t2c51);
+            t2c51.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("52")) {
+            TextView t2c52 = findViewById(R.id.t2c52);
+            t2c52.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("53")) {
+            TextView t2c53 = findViewById(R.id.t2c53);
+            t2c53.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("54")) {
+            TextView t2c54 = findViewById(R.id.t2c54);
+            t2c54.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("60")) {
+            TextView t2c60 = findViewById(R.id.t2c60);
+            t2c60.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("61")) {
+            TextView t2c61 = findViewById(R.id.t2c61);
+            t2c61.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("62")) {
+            TextView t2c62 = findViewById(R.id.t2c62);
+            t2c62.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("63")) {
+            TextView t2c63 = findViewById(R.id.t2c63);
+            t2c63.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("64")) {
+            TextView t2c64 = findViewById(R.id.t2c64);
+            t2c64.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("70")) {
+            TextView t2c70 = findViewById(R.id.t2c70);
+            t2c70.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("71")) {
+            TextView t2c71 = findViewById(R.id.t2c71);
+            t2c71.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("72")) {
+            TextView t2c72 = findViewById(R.id.t2c72);
+            t2c72.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("73")) {
+            TextView t2c73 = findViewById(R.id.t2c73);
+            t2c73.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("74")) {
+            TextView t2c74 = findViewById(R.id.t2c74);
+            t2c74.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("80")) {
+            TextView t2c80 = findViewById(R.id.t2c80);
+            t2c80.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("81")) {
+            TextView t2c81 = findViewById(R.id.t2c81);
+            t2c81.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("82")) {
+            TextView t2c82 = findViewById(R.id.t2c82);
+            t2c82.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("83")) {
+            TextView t2c83 = findViewById(R.id.t2c83);
+            t2c83.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("84")) {
+            TextView t2c84 = findViewById(R.id.t2c84);
+            t2c84.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("90")) {
+            TextView t2c90 = findViewById(R.id.t2c90);
+            t2c90.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("91")) {
+            TextView t2c91 = findViewById(R.id.t2c91);
+            t2c91.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("92")) {
+            TextView t2c92 = findViewById(R.id.t2c92);
+            t2c92.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("93")) {
+            TextView t2c93 = findViewById(R.id.t2c93);
+            t2c93.setTextColor(getResources().getColor(R.color.colorAccent));
+        } else if (cel.equals("94")) {
+            TextView t2c94 = findViewById(R.id.t2c94);
+            t2c94.setTextColor(getResources().getColor(R.color.colorAccent));
+        }
 
 
     }
-
 
 
 }
