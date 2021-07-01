@@ -107,13 +107,13 @@ public class TabelaVolumeDeBrita implements Serializable {
 
         if (this.diametroMaximo <= 9.5) {
             coluna = 0;
-        } else if (this.diametroMaximo <19.5) {
+        } else if (this.diametroMaximo > 9.5 && this.diametroMaximo <= 19.5) {
             coluna = 1;
-        } else if (this.diametroMaximo <25.0) {
+        } else if (this.diametroMaximo > 19.5 && this.diametroMaximo <= 25.0) {
             coluna = 2;
-        } else if (this.diametroMaximo <32.0) {
+        } else if (this.diametroMaximo > 25.0 && this.diametroMaximo <= 32.0) {
             coluna = 3;
-        } else if (this.diametroMaximo <38.0) {
+        } else if (this.diametroMaximo > 32.0 && this.diametroMaximo <= 38.0) {
             coluna = 4;
         }
 

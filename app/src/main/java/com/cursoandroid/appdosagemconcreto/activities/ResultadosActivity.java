@@ -718,6 +718,77 @@ public class ResultadosActivity extends AppCompatActivity {
             t1c24.setTextColor(getResources().getColor(R.color.colorAccent));
         }
 
+        // Tabela Diam. Max. x Mod. de Finura
+        cel = null;
+
+        Double mf = dosagem.areia.getModuloDefinura();
+        if (mf == 1.8) {
+            TextView t2MF18 = findViewById(R.id.t2MF18);
+            t2MF18.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel = "0";
+        } else if (mf == 2.0) {
+            TextView t2MF20 = findViewById(R.id.t2MF20);
+            t2MF20.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel = "1";
+        } else if (mf == 2.2) {
+            TextView t2MF22 = findViewById(R.id.t2MF22);
+            t2MF22.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel = "2";
+        } else if (mf == 2.4) {
+            TextView t2MF24 = findViewById(R.id.t2MF24);
+            t2MF24.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel = "3";
+        } else if (mf == 2.6) {
+            TextView t2MF26 = findViewById(R.id.t2MF26);
+            t2MF26.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel = "4";
+        } else if (mf == 2.8) {
+            TextView t2MF28 = findViewById(R.id.t2MF28);
+            t2MF28.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel = "5";
+        } else if (mf == 3.0) {
+            TextView t2MF30 = findViewById(R.id.t2MF30);
+            t2MF30.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel = "6";
+        } else if (mf == 3.2) {
+            TextView t2MF32 = findViewById(R.id.t2MF32);
+            t2MF32.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel = "7";
+        } else if (mf == 3.4) {
+            TextView t2MF34 = findViewById(R.id.t2MF34);
+            t2MF34.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel = "8";
+        } else if (mf == 3.6) {
+            TextView t2MF36 = findViewById(R.id.t2MF36);
+            t2MF36.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel = "9";
+        }
+
+
+
+        dim = dosagem.brita.getDiametroMaximo();
+        if (dim <= 9.5) {
+            TextView t2Dim9e5 = findViewById(R.id.t2Dim9e5);
+            t2Dim9e5.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel += "0";
+        } else if (dim <= 19) {
+            TextView t2Dim19 = findViewById(R.id.t2Dim19);
+            t2Dim19.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel += "1";
+        } else if (dim <= 25) {
+            TextView t2Dim25 = findViewById(R.id.t2Dim25);
+            t2Dim25.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel += "2";
+        } else if (dim <= 32) {
+            TextView t2Dim32 = findViewById(R.id.t2Dim32);
+            t2Dim32.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel += "3";
+        } else if (dim <= 38) {
+            TextView t2Dim38 = findViewById(R.id.t2Dim38);
+            t2Dim38.setTextColor(getResources().getColor(R.color.colorAccent));
+            cel += "4";
+        }
+
 
 
 
