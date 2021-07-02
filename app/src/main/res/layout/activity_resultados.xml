@@ -482,6 +482,13 @@
             android:layout_marginRight="24dp"
             android:text="Visualizar curva de Abrams" />
 
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/curvaDeAbrams"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginRight="28dp" />
+
         <TextView
             android:id="@+id/textView21"
             android:layout_width="match_parent"
