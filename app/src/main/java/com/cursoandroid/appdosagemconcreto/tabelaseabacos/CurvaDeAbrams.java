@@ -209,6 +209,10 @@ public class CurvaDeAbrams implements Serializable {
 
     // Métodos
 
+
+    public CurvaDeAbrams() {
+    }
+
     public CurvaDeAbrams(Double fcj, String especific) {
         this.fcj = fcj;
         if (especific.equals("CP29")) {

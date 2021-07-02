@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,21 +27,34 @@ import com.cursoandroid.appdosagemconcreto.materiais.Areia;
 import com.cursoandroid.appdosagemconcreto.materiais.Brita;
 import com.cursoandroid.appdosagemconcreto.materiais.Cimento;
 import com.cursoandroid.appdosagemconcreto.materiais.Concreto;
+import com.cursoandroid.appdosagemconcreto.tabelaseabacos.CurvaDeAbrams;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 public class ResultadosActivity extends AppCompatActivity {
+
+    private static final String TAG = "ResultadosActivity";
 
     //Elementos de Interface
     private Button buttonExibirMemoriaDeCalculo;
     private LinearLayout linearLayoutMemoriaDeCalculo;
     private Button buttonEditar, buttonSalvar, buttonDescartar;
     private Button buttonExibirCurvaDeAbrams, buttonExibirTabelaAbatXDmax, buttonExibirTabelaDmaxXMF;
+    private LineChart graficoCurvaDeAbrams;
     private LinearLayout tabelaAbatXDmax, tabelaDmaxXMF;
 
     String tipoDeSalvamento;
@@ -49,6 +63,8 @@ public class ResultadosActivity extends AppCompatActivity {
     private Dosagem dosagem = new Dosagem();
     private String acao;
     private int position;
+
+    //Tabelas e Abacos
 
     // Classes de arredondamento e formatação
     private DecimalFormat arred0 = new DecimalFormat("####");
@@ -88,11 +104,20 @@ public class ResultadosActivity extends AppCompatActivity {
         buttonEditar = findViewById(R.id.buttonEditar);
         buttonExibirMemoriaDeCalculo = findViewById(R.id.buttonExibirMemoriaDeCalculo);
         linearLayoutMemoriaDeCalculo = findViewById(R.id.linearLayoutMemoriaDeCalculo);
+        buttonExibirCurvaDeAbrams = findViewById(R.id.buttonVisualizarCurvaDeAbrams);
         buttonExibirTabelaAbatXDmax = findViewById(R.id.buttonVisualizarAbatXDmax);
         tabelaAbatXDmax = findViewById(R.id.tabelaAbatXDmax);
         buttonExibirTabelaDmaxXMF = findViewById(R.id.buttonVisualizarDmaxXMF);
         tabelaDmaxXMF = findViewById(R.id.tabelaDmaxXMF);
         marcarTabelas();
+
+        // Gráfico da curva de abrams
+        graficoCurvaDeAbrams = (LineChart) findViewById(R.id.graficoCurvaDeAbrams);
+        configurarGraficoCurvaDeAbrams();
+
+        //graficoCurvaDeAbrams.setOnChartGestureListener(ResultadosActivity.this);
+        //graficoCurvaDeAbrams.setOnChartValueSelectedListener(ResultadosActivity.this);
+
 
         // Memória de cálculo
 
@@ -375,6 +400,25 @@ public class ResultadosActivity extends AppCompatActivity {
             }
         });
 
+
+        // Configurar buttonExibirCurvaDeAbrams
+
+        //graficoCurvaDeAbrams.setVisibility(View.GONE);
+
+        buttonExibirCurvaDeAbrams.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (graficoCurvaDeAbrams.getVisibility() == View.GONE) {
+                    graficoCurvaDeAbrams.setVisibility(View.VISIBLE);
+                    buttonExibirCurvaDeAbrams.setText("Ocultar Curva de Abrams");
+                } else {
+                    graficoCurvaDeAbrams.setVisibility(View.GONE);
+                    buttonExibirTabelaAbatXDmax.setText("Visualizar Curva de Abrams");
+                }
+            }
+        });
+
+
         // Configurar buttonExibirTabelaAbatXDmax
 
         tabelaAbatXDmax.setVisibility(View.GONE);
@@ -392,7 +436,7 @@ public class ResultadosActivity extends AppCompatActivity {
             }
         });
 
-        // Configurar buttonExibirTabelaAbatXDmax
+        // Configurar buttonExibirTabelaDmaxXMF
 
         tabelaDmaxXMF.setVisibility(View.GONE);
 
@@ -938,6 +982,66 @@ public class ResultadosActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public void configurarGraficoCurvaDeAbrams() {
+
+        graficoCurvaDeAbrams.setDragEnabled(true);
+        graficoCurvaDeAbrams.setScaleEnabled(true);
+
+        ArrayList<Entry> yValues = new ArrayList<>();
+
+        /*CurvaDeAbrams curvaDeAbrams = new CurvaDeAbrams();
+        Double[][] curvaSelecionada = new Double[9][2];*/
+
+        /*if (dosagem.cimento.getEspecificacoes().equals("CP29")) {
+            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP29();
+        } else if (dosagem.cimento.getEspecificacoes().equals("CP32")) {
+            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP32();
+        } else  if (dosagem.cimento.getEspecificacoes().equals("CP35")) {
+            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP35();
+        } else  if (dosagem.cimento.getEspecificacoes().equals("CP38")) {
+            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP38();
+        } else  if (dosagem.cimento.getEspecificacoes().equals("CP41")) {
+            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP41();
+        } else  if (dosagem.cimento.getEspecificacoes().equals("CP44")) {
+            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP44();
+        } else  if (dosagem.cimento.getEspecificacoes().equals("CP47")) {
+            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP47();
+        } else  if (dosagem.cimento.getEspecificacoes().equals("CP50")) {
+            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP50();
+        }*/
+
+        /*int cont = 0;
+        while (cont <= 8) {
+            yValues.add(new Entry(Float.parseFloat(curvaSelecionada[cont][1].toString()), Float.parseFloat(curvaSelecionada[cont][0].toString())));
+        }*/
+
+        yValues.add(new Entry(0.4f, 31.8f));
+        yValues.add(new Entry(0.45f, 28.0f));
+        yValues.add(new Entry(0.50f, 24.2f));
+        yValues.add(new Entry(0.55f, 21.2f));
+        yValues.add(new Entry(0.60f, 18.7f));
+        yValues.add(new Entry(0.65f, 16.2f));
+        yValues.add(new Entry(0.70f, 14.0f));
+        yValues.add(new Entry(0.75f, 12.2f));
+        yValues.add(new Entry(0.80f, 10.8f));
+
+        LineDataSet set1 = new LineDataSet(yValues, "Data Set 1");
+
+        //set1.setFillAlpha(0);
+
+        set1.setColor(Color.RED, 255);
+        set1.setLineWidth(2f);
+        set1.setCircleColor(getResources().getColor(R.color.colorAccent));
+        set1.setValueTextSize(10f);
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        LineData dadosGrafico = new LineData(dataSets);
+
+        graficoCurvaDeAbrams.setData(dadosGrafico);
     }
 
 
