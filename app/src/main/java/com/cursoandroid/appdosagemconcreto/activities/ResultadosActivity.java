@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -29,10 +30,14 @@ import com.cursoandroid.appdosagemconcreto.materiais.Cimento;
 import com.cursoandroid.appdosagemconcreto.materiais.Concreto;
 import com.cursoandroid.appdosagemconcreto.tabelaseabacos.CurvaDeAbrams;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -44,6 +49,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+
+import static com.github.mikephil.charting.components.LimitLine.LimitLabelPosition.LEFT_BOTTOM;
+import static com.github.mikephil.charting.components.LimitLine.LimitLabelPosition.LEFT_TOP;
 
 public class ResultadosActivity extends AppCompatActivity {
 
@@ -113,7 +121,6 @@ public class ResultadosActivity extends AppCompatActivity {
 
         // Gráfico da curva de abrams
         graficoCurvaDeAbrams = (LineChart) findViewById(R.id.graficoCurvaDeAbrams);
-        configurarGraficoCurvaDeAbrams();
 
         //graficoCurvaDeAbrams.setOnChartGestureListener(ResultadosActivity.this);
         //graficoCurvaDeAbrams.setOnChartValueSelectedListener(ResultadosActivity.this);
@@ -165,11 +172,12 @@ public class ResultadosActivity extends AppCompatActivity {
         textViewFcjCalculo.setText("Fcj = " + arred1X.format(dosagem.concreto.getFck()) + " + 1,65*" + arred1.format(dosagem.concreto.getDesvioPadrao()));
 
         TextView textViewFcjResultado = findViewById(R.id.textViewFcjResultado);
-        textViewFcjResultado.setText("Fcj = " + arred3.format(dosagem.concreto.getFcj()) + " Mpa");
+        textViewFcjResultado.setText("Fcj = " + arred2x.format(dosagem.concreto.getFcj()) + " Mpa");
 
         // Determinação do fator a/c
         TextView textViewDeterminacaoFatorAC = findViewById(R.id.textViewDeterminacaoFatorAC);
         textViewDeterminacaoFatorAC.setText("a/c = " + arred2x.format(dosagem.concreto.getFatorAguaCimento()));
+        configurarGraficoCurvaDeAbrams();
 
         // Determinação do consumo de água
         TextView textViewDeterminacaoCA = findViewById(R.id.textViewDeterminacaoCA);
@@ -991,41 +999,16 @@ public class ResultadosActivity extends AppCompatActivity {
 
         ArrayList<Entry> yValues = new ArrayList<>();
 
-        /*CurvaDeAbrams curvaDeAbrams = new CurvaDeAbrams();
-        Double[][] curvaSelecionada = new Double[9][2];*/
+        CurvaDeAbrams curvaDeAbrams = dosagem.curvaDeAbrams;
 
-        /*if (dosagem.cimento.getEspecificacoes().equals("CP29")) {
-            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP29();
-        } else if (dosagem.cimento.getEspecificacoes().equals("CP32")) {
-            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP32();
-        } else  if (dosagem.cimento.getEspecificacoes().equals("CP35")) {
-            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP35();
-        } else  if (dosagem.cimento.getEspecificacoes().equals("CP38")) {
-            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP38();
-        } else  if (dosagem.cimento.getEspecificacoes().equals("CP41")) {
-            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP41();
-        } else  if (dosagem.cimento.getEspecificacoes().equals("CP44")) {
-            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP44();
-        } else  if (dosagem.cimento.getEspecificacoes().equals("CP47")) {
-            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP47();
-        } else  if (dosagem.cimento.getEspecificacoes().equals("CP50")) {
-            curvaSelecionada = curvaDeAbrams.getCurva28DiasCP50();
-        }*/
 
-        /*int cont = 0;
-        while (cont <= 8) {
-            yValues.add(new Entry(Float.parseFloat(curvaSelecionada[cont][1].toString()), Float.parseFloat(curvaSelecionada[cont][0].toString())));
-        }*/
-
-        yValues.add(new Entry(0.4f, 31.8f));
-        yValues.add(new Entry(0.45f, 28.0f));
-        yValues.add(new Entry(0.50f, 24.2f));
-        yValues.add(new Entry(0.55f, 21.2f));
-        yValues.add(new Entry(0.60f, 18.7f));
-        yValues.add(new Entry(0.65f, 16.2f));
-        yValues.add(new Entry(0.70f, 14.0f));
-        yValues.add(new Entry(0.75f, 12.2f));
-        yValues.add(new Entry(0.80f, 10.8f));
+        Double cont = 0.4;
+        while (cont < 0.85) {
+            Float x = Float.valueOf(arred3x.format(cont).replace(",","."));
+            Float y = Float.parseFloat(arred3x.format(curvaDeAbrams.calcularFcjPeloFatorAC(cont)).replace(",","."));
+            yValues.add(new Entry( x , y));
+            cont += 0.05;
+        }
 
         LineDataSet set1 = new LineDataSet(yValues, "Data Set 1");
 
@@ -1033,8 +1016,91 @@ public class ResultadosActivity extends AppCompatActivity {
 
         set1.setColor(Color.RED, 255);
         set1.setLineWidth(2f);
-        set1.setCircleColor(getResources().getColor(R.color.colorAccent));
+        set1.setCircleColor(Color.RED);
+        set1.setCircleHoleColor(Color.TRANSPARENT);
         set1.setValueTextSize(10f);
+        set1.setLabel("Curva " + dosagem.cimento.getEspecificacoes());
+
+        graficoCurvaDeAbrams.getAxisRight().setEnabled(false);
+        graficoCurvaDeAbrams.setDescription(null);
+
+        Float fatorACmarcacao = Float.parseFloat(arred2x.format(dosagem.concreto.getFatorAguaCimento()).replace(",","."));
+        LimitLine marcacaoFatorAC = new LimitLine( fatorACmarcacao, arred2x.format(dosagem.concreto.getFatorAguaCimento()));
+        marcacaoFatorAC.setLineWidth(1.5f);
+        marcacaoFatorAC.setTextSize(12f);
+        marcacaoFatorAC.setTextColor(getResources().getColor(R.color.colorAccent));
+
+        Float fcjmarcacao = Float.parseFloat(arred2x.format(dosagem.concreto.getFcj()).replace(",","."));
+        LimitLine marcacaoFcj = new LimitLine( fcjmarcacao, arred2x.format(dosagem.concreto.getFcj()));
+        marcacaoFcj.setLineWidth(1.5f);
+        marcacaoFcj.setTextSize(12f);
+        marcacaoFcj.setLabelPosition(LEFT_BOTTOM);
+        marcacaoFcj.setTextColor(getResources().getColor(R.color.colorAccent));
+
+        XAxis xAxis = graficoCurvaDeAbrams.getXAxis();
+        xAxis.setAxisMinimum(0.37f);
+        xAxis.setAxisMaximum(0.83f);
+        xAxis.setGranularity(0.1f);
+        xAxis.setTextColor(getResources().getColor(R.color.colorTracoDivisao));
+        xAxis.addLimitLine(marcacaoFatorAC);
+
+        YAxis yAxis = graficoCurvaDeAbrams.getAxisLeft();
+        yAxis.setTextColor(getResources().getColor(R.color.colorTracoDivisao));
+        yAxis.addLimitLine(marcacaoFcj);
+
+        graficoCurvaDeAbrams.setOnChartGestureListener(new OnChartGestureListener() {
+            @Override
+            public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+
+            }
+
+            @Override
+            public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+                XAxis xAxis = graficoCurvaDeAbrams.getXAxis();
+                if (graficoCurvaDeAbrams.getScaleX() == 1) {
+                    xAxis.setGranularity(0.1f);
+                    xAxis.setGranularityEnabled(true);
+                } else {
+                    xAxis.setGranularityEnabled(false);
+                }
+            }
+
+            @Override
+            public void onChartLongPressed(MotionEvent me) {
+
+            }
+
+            @Override
+            public void onChartDoubleTapped(MotionEvent me) {
+
+            }
+
+            @Override
+            public void onChartSingleTapped(MotionEvent me) {
+
+            }
+
+            @Override
+            public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+
+            }
+
+            @Override
+            public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+                XAxis xAxis = graficoCurvaDeAbrams.getXAxis();
+                if (scaleX == 1) {
+                    xAxis.setGranularity(0.1f);
+                    xAxis.setGranularityEnabled(true);
+                } else {
+                    xAxis.setGranularityEnabled(false);
+                }
+            }
+
+            @Override
+            public void onChartTranslate(MotionEvent me, float dX, float dY) {
+
+            }
+        });
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(set1);

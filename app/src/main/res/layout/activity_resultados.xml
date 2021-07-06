@@ -486,8 +486,8 @@
             android:id="@+id/graficoCurvaDeAbrams"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginLeft="28dp"
-            android:layout_marginRight="28dp" />
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="14dp" />
 
         <TextView
             android:id="@+id/textView21"

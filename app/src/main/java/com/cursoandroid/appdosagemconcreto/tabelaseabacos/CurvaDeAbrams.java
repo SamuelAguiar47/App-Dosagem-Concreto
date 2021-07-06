@@ -7,7 +7,6 @@ import java.io.Serializable;
 public class CurvaDeAbrams implements Serializable {
 
     // Atributos
-
     private Double fcj;
     private Double fatorAguaCimentoObtido;
 
@@ -20,6 +19,9 @@ public class CurvaDeAbrams implements Serializable {
     private Double[][] curva28DiasCP44 = new Double[9][2];
     private Double[][] curva28DiasCP47 = new Double[9][2];
     private Double[][] curva28DiasCP50 = new Double[9][2];
+
+    //Coeficientes
+    Double K1, K2;
 
 
     public Double[][] getCurva28DiasCP29() {
@@ -357,11 +359,16 @@ public class CurvaDeAbrams implements Serializable {
         Double Sxy = somaxyLinha-(somayLinha*somax)/n;
         Double b = Sxy/Sxx;
         Double a = (somayLinha/n)-(b*(somax/n));
-        Double K1 = Math.pow(10, a);
-        Double K2 = 1/Math.pow(10, b);
+        K1 = Math.pow(10, a);
+        K2 = 1/Math.pow(10, b);
         Double fatorAC = (-Math.log10(fcj)+Math.log10(K1))/Math.log10(K2);
         return (fatorAC);
 
+    }
+
+    public Double calcularFcjPeloFatorAC(Double fatorAC) {
+        Double fcj = K1/Math.pow(K2, fatorAC);
+        return fcj;
     }
 
     // Getters e Setters
