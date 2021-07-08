@@ -64,6 +64,7 @@ public class ResultadosActivity extends AppCompatActivity {
     private Button buttonExibirCurvaDeAbrams, buttonExibirTabelaAbatXDmax, buttonExibirTabelaDmaxXMF;
     private LineChart graficoCurvaDeAbrams;
     private LinearLayout tabelaAbatXDmax, tabelaDmaxXMF;
+    private TextView textViewTituloTipoDeTraco;
 
     String tipoDeSalvamento;
 
@@ -110,6 +111,10 @@ public class ResultadosActivity extends AppCompatActivity {
         buttonSalvar = findViewById(R.id.buttonSalvar);
         buttonDescartar = findViewById(R.id.buttonDescartar);
         buttonEditar = findViewById(R.id.buttonEditar);
+
+        textViewTituloTipoDeTraco = findViewById(R.id.textViewTituloTipoDeTraco);
+        textViewTituloTipoDeTraco.setText(dosagem.traco.getTipoDeTraco());
+
         buttonExibirMemoriaDeCalculo = findViewById(R.id.buttonExibirMemoriaDeCalculo);
         linearLayoutMemoriaDeCalculo = findViewById(R.id.linearLayoutMemoriaDeCalculo);
         buttonExibirCurvaDeAbrams = findViewById(R.id.buttonVisualizarCurvaDeAbrams);
@@ -421,7 +426,7 @@ public class ResultadosActivity extends AppCompatActivity {
                     buttonExibirCurvaDeAbrams.setText("Ocultar Curva de Abrams");
                 } else {
                     graficoCurvaDeAbrams.setVisibility(View.GONE);
-                    buttonExibirTabelaAbatXDmax.setText("Visualizar Curva de Abrams");
+                    buttonExibirCurvaDeAbrams.setText("Visualizar Curva de Abrams");
                 }
             }
         });
@@ -490,10 +495,22 @@ public class ResultadosActivity extends AppCompatActivity {
             buttonEditar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intentAbrirInserirDadosActivity = new Intent(getApplicationContext(), InserirDadosActivity.class);
-                    intentAbrirInserirDadosActivity.putExtra("acao", "editarTracoSalvo");
-                    intentAbrirInserirDadosActivity.putExtra("position", position);
-                    startActivityForResult(intentAbrirInserirDadosActivity, codigosDeActivity.resultadosActivity);
+                    if (dosagem != null) {
+                        Intent intentAbrirInserirDadosActivity = new Intent(getApplicationContext(), InserirDadosActivity.class);
+                        intentAbrirInserirDadosActivity.putExtra("acao", "editarTracoSalvo");
+
+                        intentAbrirInserirDadosActivity.putExtra("concreto", dosagem.concreto);
+                        intentAbrirInserirDadosActivity.putExtra("cimento", dosagem.cimento);
+                        intentAbrirInserirDadosActivity.putExtra("areia", dosagem.areia);
+                        intentAbrirInserirDadosActivity.putExtra("brita", dosagem.brita);
+                        intentAbrirInserirDadosActivity.putExtra("agua", dosagem.agua);
+
+                        intentAbrirInserirDadosActivity.putExtra("position", position);
+                        startActivityForResult(intentAbrirInserirDadosActivity, codigosDeActivity.resultadosActivity);
+                    } else {
+                        Toast.makeText(ResultadosActivity.this, "Dosagem nula", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             });
         }
@@ -1002,12 +1019,12 @@ public class ResultadosActivity extends AppCompatActivity {
         CurvaDeAbrams curvaDeAbrams = dosagem.curvaDeAbrams;
 
 
-        Double cont = 0.4;
-        while (cont < 0.85) {
+        Double cont = 0.0;
+        while (cont < 1.0) {
             Float x = Float.valueOf(arred3x.format(cont).replace(",","."));
             Float y = Float.parseFloat(arred3x.format(curvaDeAbrams.calcularFcjPeloFatorAC(cont)).replace(",","."));
             yValues.add(new Entry( x , y));
-            cont += 0.05;
+            cont += 0.01;
         }
 
         LineDataSet set1 = new LineDataSet(yValues, "Data Set 1");
@@ -1016,30 +1033,37 @@ public class ResultadosActivity extends AppCompatActivity {
 
         set1.setColor(Color.RED, 255);
         set1.setLineWidth(2f);
-        set1.setCircleColor(Color.RED);
+        set1.setCircleColor(Color.TRANSPARENT);
         set1.setCircleHoleColor(Color.TRANSPARENT);
         set1.setValueTextSize(10f);
-        set1.setLabel("Curva " + dosagem.cimento.getEspecificacoes());
+        set1.setValueTextColor(Color.TRANSPARENT);
+        set1.setLabel("Curva " + dosagem.cimento.getEspecificacoes() + " - 28 dias");
+        set1.setHighLightColor(Color.TRANSPARENT);
 
         graficoCurvaDeAbrams.getAxisRight().setEnabled(false);
         graficoCurvaDeAbrams.setDescription(null);
+        graficoCurvaDeAbrams.setDrawBorders(true);
+        graficoCurvaDeAbrams.setBorderColor(getResources().getColor(R.color.colorTracoDivisao));
+        graficoCurvaDeAbrams.setBackgroundColor(Color.TRANSPARENT);
 
         Float fatorACmarcacao = Float.parseFloat(arred2x.format(dosagem.concreto.getFatorAguaCimento()).replace(",","."));
-        LimitLine marcacaoFatorAC = new LimitLine( fatorACmarcacao, arred2x.format(dosagem.concreto.getFatorAguaCimento()));
+        LimitLine marcacaoFatorAC = new LimitLine( fatorACmarcacao, "a/c = " + arred2x.format(dosagem.concreto.getFatorAguaCimento()));
         marcacaoFatorAC.setLineWidth(1.5f);
         marcacaoFatorAC.setTextSize(12f);
-        marcacaoFatorAC.setTextColor(getResources().getColor(R.color.colorAccent));
+        marcacaoFatorAC.setLineColor(getResources().getColor(R.color.colorGrafico));
+        marcacaoFatorAC.setTextColor(getResources().getColor(R.color.colorGrafico));
 
         Float fcjmarcacao = Float.parseFloat(arred2x.format(dosagem.concreto.getFcj()).replace(",","."));
-        LimitLine marcacaoFcj = new LimitLine( fcjmarcacao, arred2x.format(dosagem.concreto.getFcj()));
+        LimitLine marcacaoFcj = new LimitLine( fcjmarcacao, "Fcj = " + arred2x.format(dosagem.concreto.getFcj()));
         marcacaoFcj.setLineWidth(1.5f);
         marcacaoFcj.setTextSize(12f);
         marcacaoFcj.setLabelPosition(LEFT_BOTTOM);
-        marcacaoFcj.setTextColor(getResources().getColor(R.color.colorAccent));
+        marcacaoFcj.setLineColor(getResources().getColor(R.color.colorGrafico));
+        marcacaoFcj.setTextColor(getResources().getColor(R.color.colorGrafico));
 
         XAxis xAxis = graficoCurvaDeAbrams.getXAxis();
-        xAxis.setAxisMinimum(0.37f);
-        xAxis.setAxisMaximum(0.83f);
+        xAxis.setAxisMinimum(0.0f);
+        xAxis.setAxisMaximum(1f);
         xAxis.setGranularity(0.1f);
         xAxis.setTextColor(getResources().getColor(R.color.colorTracoDivisao));
         xAxis.addLimitLine(marcacaoFatorAC);

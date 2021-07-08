@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.Dosagem;
+import com.cursoandroid.appdosagemconcreto.classesdecalculo.Traco;
 import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
 import com.cursoandroid.appdosagemconcreto.helper.TracoDAO;
 import com.cursoandroid.appdosagemconcreto.materiais.Agua;
@@ -40,8 +41,7 @@ public class InserirDadosActivity extends AppCompatActivity {
             textInputModuloDeFinuraAreia, textInputMassaEspecificaAreia, textInputMassaUnitariaAreia,
             textInputDiametroMaximoBrita, textInputMassaEspecificaBrita, textInputMassaUnitariaCompBrita,
             textInputMassaUnitariaBrita;
-    private Spinner spinnerTipoDeCimento, spinnerDesvioPadrao, spinnerTipoDeTraco,
-            spinnerUnidadeCimento, spinnerUnidadeAreia, spinnerUnidadeBrita, spinnerUnidadeAgua;
+    private Spinner spinnerTipoDeCimento, spinnerDesvioPadrao, spinnerTipoDeTraco;
     private TextView textViewUnidadesTraco, textViewUnidadesCimento, textViewUnidadesAreia, textViewUnidadesBrita, textViewUnidadesAgua;
     private Button buttonCalcularTraco;
 
@@ -54,6 +54,7 @@ public class InserirDadosActivity extends AppCompatActivity {
 
     // Classes de calculo
     private Dosagem dosagem = new Dosagem();
+    private Traco traco = new Traco();
     String acao;
     int position;
     private List<Dosagem> listaDosagens = new ArrayList<>();
@@ -83,46 +84,18 @@ public class InserirDadosActivity extends AppCompatActivity {
         textInputMassaUnitariaCompBrita = findViewById(R.id.textInputMassaUnitariaCompBrita);
         textInputMassaUnitariaBrita = findViewById(R.id.textInputMassaUnitariaBrita);
 
-        // Text Views
-        textViewUnidadesTraco = findViewById(R.id.textViewUnidadesTraco);
-        textViewUnidadesCimento = findViewById(R.id.textViewUnidadesCimento);
-        textViewUnidadesAreia = findViewById(R.id.textViewUnidadesAreia);
-        textViewUnidadesBrita = findViewById(R.id.textViewUnidadesBrita);
-        textViewUnidadesAgua = findViewById(R.id.textViewUnidadesAgua);
-
         //Spinners
         spinnerTipoDeCimento = findViewById(R.id.spinnerTipoDeCimento);
         spinnerDesvioPadrao = findViewById(R.id.spinnerDesvioPadrao);
         spinnerTipoDeTraco = findViewById(R.id.spinnerTipoDeTraco);
 
-        spinnerUnidadeCimento = findViewById(R.id.spinnerUnidadeCimento);
-        spinnerUnidadeAreia = findViewById(R.id.spinnerUnidadeAreia);
-        spinnerUnidadeBrita = findViewById(R.id.spinnerUnidadeBrita);
-        spinnerUnidadeAgua = findViewById(R.id.spinnerUnidadeAgua);
         carregarDadosSpinner();
         spinnerTipoDeTraco.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if ( i==0 ) {
-                    textViewUnidadesTraco.setVisibility(View.GONE);
-                    textViewUnidadesCimento.setVisibility(View.GONE);
-                    textViewUnidadesAreia.setVisibility(View.GONE);
-                    textViewUnidadesBrita.setVisibility(View.GONE);
-                    textViewUnidadesAgua.setVisibility(View.GONE);
-                    spinnerUnidadeCimento.setVisibility(View.GONE);
-                    spinnerUnidadeAreia.setVisibility(View.GONE);
-                    spinnerUnidadeBrita.setVisibility(View.GONE);
-                    spinnerUnidadeAgua.setVisibility(View.GONE);
-                } else if ( i==1 ) {
-                    textViewUnidadesTraco.setVisibility(View.VISIBLE);
-                    textViewUnidadesCimento.setVisibility(View.VISIBLE);
-                    textViewUnidadesAreia.setVisibility(View.VISIBLE);
-                    textViewUnidadesBrita.setVisibility(View.VISIBLE);
-                    textViewUnidadesAgua.setVisibility(View.VISIBLE);
-                    spinnerUnidadeCimento.setVisibility(View.VISIBLE);
-                    spinnerUnidadeAreia.setVisibility(View.VISIBLE);
-                    spinnerUnidadeBrita.setVisibility(View.VISIBLE);
-                    spinnerUnidadeAgua.setVisibility(View.VISIBLE);
+                if (spinnerTipoDeCimento.getSelectedItem().toString().equals("Traço para 1 saco (50kg) de cimento em volume") ||
+                    spinnerTipoDeCimento.getSelectedItem().toString().equals("Traço para 1 saco (50kg) em padiolas")){
+
                 }
             }
 
@@ -147,13 +120,19 @@ public class InserirDadosActivity extends AppCompatActivity {
             textInputMassaUnitariaBrita.setText("1430");
 
         } else if (acao.equals("editarTracoSalvo")) {
-            position = dados.getInt("position");
-            //Listar dosagens
-            TracoDAO tracoDAO = new TracoDAO( getApplicationContext() );
-            listaDosagens = tracoDAO.listar();
-
             //Recuperar dosagem
-            dosagem = listaDosagens.get(position);
+            concreto = (Concreto) dados.getSerializable("concreto");
+            cimento = (Cimento) dados.getSerializable("cimento");
+            areia = (Areia) dados.getSerializable("areia");
+            brita = (Brita) dados.getSerializable("brita");
+            agua = (Agua) dados.getSerializable("agua");
+
+            dosagem.concreto = concreto;
+            dosagem.cimento = cimento;
+            dosagem.areia = areia;
+            dosagem.brita = brita;
+            dosagem.agua = agua;
+
             textInputFck.setText(dosagem.concreto.getFck().toString());
             textInputAbatimento.setText(dosagem.concreto.getAbatimento().toString());
             Double desvioPadrao = dosagem.concreto.getDesvioPadrao();
@@ -195,6 +174,8 @@ public class InserirDadosActivity extends AppCompatActivity {
             textInputMassaEspecificaBrita.setText(dosagem.brita.getMassaEspecifica().toString());
             textInputMassaUnitariaCompBrita.setText(dosagem.brita.getMassaUnitariaComp().toString());
             textInputMassaUnitariaBrita.setText(dosagem.brita.getMassaUnitaria().toString());
+
+
         }
 
         buttonCalcularTraco = findViewById(R.id.buttonCalcularTraco);
@@ -222,6 +203,7 @@ public class InserirDadosActivity extends AppCompatActivity {
 
                     inserirDados();
                     dosagem.inserirInformacoesIncicias(concreto, cimento, areia, brita, agua);
+                    dosagem.traco = traco;
 
                     // Criar Intent
                     Intent intentAbrirResultadosActivity = new Intent(getApplicationContext(), ResultadosActivity.class);
@@ -269,6 +251,8 @@ public class InserirDadosActivity extends AppCompatActivity {
         brita.setMassaEspecifica(Double.parseDouble(textInputMassaEspecificaBrita.getText().toString()));
         brita.setMassaUnitariaComp(Double.parseDouble(textInputMassaUnitariaCompBrita.getText().toString()));
         brita.setMassaUnitaria(Double.parseDouble(textInputMassaUnitariaBrita.getText().toString()));
+
+        traco.setTipoDeTraco(spinnerTipoDeTraco.getSelectedItem().toString());
     }
 
     private void carregarDadosSpinner() {
@@ -297,7 +281,9 @@ public class InserirDadosActivity extends AppCompatActivity {
 
         // Spinner Tipo de Traço
         String[] tiposDeTraco = new String[]{
-                "Traço em massa", "Traço personalizado"
+                "Traço para um 1 m³ de concreto", "Traço unitário em massa",
+                "Traço para 1 saco (50kg) de cimento em massa", "Traço para 1 saco (50kg) de cimento em volume",
+                "Traço para 1 saco (50kg) de cimento em padiolas"
         };
         ArrayAdapter<String> arrayAdapterTiposDeTraco = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item,
@@ -305,50 +291,6 @@ public class InserirDadosActivity extends AppCompatActivity {
         );
         arrayAdapterTiposDeTraco.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTipoDeTraco.setAdapter(arrayAdapterTiposDeTraco);
-
-        // Spinner Unidades Cimento
-        String[] unidadesCimento = new String[]{
-                "Quilograma (Kg)", "Saco (50 Kg)", "Metros cúbicos (m³)"
-        };
-        ArrayAdapter<String> arrayAdapterUnidadesCimento = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item,
-                unidadesCimento
-        );
-        arrayAdapterUnidadesCimento.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerUnidadeCimento.setAdapter(arrayAdapterUnidadesCimento);
-
-        // Spinner Unidades Areia
-        String[] unidadesAreia = new String[]{
-                "Quilograma (Kg)", "Metros cúbicos (m³)"
-        };
-        ArrayAdapter<String> arrayAdapterUnidadesAreia = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item,
-                unidadesAreia
-        );
-        arrayAdapterUnidadesAreia.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerUnidadeAreia.setAdapter(arrayAdapterUnidadesAreia);
-
-        // Spinner Unidades Brita
-        String[] unidadesBrita = new String[]{
-                "Quilograma (Kg)", "Metros cúbicos (m³)"
-        };
-        ArrayAdapter<String> arrayAdapterUnidadesBrita = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item,
-                unidadesAreia
-        );
-        arrayAdapterUnidadesBrita.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerUnidadeBrita.setAdapter(arrayAdapterUnidadesBrita);
-
-        // Spinner Unidades Água
-        String[] unidadesÁgua = new String[]{
-                "Litros (l)", "Metros cúbicos (m³)"
-        };
-        ArrayAdapter<String> arrayAdapterUnidadesAgua = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item,
-                unidadesÁgua
-        );
-        arrayAdapterUnidadesAgua.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerUnidadeAgua.setAdapter(arrayAdapterUnidadesAgua);
 
     }
 
