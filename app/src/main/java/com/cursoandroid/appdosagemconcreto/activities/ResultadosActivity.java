@@ -3,7 +3,6 @@ package com.cursoandroid.appdosagemconcreto.activities;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,14 +19,8 @@ import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.Dosagem;
-import com.cursoandroid.appdosagemconcreto.classesdecalculo.Traco;
 import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
 import com.cursoandroid.appdosagemconcreto.helper.TracoDAO;
-import com.cursoandroid.appdosagemconcreto.materiais.Agua;
-import com.cursoandroid.appdosagemconcreto.materiais.Areia;
-import com.cursoandroid.appdosagemconcreto.materiais.Brita;
-import com.cursoandroid.appdosagemconcreto.materiais.Cimento;
-import com.cursoandroid.appdosagemconcreto.materiais.Concreto;
 import com.cursoandroid.appdosagemconcreto.tabelaseabacos.CurvaDeAbrams;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.LimitLine;
@@ -39,19 +32,14 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
 
 import static com.github.mikephil.charting.components.LimitLine.LimitLabelPosition.LEFT_BOTTOM;
-import static com.github.mikephil.charting.components.LimitLine.LimitLabelPosition.LEFT_TOP;
 
 public class ResultadosActivity extends AppCompatActivity {
 
@@ -247,7 +235,7 @@ public class ResultadosActivity extends AppCompatActivity {
         TextView textViewTracoConsumoDeCimentoQuociente4 = findViewById(R.id.textViewTracoConsumoDeCimentoQuociente4);
         textViewTracoConsumoDeCimentoQuociente4.setText(arred2x.format(dosagem.cimento.getConsumoDeCimento()));
 
-        TextView textViewTracoEmMassaResultado = findViewById(R.id.textViewTracoEmMassaResultado);
+        TextView textViewTracoEmMassaResultado = findViewById(R.id.textViewTracoUnitarioEmMassaResultado);
         textViewTracoEmMassaResultado.setText(arred2x.format(dosagem.getTracoEmMassa()[0]) + " : "
                 + arred2x.format(dosagem.getTracoEmMassa()[1]) + " : "
                 + arred2x.format(dosagem.getTracoEmMassa()[2]) + " : "
@@ -255,7 +243,6 @@ public class ResultadosActivity extends AppCompatActivity {
 
         dosagem.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
         dosagem.traco.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
-        dosagem.traco.setTipoDeTraco("Traco em massa");
         dosagem.traco.setDataDoTraco(formataData.format(data));
 
 

@@ -217,6 +217,7 @@ public class InserirDadosActivity extends AppCompatActivity {
                 } else if (acao.equals("editarTracoSalvo")) {
                     inserirDados();
                     dosagem.inserirInformacoesIncicias(concreto, cimento, areia, brita, agua);
+                    dosagem.traco = traco;
 
                     // Criar Intent
                     Intent intentAbrirResultadosActivity = new Intent(getApplicationContext(), ResultadosActivity.class);
