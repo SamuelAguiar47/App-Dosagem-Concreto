@@ -28,7 +28,7 @@ public class Dosagem implements Serializable {
     public CurvaDeAbrams curvaDeAbrams;
     public TabelaConsumoDeAgua tabelaCa;
     public TabelaVolumeDeBrita tabelaVb;
-    private Double[] tracoEmMassa = new Double[4];
+    private Double[] tracoUnitarioEmMassa = new Double[4];
     private String tracoExibido;
 
 
@@ -107,12 +107,12 @@ public class Dosagem implements Serializable {
 
     }
 
-    public void determinarTracoEmMassa() {
+    public void determinarTracoUnitarioEmMassa() {
 
-        this.tracoEmMassa[0] = 1.0;                                                               // cimento
-        this.tracoEmMassa[1] = this.areia.getConsumoDeAreia()/this.cimento.getConsumoDeCimento(); // areia
-        this.tracoEmMassa[2] = this.brita.getConsumoDeBrita()/this.cimento.getConsumoDeCimento(); // brita
-        this.tracoEmMassa[3] = this.agua.getConsumoDeAgua()/this.cimento.getConsumoDeCimento();   // água
+        this.tracoUnitarioEmMassa[0] = 1.0;                                                               // cimento
+        this.tracoUnitarioEmMassa[1] = this.areia.getConsumoDeAreia()/this.cimento.getConsumoDeCimento(); // areia
+        this.tracoUnitarioEmMassa[2] = this.brita.getConsumoDeBrita()/this.cimento.getConsumoDeCimento(); // brita
+        this.tracoUnitarioEmMassa[3] = this.agua.getConsumoDeAgua()/this.cimento.getConsumoDeCimento();   // água
 
     }
 
@@ -190,12 +190,12 @@ public class Dosagem implements Serializable {
         this.tabelaVb = tabelaVb;
     }
 
-    public Double[] getTracoEmMassa() {
-        return tracoEmMassa;
+    public Double[] getTracoUnitarioEmMassa() {
+        return tracoUnitarioEmMassa;
     }
 
-    public void setTracoEmMassa(Double[] tracoEmMassa) {
-        this.tracoEmMassa = tracoEmMassa;
+    public void setTracoUnitarioEmMassa(Double[] tracoEmMassa) {
+        this.tracoUnitarioEmMassa = tracoEmMassa;
     }
 
     public String getTracoExibido() {

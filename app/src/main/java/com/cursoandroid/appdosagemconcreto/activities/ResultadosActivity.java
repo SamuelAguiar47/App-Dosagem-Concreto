@@ -236,10 +236,10 @@ public class ResultadosActivity extends AppCompatActivity {
         textViewTracoConsumoDeCimentoQuociente4.setText(arred2x.format(dosagem.cimento.getConsumoDeCimento()));
 
         TextView textViewTracoEmMassaResultado = findViewById(R.id.textViewTracoUnitarioEmMassaResultado);
-        textViewTracoEmMassaResultado.setText(arred2x.format(dosagem.getTracoEmMassa()[0]) + " : "
-                + arred2x.format(dosagem.getTracoEmMassa()[1]) + " : "
-                + arred2x.format(dosagem.getTracoEmMassa()[2]) + " : "
-                + arred2x.format(dosagem.getTracoEmMassa()[3]));
+        textViewTracoEmMassaResultado.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[0]) + " : "
+                + arred2x.format(dosagem.getTracoUnitarioEmMassa()[1]) + " : "
+                + arred2x.format(dosagem.getTracoUnitarioEmMassa()[2]) + " : "
+                + arred2x.format(dosagem.getTracoUnitarioEmMassa()[3]));
 
         dosagem.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
         dosagem.traco.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
@@ -247,13 +247,13 @@ public class ResultadosActivity extends AppCompatActivity {
 
 
         final TextView editTextTracoExibidoCimento = findViewById(R.id.editTextTracoExibidoCimento);
-        editTextTracoExibidoCimento.setText(arred2x.format(dosagem.getTracoEmMassa()[0]));
+        editTextTracoExibidoCimento.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[0]));
         final TextView editTextTracoExibidoAreia = findViewById(R.id.editTextTracoExibidoAreia);
-        editTextTracoExibidoAreia.setText(arred2x.format(dosagem.getTracoEmMassa()[1]));
+        editTextTracoExibidoAreia.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[1]));
         final TextView editTextTracoExibidoBrita = findViewById(R.id.editTextTracoExibidoBrita);
-        editTextTracoExibidoBrita.setText(arred2x.format(dosagem.getTracoEmMassa()[2]));
+        editTextTracoExibidoBrita.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[2]));
         final TextView editTextTracoExibidoAgua = findViewById(R.id.editTextTracoExibidoAgua);
-        editTextTracoExibidoAgua.setText(arred2x.format(dosagem.getTracoEmMassa()[3]));
+        editTextTracoExibidoAgua.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[3]));
 
         final Double[] tracoProporcao = new Double[4];
         tracoProporcao[0] = Double.parseDouble(editTextTracoExibidoCimento.getText().toString().replace(",", "."));
@@ -522,7 +522,7 @@ public class ResultadosActivity extends AppCompatActivity {
 
         dosagem.determinarConsumoDeAreia();
 
-        dosagem.determinarTracoEmMassa();
+        dosagem.determinarTracoUnitarioEmMassa();
     }
 
     public void abrirDialogSalvar(final View view) {

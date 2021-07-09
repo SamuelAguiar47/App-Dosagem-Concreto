@@ -6,7 +6,11 @@ public class Traco implements Serializable {
 
     // Atributos
     private String nomeDoTraco;
-    private Double[] tracoEmMassa = new Double[4];
+    private Double[] tracoPara1M3DeConcretoEmMassa = new Double[4];
+    private Double[] tracoUnitarioEmMassa = new Double[4];
+    private Double[] tracoPara1Saco50KgDeCimentoEmMassa = new Double[4];
+    private Double[] tracoPara1Saco50KgDeCimentoEmVolume = new Double[4];
+    private Double[] tracoPara1Saco50KgDeCimentoEmPadiolas = new Double[4];
     private String tipoDeTraco;
     private String tracoExibido;
     private String dataDoTraco;
@@ -22,12 +26,12 @@ public class Traco implements Serializable {
         this.nomeDoTraco = nomeDoTraco;
     }
 
-    public Double[] getTracoEmMassa() {
-        return tracoEmMassa;
+    public Double[] getTracoUnitarioEmMassa() {
+        return tracoUnitarioEmMassa;
     }
 
-    public void setTracoEmMassa(Double[] tracoEmMassa) {
-        this.tracoEmMassa = tracoEmMassa;
+    public void setTracoUnitarioEmMassa(Double[] tracoUnitarioEmMassa) {
+        this.tracoUnitarioEmMassa = tracoUnitarioEmMassa;
     }
 
     public String getDataDoTraco() {
