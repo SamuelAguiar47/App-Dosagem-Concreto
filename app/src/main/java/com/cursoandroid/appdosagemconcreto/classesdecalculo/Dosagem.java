@@ -107,6 +107,13 @@ public class Dosagem implements Serializable {
 
     }
 
+    public void determinarTracoPara1M3DeConcretoEmMassa() {
+        this.traco.tracoPara1M3DeConcretoEmMassa[0] = this.cimento.getConsumoDeCimento();
+        this.traco.tracoPara1M3DeConcretoEmMassa[1] = this.areia.getConsumoDeAreia();
+        this.traco.tracoPara1M3DeConcretoEmMassa[2] = this.brita.getConsumoDeBrita();
+        this.traco.tracoPara1M3DeConcretoEmMassa[3] = this.agua.getConsumoDeAgua();
+    }
+
     public void determinarTracoUnitarioEmMassa() {
 
         this.tracoUnitarioEmMassa[0] = 1.0;                                                               // cimento

@@ -6,11 +6,11 @@ public class Traco implements Serializable {
 
     // Atributos
     private String nomeDoTraco;
-    private Double[] tracoPara1M3DeConcretoEmMassa = new Double[4];
-    private Double[] tracoUnitarioEmMassa = new Double[4];
-    private Double[] tracoPara1Saco50KgDeCimentoEmMassa = new Double[4];
-    private Double[] tracoPara1Saco50KgDeCimentoEmVolume = new Double[4];
-    private Double[] tracoPara1Saco50KgDeCimentoEmPadiolas = new Double[4];
+    protected Double[] tracoPara1M3DeConcretoEmMassa = new Double[4];
+    protected Double[] tracoUnitarioEmMassa = new Double[4];
+    protected Double[] tracoPara1Saco50KgDeCimentoEmMassa = new Double[4];
+    protected Double[] tracoPara1Saco50KgDeCimentoEmVolume = new Double[4];
+    protected Double[] tracoPara1Saco50KgDeCimentoEmPadiolas = new Double[4];
     private String tipoDeTraco;
     private String tracoExibido;
     private String dataDoTraco;
@@ -26,12 +26,24 @@ public class Traco implements Serializable {
         this.nomeDoTraco = nomeDoTraco;
     }
 
+    public Double[] getTracoPara1M3DeConcretoEmMassa() {
+        return tracoPara1M3DeConcretoEmMassa;
+    }
+
     public Double[] getTracoUnitarioEmMassa() {
         return tracoUnitarioEmMassa;
     }
 
-    public void setTracoUnitarioEmMassa(Double[] tracoUnitarioEmMassa) {
-        this.tracoUnitarioEmMassa = tracoUnitarioEmMassa;
+    public Double[] getTracoPara1Saco50KgDeCimentoEmMassa() {
+        return tracoPara1Saco50KgDeCimentoEmMassa;
+    }
+
+    public Double[] getTracoPara1Saco50KgDeCimentoEmVolume() {
+        return tracoPara1Saco50KgDeCimentoEmVolume;
+    }
+
+    public Double[] getTracoPara1Saco50KgDeCimentoEmPadiolas() {
+        return tracoPara1Saco50KgDeCimentoEmPadiolas;
     }
 
     public String getDataDoTraco() {

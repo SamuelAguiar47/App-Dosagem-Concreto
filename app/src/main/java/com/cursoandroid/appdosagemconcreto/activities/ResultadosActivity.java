@@ -209,7 +209,26 @@ public class ResultadosActivity extends AppCompatActivity {
         TextView textViewConsumoDeAreiaResultado = findViewById(R.id.textViewConsumoDeAreiaResultado);
         textViewConsumoDeAreiaResultado.setText("Careia = " + arred2x.format(dosagem.areia.getConsumoDeAreia()) + " kg/m³");
 
-        // Cálculo do traço em massa
+        // Cálculo para 1 m³ de concreto em massa
+        TextView textViewConsumoDeCimentoResultado2 = findViewById(R.id.textViewConsumoDeCimentoResultado2);
+        textViewConsumoDeCimentoResultado2.setText("Cc = " + arred2x.format(dosagem.cimento.getConsumoDeCimento()) + " kg/m³");
+
+        TextView textViewConsumoDeAreiaResultado2 = findViewById(R.id.textViewConsumoDeAreiaResultado2);
+        textViewConsumoDeAreiaResultado2.setText("Careia = " + arred2x.format(dosagem.areia.getConsumoDeAreia()) + " kg/m³");
+
+        TextView textViewConsumoDeBritaResultado2 = findViewById(R.id.textViewConsumoDeBritaResultado2);
+        textViewConsumoDeBritaResultado2.setText("Cb = " + arred2x.format(dosagem.brita.getConsumoDeBrita()) + " kg/m³");
+
+        TextView textViewDeterminacaoCA2 = findViewById(R.id.textViewDeterminacaoCA2);
+        textViewDeterminacaoCA2.setText("Ca = " + arred0.format(dosagem.agua.getConsumoDeAgua()) + " l/m³");
+
+        TextView textViewTracoPara1M3DeConcretoEmMassaResultado = findViewById(R.id.textViewTracoPara1M3DeConcretoEmMassaResultado);
+        textViewTracoPara1M3DeConcretoEmMassaResultado.setText(arred2x.format(dosagem.traco.getTracoPara1M3DeConcretoEmMassa()[0]) + " : "
+                + arred2x.format(dosagem.traco.getTracoPara1M3DeConcretoEmMassa()[1]) + " : "
+                + arred2x.format(dosagem.traco.getTracoPara1M3DeConcretoEmMassa()[2]) + " : "
+                + arred2x.format(dosagem.traco.getTracoPara1M3DeConcretoEmMassa()[3]));
+
+        // Cálculo do traço unitário em massa
 
         TextView textViewTracoConsumoDeCimentoDividendo = findViewById(R.id.textViewTracoConsumoDeCimentoDividendo);
         textViewTracoConsumoDeCimentoDividendo.setText(arred2x.format(dosagem.cimento.getConsumoDeCimento()));
@@ -245,15 +264,32 @@ public class ResultadosActivity extends AppCompatActivity {
         dosagem.traco.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
         dosagem.traco.setDataDoTraco(formataData.format(data));
 
-
         final TextView editTextTracoExibidoCimento = findViewById(R.id.editTextTracoExibidoCimento);
-        editTextTracoExibidoCimento.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[0]));
         final TextView editTextTracoExibidoAreia = findViewById(R.id.editTextTracoExibidoAreia);
-        editTextTracoExibidoAreia.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[1]));
         final TextView editTextTracoExibidoBrita = findViewById(R.id.editTextTracoExibidoBrita);
-        editTextTracoExibidoBrita.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[2]));
         final TextView editTextTracoExibidoAgua = findViewById(R.id.editTextTracoExibidoAgua);
-        editTextTracoExibidoAgua.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[3]));
+
+        if (dosagem.traco.getTipoDeTraco().equals("Traço para 1 m³ de concreto")) {
+            editTextTracoExibidoCimento.setText(arred2x.format(dosagem.traco.getTracoPara1M3DeConcretoEmMassa()[0]));
+            editTextTracoExibidoAreia.setText(arred2x.format(dosagem.traco.getTracoPara1M3DeConcretoEmMassa()[1]));
+            editTextTracoExibidoBrita.setText(arred2x.format(dosagem.traco.getTracoPara1M3DeConcretoEmMassa()[2]));
+            editTextTracoExibidoAgua.setText(arred2x.format(dosagem.traco.getTracoPara1M3DeConcretoEmMassa()[3]));
+
+            LinearLayout linearLayoutCalculoTracoUnitarioEmMassa = findViewById(R.id.linearLayoutCalculoTracoUnitarioEmMassa);
+            linearLayoutCalculoTracoUnitarioEmMassa.setVisibility(View.GONE);
+
+            //dosagem.setTracoExibido(textViewTracoPara1M3DeConcretoEmMassaResultado.getText().toString());
+            //dosagem.traco.setTracoExibido(textViewTracoPara1M3DeConcretoEmMassaResultado.getText().toString());
+
+        } else {
+            editTextTracoExibidoCimento.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[0]));
+            editTextTracoExibidoAreia.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[1]));
+            editTextTracoExibidoBrita.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[2]));
+            editTextTracoExibidoAgua.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[3]));
+
+            //dosagem.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
+            //dosagem.traco.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
+        }
 
         final Double[] tracoProporcao = new Double[4];
         tracoProporcao[0] = Double.parseDouble(editTextTracoExibidoCimento.getText().toString().replace(",", "."));
@@ -277,9 +313,9 @@ public class ResultadosActivity extends AppCompatActivity {
                     } else {
                         tracoCimentoInput = Double.parseDouble(editTextTracoExibidoCimento.getText().toString().replace(",", "."));
                     }
-                    Double tracoAreiaMultiplicado = tracoCimentoInput * tracoProporcao[1];
-                    Double tracoBritaMultiplicado = tracoCimentoInput * tracoProporcao[2];
-                    Double tracoAguaMultiplicado = tracoCimentoInput * tracoProporcao[3];
+                    Double tracoAreiaMultiplicado = tracoCimentoInput * tracoProporcao[1] / tracoProporcao[0];
+                    Double tracoBritaMultiplicado = tracoCimentoInput * tracoProporcao[2] / tracoProporcao[0];
+                    Double tracoAguaMultiplicado = tracoCimentoInput * tracoProporcao[3] / tracoProporcao[0];
                     editTextTracoExibidoAreia.setText(arred2x.format(tracoAreiaMultiplicado));
                     editTextTracoExibidoBrita.setText(arred2x.format(tracoBritaMultiplicado));
                     editTextTracoExibidoAgua.setText(arred2x.format(tracoAguaMultiplicado));
@@ -491,6 +527,7 @@ public class ResultadosActivity extends AppCompatActivity {
                         intentAbrirInserirDadosActivity.putExtra("areia", dosagem.areia);
                         intentAbrirInserirDadosActivity.putExtra("brita", dosagem.brita);
                         intentAbrirInserirDadosActivity.putExtra("agua", dosagem.agua);
+                        intentAbrirInserirDadosActivity.putExtra("traco", dosagem.traco);
 
                         intentAbrirInserirDadosActivity.putExtra("position", position);
                         startActivityForResult(intentAbrirInserirDadosActivity, codigosDeActivity.resultadosActivity);
@@ -521,6 +558,8 @@ public class ResultadosActivity extends AppCompatActivity {
         dosagem.determinarVolumeDeAreia();
 
         dosagem.determinarConsumoDeAreia();
+
+        dosagem.determinarTracoPara1M3DeConcretoEmMassa();
 
         dosagem.determinarTracoUnitarioEmMassa();
     }

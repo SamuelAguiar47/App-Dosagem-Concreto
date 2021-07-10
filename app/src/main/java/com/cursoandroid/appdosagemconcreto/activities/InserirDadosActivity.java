@@ -126,12 +126,14 @@ public class InserirDadosActivity extends AppCompatActivity {
             areia = (Areia) dados.getSerializable("areia");
             brita = (Brita) dados.getSerializable("brita");
             agua = (Agua) dados.getSerializable("agua");
+            traco = (Traco) dados.getSerializable("traco");
 
             dosagem.concreto = concreto;
             dosagem.cimento = cimento;
             dosagem.areia = areia;
             dosagem.brita = brita;
             dosagem.agua = agua;
+            dosagem.traco = traco;
 
             textInputFck.setText(dosagem.concreto.getFck().toString());
             textInputAbatimento.setText(dosagem.concreto.getAbatimento().toString());
@@ -174,6 +176,21 @@ public class InserirDadosActivity extends AppCompatActivity {
             textInputMassaEspecificaBrita.setText(dosagem.brita.getMassaEspecifica().toString());
             textInputMassaUnitariaCompBrita.setText(dosagem.brita.getMassaUnitariaComp().toString());
             textInputMassaUnitariaBrita.setText(dosagem.brita.getMassaUnitaria().toString());
+
+            String tipoDeTraco = dosagem.traco.getTipoDeTraco();
+            spinnerPosition = 0;
+            if (tipoDeTraco.equals("Traço para 1 m³ de concreto")) {
+                spinnerPosition = 0;
+            } else if (tipoDeTraco.equals("Traço unitário em massa")){
+                spinnerPosition = 1;
+            } else if (tipoDeTraco.equals("Traço para 1 saco (50kg) de cimento em massa")){
+                spinnerPosition = 2;
+            } else if (tipoDeTraco.equals("Traço para 1 saco (50kg) de cimento em volume")){
+                spinnerPosition = 3;
+            } else if (tipoDeTraco.equals("Traço para 1 saco (50kg) de cimento em padiolas")){
+                spinnerPosition = 4;
+            }
+            spinnerTipoDeTraco.setSelection(spinnerPosition);
 
 
         }
@@ -282,7 +299,7 @@ public class InserirDadosActivity extends AppCompatActivity {
 
         // Spinner Tipo de Traço
         String[] tiposDeTraco = new String[]{
-                "Traço para um 1 m³ de concreto", "Traço unitário em massa",
+                "Traço para 1 m³ de concreto", "Traço unitário em massa",
                 "Traço para 1 saco (50kg) de cimento em massa", "Traço para 1 saco (50kg) de cimento em volume",
                 "Traço para 1 saco (50kg) de cimento em padiolas"
         };

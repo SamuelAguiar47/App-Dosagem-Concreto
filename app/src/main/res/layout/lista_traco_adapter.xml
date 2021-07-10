@@ -16,12 +16,17 @@
 
         <TextView
             android:id="@+id/textTraco"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:padding="8dp"
             android:text="Titulo do traço"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/textViewDataDoTraco"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,16 +34,15 @@
             android:id="@+id/textViewTipoDeTraco"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Traco em massa"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:padding="4dp"
+            android:text="Tipo de traço"
+            android:textColor="@color/colorTracoDivisao"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textViewTracoExibido"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textTraco" />
 
@@ -47,9 +51,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:text="05/06/2021"
+            android:textColor="@color/colorTracoDivisao"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -58,13 +63,19 @@
             android:id="@+id/textViewTracoExibido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             android:text="0:0:0:0"
+            android:textColor="@color/colorAccent"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewTipoDeTraco"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textViewTipoDeTraco" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTipoDeTraco" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
