@@ -260,8 +260,6 @@ public class ResultadosActivity extends AppCompatActivity {
                 + arred2x.format(dosagem.getTracoUnitarioEmMassa()[2]) + " : "
                 + arred2x.format(dosagem.getTracoUnitarioEmMassa()[3]));
 
-        dosagem.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
-        dosagem.traco.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
         dosagem.traco.setDataDoTraco(formataData.format(data));
 
         final TextView editTextTracoExibidoCimento = findViewById(R.id.editTextTracoExibidoCimento);
@@ -278,8 +276,7 @@ public class ResultadosActivity extends AppCompatActivity {
             LinearLayout linearLayoutCalculoTracoUnitarioEmMassa = findViewById(R.id.linearLayoutCalculoTracoUnitarioEmMassa);
             linearLayoutCalculoTracoUnitarioEmMassa.setVisibility(View.GONE);
 
-            //dosagem.setTracoExibido(textViewTracoPara1M3DeConcretoEmMassaResultado.getText().toString());
-            //dosagem.traco.setTracoExibido(textViewTracoPara1M3DeConcretoEmMassaResultado.getText().toString());
+            dosagem.traco.setTracoExibido(textViewTracoPara1M3DeConcretoEmMassaResultado.getText().toString());
 
         } else {
             editTextTracoExibidoCimento.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[0]));
@@ -287,8 +284,7 @@ public class ResultadosActivity extends AppCompatActivity {
             editTextTracoExibidoBrita.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[2]));
             editTextTracoExibidoAgua.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[3]));
 
-            //dosagem.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
-            //dosagem.traco.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
+            dosagem.traco.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
         }
 
         final Double[] tracoProporcao = new Double[4];
@@ -522,6 +518,7 @@ public class ResultadosActivity extends AppCompatActivity {
                         Intent intentAbrirInserirDadosActivity = new Intent(getApplicationContext(), InserirDadosActivity.class);
                         intentAbrirInserirDadosActivity.putExtra("acao", "editarTracoSalvo");
 
+                        intentAbrirInserirDadosActivity.putExtra("id", dosagem.getId());
                         intentAbrirInserirDadosActivity.putExtra("concreto", dosagem.concreto);
                         intentAbrirInserirDadosActivity.putExtra("cimento", dosagem.cimento);
                         intentAbrirInserirDadosActivity.putExtra("areia", dosagem.areia);

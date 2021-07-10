@@ -29,7 +29,7 @@ public class Dosagem implements Serializable {
     public TabelaConsumoDeAgua tabelaCa;
     public TabelaVolumeDeBrita tabelaVb;
     private Double[] tracoUnitarioEmMassa = new Double[4];
-    private String tracoExibido;
+    //private String tracoExibido;
 
 
     // Classes de arredondamento
@@ -203,14 +203,6 @@ public class Dosagem implements Serializable {
 
     public void setTracoUnitarioEmMassa(Double[] tracoEmMassa) {
         this.tracoUnitarioEmMassa = tracoEmMassa;
-    }
-
-    public String getTracoExibido() {
-        return tracoExibido;
-    }
-
-    public void setTracoExibido(String tracoExibido) {
-        this.tracoExibido = tracoExibido;
     }
 
     public Long getId() {

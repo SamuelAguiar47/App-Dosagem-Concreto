@@ -121,6 +121,7 @@ public class InserirDadosActivity extends AppCompatActivity {
 
         } else if (acao.equals("editarTracoSalvo")) {
             //Recuperar dosagem
+            Long id = dados.getLong("id");
             concreto = (Concreto) dados.getSerializable("concreto");
             cimento = (Cimento) dados.getSerializable("cimento");
             areia = (Areia) dados.getSerializable("areia");
@@ -128,6 +129,7 @@ public class InserirDadosActivity extends AppCompatActivity {
             agua = (Agua) dados.getSerializable("agua");
             traco = (Traco) dados.getSerializable("traco");
 
+            dosagem.setId(id);
             dosagem.concreto = concreto;
             dosagem.cimento = cimento;
             dosagem.areia = areia;
