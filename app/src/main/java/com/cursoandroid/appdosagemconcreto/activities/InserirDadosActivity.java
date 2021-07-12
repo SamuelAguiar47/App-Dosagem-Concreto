@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -40,9 +41,11 @@ public class InserirDadosActivity extends AppCompatActivity {
     private TextInputEditText textInputFck, textInputAbatimento, textInputMassaEspecificaCimento,
             textInputModuloDeFinuraAreia, textInputMassaEspecificaAreia, textInputMassaUnitariaAreia,
             textInputDiametroMaximoBrita, textInputMassaEspecificaBrita, textInputMassaUnitariaCompBrita,
-            textInputMassaUnitariaBrita;
+            textInputMassaUnitariaBrita, textInputUmidadeDaAreia, textInputInchamentoDaAreia,
+            textInputLarguraDaPadiola, textInputComprimentoDaPadiola;
     private Spinner spinnerTipoDeCimento, spinnerDesvioPadrao, spinnerTipoDeTraco;
-    private TextView textViewUnidadesTraco, textViewUnidadesCimento, textViewUnidadesAreia, textViewUnidadesBrita, textViewUnidadesAgua;
+    private TextView textViewTituloInformacoesAdicionais, textViewTituloDimensoesDaPadiola;
+    private LinearLayout linearLayoutDimensoesDaPadiola;
     private Button buttonCalcularTraco;
 
     // Materiais
@@ -83,6 +86,17 @@ public class InserirDadosActivity extends AppCompatActivity {
         textInputMassaEspecificaBrita = findViewById(R.id.textInputMassaEspecificaBrita);
         textInputMassaUnitariaCompBrita = findViewById(R.id.textInputMassaUnitariaCompBrita);
         textInputMassaUnitariaBrita = findViewById(R.id.textInputMassaUnitariaBrita);
+        textInputUmidadeDaAreia = findViewById(R.id.textInputUmidadeDaAreia);
+        textInputInchamentoDaAreia = findViewById(R.id.textInputInchamentoDaAreia);
+        textInputLarguraDaPadiola = findViewById(R.id.textInputLarguraDaPadiola);
+        textInputComprimentoDaPadiola = findViewById(R.id.textInputComprimentoDaPadiola);
+
+        //Text Views
+        textViewTituloInformacoesAdicionais = findViewById(R.id.textViewTituloInformacoesAdicionais);
+        textViewTituloDimensoesDaPadiola = findViewById(R.id.textViewTituloDimensoesDaPadiola);
+
+        //Layouts
+        linearLayoutDimensoesDaPadiola = findViewById(R.id.linearLayoutDimensoesDaPadiola);
 
         //Spinners
         spinnerTipoDeCimento = findViewById(R.id.spinnerTipoDeCimento);
@@ -196,6 +210,36 @@ public class InserirDadosActivity extends AppCompatActivity {
 
 
         }
+
+        spinnerTipoDeTraco.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i < 3) {
+                    textViewTituloInformacoesAdicionais.setVisibility(View.GONE);
+                    textInputUmidadeDaAreia.setVisibility(View.GONE);
+                    textInputInchamentoDaAreia.setVisibility(View.GONE);
+                    textViewTituloDimensoesDaPadiola.setVisibility(View.GONE);
+                    linearLayoutDimensoesDaPadiola.setVisibility(View.GONE);
+                } else if (i == 3) {
+                    textViewTituloInformacoesAdicionais.setVisibility(View.VISIBLE);
+                    textInputUmidadeDaAreia.setVisibility(View.VISIBLE);
+                    textInputInchamentoDaAreia.setVisibility(View.VISIBLE);
+                    textViewTituloDimensoesDaPadiola.setVisibility(View.GONE);
+                    linearLayoutDimensoesDaPadiola.setVisibility(View.GONE);
+                } else {
+                    textViewTituloInformacoesAdicionais.setVisibility(View.VISIBLE);
+                    textInputUmidadeDaAreia.setVisibility(View.VISIBLE);
+                    textInputInchamentoDaAreia.setVisibility(View.VISIBLE);
+                    textViewTituloDimensoesDaPadiola.setVisibility(View.VISIBLE);
+                    linearLayoutDimensoesDaPadiola.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         buttonCalcularTraco = findViewById(R.id.buttonCalcularTraco);
         buttonCalcularTraco.setOnClickListener(new View.OnClickListener() {
