@@ -315,6 +315,8 @@ public class ResultadosActivity extends AppCompatActivity {
             editTextTracoExibidoAgua.setText(arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmMassa()[3]));
 
             dosagem.traco.setTracoExibido(textViewTracoPara1SacoDeCimentoEmMassaResultado.getText().toString());
+            TextView textViewRotuloTracoCimento = findViewById(R.id.textViewRotuloTracoCimento);
+            textViewRotuloTracoCimento.setText("Cimento (Saco)");
         }
 
         final Double[] tracoProporcao = new Double[4];
@@ -465,7 +467,7 @@ public class ResultadosActivity extends AppCompatActivity {
 
         // Configurar buttonExibirCurvaDeAbrams
 
-        //graficoCurvaDeAbrams.setVisibility(View.GONE);
+        graficoCurvaDeAbrams.setVisibility(View.GONE);
 
         buttonExibirCurvaDeAbrams.setOnClickListener(new View.OnClickListener() {
             @Override
