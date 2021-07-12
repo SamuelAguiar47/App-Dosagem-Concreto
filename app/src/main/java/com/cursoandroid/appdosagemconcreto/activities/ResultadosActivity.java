@@ -260,6 +260,24 @@ public class ResultadosActivity extends AppCompatActivity {
                 + arred2x.format(dosagem.getTracoUnitarioEmMassa()[2]) + " : "
                 + arred2x.format(dosagem.getTracoUnitarioEmMassa()[3]));
 
+        // Cálculo do traço para 1 saco de cimento em massa
+
+        TextView textViewTracoPara1SacoDeCimentoEmMassaCalculo = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmMassaCalculo);
+        textViewTracoPara1SacoDeCimentoEmMassaCalculo.setText(
+                        arred2x.format(dosagem.getTracoUnitarioEmMassa()[0]) + "*1 : " +
+                        arred2x.format(dosagem.getTracoUnitarioEmMassa()[1]) + "*50 : " +
+                        arred2x.format(dosagem.getTracoUnitarioEmMassa()[2]) + "*50 : " +
+                        arred2x.format(dosagem.getTracoUnitarioEmMassa()[3]) + "*50"
+        );
+
+        TextView textViewTracoPara1SacoDeCimentoEmMassaResultado = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmMassaResultado);
+        textViewTracoPara1SacoDeCimentoEmMassaResultado.setText(
+                        arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmMassa()[0]) + " : " +
+                        arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmMassa()[1]) + " : " +
+                        arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmMassa()[2]) + " : " +
+                        arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmMassa()[3])
+        );
+
         dosagem.traco.setDataDoTraco(formataData.format(data));
 
         final TextView editTextTracoExibidoCimento = findViewById(R.id.editTextTracoExibidoCimento);
@@ -275,16 +293,28 @@ public class ResultadosActivity extends AppCompatActivity {
 
             LinearLayout linearLayoutCalculoTracoUnitarioEmMassa = findViewById(R.id.linearLayoutCalculoTracoUnitarioEmMassa);
             linearLayoutCalculoTracoUnitarioEmMassa.setVisibility(View.GONE);
+            LinearLayout linearLayoutCalculoTracoPara1SacoDeCimentoEmMassa = findViewById(R.id.linearLayoutCalculoTracoPara1SacoDeCimentoEmMassa);
+            linearLayoutCalculoTracoPara1SacoDeCimentoEmMassa.setVisibility(View.GONE);
 
             dosagem.traco.setTracoExibido(textViewTracoPara1M3DeConcretoEmMassaResultado.getText().toString());
 
-        } else {
+        } else if (dosagem.traco.getTipoDeTraco().equals("Traço unitário em massa")) {
             editTextTracoExibidoCimento.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[0]));
             editTextTracoExibidoAreia.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[1]));
             editTextTracoExibidoBrita.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[2]));
             editTextTracoExibidoAgua.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[3]));
 
+            LinearLayout linearLayoutCalculoTracoPara1SacoDeCimentoEmMassa = findViewById(R.id.linearLayoutCalculoTracoPara1SacoDeCimentoEmMassa);
+            linearLayoutCalculoTracoPara1SacoDeCimentoEmMassa.setVisibility(View.GONE);
+
             dosagem.traco.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
+        } else {
+            editTextTracoExibidoCimento.setText(arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmMassa()[0]));
+            editTextTracoExibidoAreia.setText(arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmMassa()[1]));
+            editTextTracoExibidoBrita.setText(arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmMassa()[2]));
+            editTextTracoExibidoAgua.setText(arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmMassa()[3]));
+
+            dosagem.traco.setTracoExibido(textViewTracoPara1SacoDeCimentoEmMassaResultado.getText().toString());
         }
 
         final Double[] tracoProporcao = new Double[4];
@@ -559,6 +589,8 @@ public class ResultadosActivity extends AppCompatActivity {
         dosagem.determinarTracoPara1M3DeConcretoEmMassa();
 
         dosagem.determinarTracoUnitarioEmMassa();
+
+        dosagem.determinarTracoPara1Saco50KGDeCimentoEmMassa();
     }
 
     public void abrirDialogSalvar(final View view) {

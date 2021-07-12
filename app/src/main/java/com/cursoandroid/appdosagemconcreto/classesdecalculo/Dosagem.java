@@ -123,6 +123,13 @@ public class Dosagem implements Serializable {
 
     }
 
+    public void determinarTracoPara1Saco50KGDeCimentoEmMassa() {
+        this.traco.tracoPara1Saco50KgDeCimentoEmMassa[0] = 1.0;
+        this.traco.tracoPara1Saco50KgDeCimentoEmMassa[1] = this.tracoUnitarioEmMassa[1]*50;
+        this.traco.tracoPara1Saco50KgDeCimentoEmMassa[2] = this.tracoUnitarioEmMassa[2]*50;
+        this.traco.tracoPara1Saco50KgDeCimentoEmMassa[3] = this.tracoUnitarioEmMassa[3]*50;
+    }
+
     public void recalcularTraco(String unidadeCimento,String unidadeAreia, String unidadeBrita, String unidadeAgua) {
 
     }
