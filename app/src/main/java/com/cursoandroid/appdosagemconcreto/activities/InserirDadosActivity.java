@@ -132,6 +132,10 @@ public class InserirDadosActivity extends AppCompatActivity {
             textInputMassaEspecificaBrita.setText("2750");
             textInputMassaUnitariaCompBrita.setText("1550");
             textInputMassaUnitariaBrita.setText("1430");
+            textInputUmidadeDaAreia.setText("30");
+            textInputInchamentoDaAreia.setText("6");
+            textInputLarguraDaPadiola.setText("35");
+            textInputComprimentoDaPadiola.setText("45");
 
         } else if (acao.equals("editarTracoSalvo")) {
             //Recuperar dosagem
@@ -259,7 +263,23 @@ public class InserirDadosActivity extends AppCompatActivity {
                     (textInputDiametroMaximoBrita.getText().toString() == null || textInputDiametroMaximoBrita.getText().toString().equals("")) ||
                     (textInputMassaEspecificaBrita.getText().toString() == null || textInputMassaEspecificaBrita.getText().toString().equals("")) ||
                     (textInputMassaUnitariaCompBrita.getText().toString() == null || textInputMassaUnitariaCompBrita.getText().toString().equals("")) ||
-                    (textInputMassaUnitariaBrita.getText().toString() == null || textInputMassaUnitariaBrita.getText().toString().equals(""))
+                    (textInputMassaUnitariaBrita.getText().toString() == null || textInputMassaUnitariaBrita.getText().toString().equals("")) ||
+                    (
+                        (spinnerTipoDeTraco.getSelectedItem().equals("Traço para 1 saco (50kg) de cimento em volume")) &&
+                                (
+                                 (textInputUmidadeDaAreia.getText().toString() == null || textInputUmidadeDaAreia.getText().toString().equals("")) ||
+                                 (textInputInchamentoDaAreia.getText().toString() == null || textInputInchamentoDaAreia.getText().toString().equals(""))
+                                )
+                    ) ||
+                    (
+                        (spinnerTipoDeTraco.getSelectedItem().equals("Traço para 1 saco (50kg) de cimento em padiolas")) &&
+                                (
+                                 (textInputUmidadeDaAreia.getText().toString() == null || textInputUmidadeDaAreia.getText().toString().equals("")) ||
+                                 (textInputInchamentoDaAreia.getText().toString() == null || textInputInchamentoDaAreia.getText().toString().equals("")) ||
+                                 (textInputLarguraDaPadiola.getText().toString() == null || textInputLarguraDaPadiola.getText().toString().equals("")) ||
+                                 (textInputComprimentoDaPadiola.getText().toString() == null || textInputComprimentoDaPadiola.getText().toString().equals(""))
+                                )
+                    )
                 ) {
                     Toast.makeText(InserirDadosActivity.this, "Por favor preencha todos os campos", Toast.LENGTH_LONG).show();
                 } else if (acao.equals("calcularNovoTraco")) {
@@ -317,6 +337,19 @@ public class InserirDadosActivity extends AppCompatActivity {
         brita.setMassaUnitaria(Double.parseDouble(textInputMassaUnitariaBrita.getText().toString()));
 
         traco.setTipoDeTraco(spinnerTipoDeTraco.getSelectedItem().toString());
+
+        if (spinnerTipoDeTraco.getSelectedItem().toString().equals("Traço para 1 saco (50kg) de cimento em volume")) {
+            areia.setUmidadeDaAreia(Double.parseDouble(textInputUmidadeDaAreia.getText().toString()));
+            areia.setInchamentoDaAreia(Double.parseDouble(textInputInchamentoDaAreia.getText().toString()));
+        }
+
+        if (spinnerTipoDeTraco.getSelectedItem().toString().equals("Traço para 1 saco (50kg) de cimento em padiolas")) {
+            areia.setUmidadeDaAreia(Double.parseDouble(textInputUmidadeDaAreia.getText().toString()));
+            areia.setInchamentoDaAreia(Double.parseDouble(textInputInchamentoDaAreia.getText().toString()));
+            dosagem.setLarguraDaPadiola(Double.parseDouble(textInputLarguraDaPadiola.getText().toString()));
+            dosagem.setComprimentoDaPadiola(Double.parseDouble(textInputComprimentoDaPadiola.getText().toString()));
+        }
+
     }
 
     private void carregarDadosSpinner() {

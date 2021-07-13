@@ -31,6 +31,10 @@ public class Dosagem implements Serializable {
     private Double[] tracoUnitarioEmMassa = new Double[4];
     //private String tracoExibido;
 
+    private Double larguraDaPadiola;
+    private Double comprimentoDaPadiola;
+    private Double alturaDaPadiola;
+
 
     // Classes de arredondamento
     private DecimalFormat arred0 = new DecimalFormat("####");
@@ -178,6 +182,30 @@ public class Dosagem implements Serializable {
 
     public void setAgua(Agua agua) {
         this.agua = agua;
+    }
+
+    public Double getLarguraDaPadiola() {
+        return larguraDaPadiola;
+    }
+
+    public void setLarguraDaPadiola(Double larguraDaPadiola) {
+        this.larguraDaPadiola = larguraDaPadiola;
+    }
+
+    public Double getComprimentoDaPadiola() {
+        return comprimentoDaPadiola;
+    }
+
+    public void setComprimentoDaPadiola(Double comprimentoDaPadiola) {
+        this.comprimentoDaPadiola = comprimentoDaPadiola;
+    }
+
+    public Double getAlturaDaPadiola() {
+        return alturaDaPadiola;
+    }
+
+    public void setAlturaDaPadiola(Double alturaDaPadiola) {
+        this.alturaDaPadiola = alturaDaPadiola;
     }
 
     public CurvaDeAbrams getCurvaDeAbrams() {

@@ -316,7 +316,7 @@ public class ResultadosActivity extends AppCompatActivity {
 
             dosagem.traco.setTracoExibido(textViewTracoPara1SacoDeCimentoEmMassaResultado.getText().toString());
             TextView textViewRotuloTracoCimento = findViewById(R.id.textViewRotuloTracoCimento);
-            textViewRotuloTracoCimento.setText("Cimento (Saco)");
+            textViewRotuloTracoCimento.setText("Cimento (Sacos)");
         }
 
         final Double[] tracoProporcao = new Double[4];

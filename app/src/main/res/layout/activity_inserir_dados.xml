@@ -50,7 +50,7 @@
                 android:id="@+id/textInputAbatimento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Abatimento"
+                android:hint="Abatimento (mm)"
                 android:inputType="numberDecimal" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -257,7 +257,8 @@
                 android:id="@+id/textInputUmidadeDaAreia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Umidade da areia" />
+                android:hint="Umidade da areia"
+                android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -268,7 +269,8 @@
                 android:id="@+id/textInputInchamentoDaAreia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Inchamento da areia para a umidade definida (%)" />
+                android:hint="Inchamento da areia para a umidade definida (%)"
+                android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -277,7 +279,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="8dp"
-            android:text="Dimensões da padiola:"
+            android:text="Dimensões da base da padiola:"
             android:textSize="16dp" />
 
         <LinearLayout
@@ -295,8 +297,9 @@
                     android:id="@+id/textInputLarguraDaPadiola"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:hint="Largura (cm)" />
+                    android:gravity="center_vertical"
+                    android:hint="Largura (cm)"
+                    android:inputType="numberDecimal" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -318,8 +321,9 @@
                     android:id="@+id/textInputComprimentoDaPadiola"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:hint="Comprimento (cm)" />
+                    android:gravity="center_vertical"
+                    android:hint="Comprimento (cm)"
+                    android:inputType="numberDecimal" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>

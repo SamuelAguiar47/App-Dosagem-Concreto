@@ -9,6 +9,8 @@ public class Areia implements Serializable {
     private Double moduloDefinura;
     private Double massaEspecifica;
     private Double massaUnitaria;
+    private Double umidadeDaAreia;
+    private Double inchamentoDaAreia;
     private Double consumoDeAreia;
     private Double volumeDeAreia;
 
@@ -56,6 +58,22 @@ public class Areia implements Serializable {
 
     public void setMassaUnitaria(Double massaUnitaria) {
         this.massaUnitaria = massaUnitaria;
+    }
+
+    public Double getUmidadeDaAreia() {
+        return umidadeDaAreia;
+    }
+
+    public void setUmidadeDaAreia(Double umidadeDaAreia) {
+        this.umidadeDaAreia = umidadeDaAreia;
+    }
+
+    public Double getInchamentoDaAreia() {
+        return inchamentoDaAreia;
+    }
+
+    public void setInchamentoDaAreia(Double inchamentoDaAreia) {
+        this.inchamentoDaAreia = inchamentoDaAreia;
     }
 
     public Double getConsumoDeAreia() {
