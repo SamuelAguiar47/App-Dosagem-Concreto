@@ -61,10 +61,10 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTracoExibidoCimento" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/textViewRotuloTracoAreia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="45dp"
         android:rotation="-90"
         android:rotationX="0"
         android:text="Areia (Kg)"
@@ -74,10 +74,10 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTracoExibidoAreia" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/textViewRotuloTracoBrita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="43dp"
         android:rotation="-90"
         android:rotationX="0"
         android:text="Brita (Kg)"
@@ -87,7 +87,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTracoExibidoBrita" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/textViewRotuloTracoAgua"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
@@ -2397,6 +2397,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayoutCalculoTracoPara1SacoDeCimentoEmVolume"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -2443,7 +2444,7 @@
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginRight="28dp"
-                android:text="Vareia = (Careia / (γareia/1000)) * CI"
+                android:text="Vareia = (Careia / (γareia/1000)) * (1 + CI)"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
 

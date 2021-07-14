@@ -31,6 +31,7 @@ import com.cursoandroid.appdosagemconcreto.materiais.Brita;
 import com.cursoandroid.appdosagemconcreto.materiais.Cimento;
 import com.cursoandroid.appdosagemconcreto.materiais.Concreto;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,7 @@ public class InserirDadosActivity extends AppCompatActivity {
             textInputDiametroMaximoBrita, textInputMassaEspecificaBrita, textInputMassaUnitariaCompBrita,
             textInputMassaUnitariaBrita, textInputUmidadeDaAreia, textInputInchamentoDaAreia,
             textInputLarguraDaPadiola, textInputComprimentoDaPadiola;
+    private TextInputLayout textInputLayoutUmidadeDaAreia, textInputLayoutInchamentoDaAreia;
     private Spinner spinnerTipoDeCimento, spinnerDesvioPadrao, spinnerTipoDeTraco;
     private TextView textViewTituloInformacoesAdicionais, textViewTituloDimensoesDaPadiola;
     private LinearLayout linearLayoutDimensoesDaPadiola;
@@ -96,6 +98,8 @@ public class InserirDadosActivity extends AppCompatActivity {
         textViewTituloDimensoesDaPadiola = findViewById(R.id.textViewTituloDimensoesDaPadiola);
 
         //Layouts
+        textInputLayoutUmidadeDaAreia = findViewById(R.id.textInputLayoutUmidadeDaAreia);
+        textInputLayoutInchamentoDaAreia = findViewById(R.id.textInputLayoutInchamentoDaAreia);
         linearLayoutDimensoesDaPadiola = findViewById(R.id.linearLayoutDimensoesDaPadiola);
 
         //Spinners
@@ -132,8 +136,8 @@ public class InserirDadosActivity extends AppCompatActivity {
             textInputMassaEspecificaBrita.setText("2750");
             textInputMassaUnitariaCompBrita.setText("1550");
             textInputMassaUnitariaBrita.setText("1430");
-            textInputUmidadeDaAreia.setText("30");
-            textInputInchamentoDaAreia.setText("6");
+            textInputUmidadeDaAreia.setText("6");
+            textInputInchamentoDaAreia.setText("30");
             textInputLarguraDaPadiola.setText("35");
             textInputComprimentoDaPadiola.setText("45");
 
@@ -220,20 +224,20 @@ public class InserirDadosActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i < 3) {
                     textViewTituloInformacoesAdicionais.setVisibility(View.GONE);
-                    textInputUmidadeDaAreia.setVisibility(View.GONE);
-                    textInputInchamentoDaAreia.setVisibility(View.GONE);
+                    textInputLayoutUmidadeDaAreia.setVisibility(View.GONE);
+                    textInputLayoutInchamentoDaAreia.setVisibility(View.GONE);
                     textViewTituloDimensoesDaPadiola.setVisibility(View.GONE);
                     linearLayoutDimensoesDaPadiola.setVisibility(View.GONE);
                 } else if (i == 3) {
                     textViewTituloInformacoesAdicionais.setVisibility(View.VISIBLE);
-                    textInputUmidadeDaAreia.setVisibility(View.VISIBLE);
-                    textInputInchamentoDaAreia.setVisibility(View.VISIBLE);
+                    textInputLayoutUmidadeDaAreia.setVisibility(View.VISIBLE);
+                    textInputLayoutInchamentoDaAreia.setVisibility(View.VISIBLE);
                     textViewTituloDimensoesDaPadiola.setVisibility(View.GONE);
                     linearLayoutDimensoesDaPadiola.setVisibility(View.GONE);
                 } else {
                     textViewTituloInformacoesAdicionais.setVisibility(View.VISIBLE);
-                    textInputUmidadeDaAreia.setVisibility(View.VISIBLE);
-                    textInputInchamentoDaAreia.setVisibility(View.VISIBLE);
+                    textInputLayoutUmidadeDaAreia.setVisibility(View.VISIBLE);
+                    textInputLayoutInchamentoDaAreia.setVisibility(View.VISIBLE);
                     textViewTituloDimensoesDaPadiola.setVisibility(View.VISIBLE);
                     linearLayoutDimensoesDaPadiola.setVisibility(View.VISIBLE);
                 }
@@ -337,6 +341,13 @@ public class InserirDadosActivity extends AppCompatActivity {
         brita.setMassaUnitaria(Double.parseDouble(textInputMassaUnitariaBrita.getText().toString()));
 
         traco.setTipoDeTraco(spinnerTipoDeTraco.getSelectedItem().toString());
+
+        if ((spinnerTipoDeTraco.getSelectedItem().toString().equals("Traço para 1 m³ de concreto")) ||
+           (spinnerTipoDeTraco.getSelectedItem().toString().equals("Traço unitário em massa")) ||
+           (spinnerTipoDeTraco.getSelectedItem().toString().equals("Traço para 1 saco (50kg) de cimento em massa"))) {
+            areia.setUmidadeDaAreia(0.0);
+            areia.setInchamentoDaAreia(0.0);
+        }
 
         if (spinnerTipoDeTraco.getSelectedItem().toString().equals("Traço para 1 saco (50kg) de cimento em volume")) {
             areia.setUmidadeDaAreia(Double.parseDouble(textInputUmidadeDaAreia.getText().toString()));
