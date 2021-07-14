@@ -2396,6 +2396,210 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="- Cálculo do traço para 1 saco de cimento em volume -"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaCimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:text="Vc = 1 saco"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/colorTracoDivisao" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaAreia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Vareia = (Careia / (γareia/1000)) * CI"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeCalculoAreia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Vareia = *cálculo* "
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeResutadoAreia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Vareia = *resultado* "
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/colorTracoDivisao" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaBrita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Vb = (Cb / (γb/1000))"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeCalculoBrita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Vb = *cálculo*"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeBritaBrita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Vb = *resultado*"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/divider7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/colorTracoDivisao" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaAgua"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Va (l) = Ca (kg) = Ca - h*Careia (do traço em massa)"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeCalculoAgua"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Va = *cálculo*"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeResultadoAgua"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Va = *resultado*"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/divider8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/colorTracoDivisao" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormula"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Vc : Vareia : Vb : Va"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeResultado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="*resultado*"
+                android:textAllCaps="false"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
