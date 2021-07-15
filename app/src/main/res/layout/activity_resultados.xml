@@ -2424,7 +2424,8 @@
                 android:layout_marginTop="3dp"
                 android:text="Vc = 1 saco"
                 android:textAllCaps="false"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <View
                 android:id="@+id/divider5"
@@ -2470,7 +2471,8 @@
                 android:layout_marginRight="28dp"
                 android:text="Vareia = *resultado* "
                 android:textAllCaps="false"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <View
                 android:id="@+id/divider6"
@@ -2516,7 +2518,8 @@
                 android:layout_marginRight="28dp"
                 android:text="Vb = *resultado*"
                 android:textAllCaps="false"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <View
                 android:id="@+id/divider7"
@@ -2562,7 +2565,8 @@
                 android:layout_marginRight="28dp"
                 android:text="Va = *resultado*"
                 android:textAllCaps="false"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <View
                 android:id="@+id/divider8"
