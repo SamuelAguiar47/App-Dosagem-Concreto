@@ -33,6 +33,7 @@ import com.cursoandroid.appdosagemconcreto.materiais.Concreto;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +64,15 @@ public class InserirDadosActivity extends AppCompatActivity {
     String acao;
     int position;
     private List<Dosagem> listaDosagens = new ArrayList<>();
+
+    // Classes de arredondamento e formatação
+    private DecimalFormat arred0 = new DecimalFormat("####");
+    private DecimalFormat arred1 = new DecimalFormat("##0.0");
+    private DecimalFormat arred1X = new DecimalFormat("##0.#");
+    private DecimalFormat arred2 = new DecimalFormat("##0.00");
+    private DecimalFormat arred2x = new DecimalFormat("##0.##");
+    private DecimalFormat arred3 = new DecimalFormat("##0.000");
+    private DecimalFormat arred3x = new DecimalFormat("##0.###");
 
     // Helper
     CodigosDeActivity codigosDeActivity = new CodigosDeActivity();
@@ -158,9 +168,11 @@ public class InserirDadosActivity extends AppCompatActivity {
             dosagem.brita = brita;
             dosagem.agua = agua;
             dosagem.traco = traco;
+            dosagem.setLarguraDaPadiola(dados.getDouble("larguraDaPadiola"));
+            dosagem.setComprimentoDaPadiola(dados.getDouble("comprimentoDaPadiola"));
 
-            textInputFck.setText(dosagem.concreto.getFck().toString());
-            textInputAbatimento.setText(dosagem.concreto.getAbatimento().toString());
+            textInputFck.setText(arred3x.format(dosagem.concreto.getFck()));
+            textInputAbatimento.setText(arred3x.format(dosagem.concreto.getAbatimento()));
             Double desvioPadrao = dosagem.concreto.getDesvioPadrao();
             int spinnerPosition = 0;
             if (desvioPadrao.equals(4.0)) {
@@ -192,14 +204,14 @@ public class InserirDadosActivity extends AppCompatActivity {
                 spinnerPosition = 7;
             }
             spinnerTipoDeCimento.setSelection(spinnerPosition);
-            textInputMassaEspecificaCimento.setText(dosagem.cimento.getMassaEspecifica().toString());
-            textInputModuloDeFinuraAreia.setText(dosagem.areia.getModuloDefinura().toString());
-            textInputMassaEspecificaAreia.setText(dosagem.areia.getMassaEspecifica().toString());
-            textInputMassaUnitariaAreia.setText(dosagem.areia.getMassaUnitaria().toString());
-            textInputDiametroMaximoBrita.setText(dosagem.brita.getDiametroMaximo().toString());
-            textInputMassaEspecificaBrita.setText(dosagem.brita.getMassaEspecifica().toString());
-            textInputMassaUnitariaCompBrita.setText(dosagem.brita.getMassaUnitariaComp().toString());
-            textInputMassaUnitariaBrita.setText(dosagem.brita.getMassaUnitaria().toString());
+            textInputMassaEspecificaCimento.setText(arred3x.format(dosagem.cimento.getMassaEspecifica()));
+            textInputModuloDeFinuraAreia.setText(arred3x.format(dosagem.areia.getModuloDefinura()));
+            textInputMassaEspecificaAreia.setText(arred3x.format(dosagem.areia.getMassaEspecifica()));
+            textInputMassaUnitariaAreia.setText(arred3x.format(dosagem.areia.getMassaUnitaria()));
+            textInputDiametroMaximoBrita.setText(arred3x.format(dosagem.brita.getDiametroMaximo()));
+            textInputMassaEspecificaBrita.setText(arred3x.format(dosagem.brita.getMassaEspecifica()));
+            textInputMassaUnitariaCompBrita.setText(arred3x.format(dosagem.brita.getMassaUnitariaComp()));
+            textInputMassaUnitariaBrita.setText(arred3x.format(dosagem.brita.getMassaUnitaria()));
 
             String tipoDeTraco = dosagem.traco.getTipoDeTraco();
             spinnerPosition = 0;
@@ -215,6 +227,14 @@ public class InserirDadosActivity extends AppCompatActivity {
                 spinnerPosition = 4;
             }
             spinnerTipoDeTraco.setSelection(spinnerPosition);
+
+            if (tipoDeTraco.equals("Traço para 1 saco (50kg) de cimento em volume") || tipoDeTraco.equals("Traço para 1 saco (50kg) de cimento em padiolas")) {
+                textInputUmidadeDaAreia.setText(arred3x.format(dosagem.areia.getUmidadeDaAreia()));
+                textInputInchamentoDaAreia.setText(arred3x.format(dosagem.areia.getInchamentoDaAreia()));
+            } else if (tipoDeTraco.equals("Traço para 1 saco (50kg) de cimento em padiolas")) {
+                textInputLarguraDaPadiola.setText(arred3x.format(dosagem.getLarguraDaPadiola()));
+                textInputComprimentoDaPadiola.setText(arred3x.format(dosagem.getComprimentoDaPadiola()));
+            }
 
 
         }
@@ -324,21 +344,21 @@ public class InserirDadosActivity extends AppCompatActivity {
     }
 
     public void inserirDados() {
-        concreto.setDesvioPadrao(Double.parseDouble(spinnerDesvioPadrao.getSelectedItem().toString()));
-        concreto.setFck(Double.parseDouble(textInputFck.getText().toString()));
-        concreto.setAbatimento(Double.parseDouble(textInputAbatimento.getText().toString()));
+        concreto.setDesvioPadrao(Double.parseDouble(spinnerDesvioPadrao.getSelectedItem().toString().replace(",",".")));
+        concreto.setFck(Double.parseDouble(textInputFck.getText().toString().replace(",",".")));
+        concreto.setAbatimento(Double.parseDouble(textInputAbatimento.getText().toString().replace(",",".")));
 
         cimento.setEspecificacoes(spinnerTipoDeCimento.getSelectedItem().toString());
-        cimento.setMassaEspecifica(Double.parseDouble(textInputMassaEspecificaCimento.getText().toString()));
+        cimento.setMassaEspecifica(Double.parseDouble(textInputMassaEspecificaCimento.getText().toString().replace(",",".")));
 
-        areia.setModuloDefinura(Double.parseDouble(textInputModuloDeFinuraAreia.getText().toString()));
-        areia.setMassaEspecifica(Double.parseDouble(textInputMassaEspecificaAreia.getText().toString()));
-        areia.setMassaUnitaria(Double.parseDouble(textInputMassaUnitariaAreia.getText().toString()));
+        areia.setModuloDefinura(Double.parseDouble(textInputModuloDeFinuraAreia.getText().toString().replace(",",".")));
+        areia.setMassaEspecifica(Double.parseDouble(textInputMassaEspecificaAreia.getText().toString().replace(",",".")));
+        areia.setMassaUnitaria(Double.parseDouble(textInputMassaUnitariaAreia.getText().toString().replace(",",".")));
 
-        brita.setDiametroMaximo(Double.parseDouble(textInputDiametroMaximoBrita.getText().toString()));
-        brita.setMassaEspecifica(Double.parseDouble(textInputMassaEspecificaBrita.getText().toString()));
-        brita.setMassaUnitariaComp(Double.parseDouble(textInputMassaUnitariaCompBrita.getText().toString()));
-        brita.setMassaUnitaria(Double.parseDouble(textInputMassaUnitariaBrita.getText().toString()));
+        brita.setDiametroMaximo(Double.parseDouble(textInputDiametroMaximoBrita.getText().toString().replace(",",".")));
+        brita.setMassaEspecifica(Double.parseDouble(textInputMassaEspecificaBrita.getText().toString().replace(",",".")));
+        brita.setMassaUnitariaComp(Double.parseDouble(textInputMassaUnitariaCompBrita.getText().toString().replace(",",".")));
+        brita.setMassaUnitaria(Double.parseDouble(textInputMassaUnitariaBrita.getText().toString().replace(",",".")));
 
         traco.setTipoDeTraco(spinnerTipoDeTraco.getSelectedItem().toString());
 
@@ -350,15 +370,15 @@ public class InserirDadosActivity extends AppCompatActivity {
         }
 
         if (spinnerTipoDeTraco.getSelectedItem().toString().equals("Traço para 1 saco (50kg) de cimento em volume")) {
-            areia.setUmidadeDaAreia(Double.parseDouble(textInputUmidadeDaAreia.getText().toString()));
-            areia.setInchamentoDaAreia(Double.parseDouble(textInputInchamentoDaAreia.getText().toString()));
+            areia.setUmidadeDaAreia(Double.parseDouble(textInputUmidadeDaAreia.getText().toString().replace(",",".")));
+            areia.setInchamentoDaAreia(Double.parseDouble(textInputInchamentoDaAreia.getText().toString().replace(",",".")));
         }
 
         if (spinnerTipoDeTraco.getSelectedItem().toString().equals("Traço para 1 saco (50kg) de cimento em padiolas")) {
-            areia.setUmidadeDaAreia(Double.parseDouble(textInputUmidadeDaAreia.getText().toString()));
-            areia.setInchamentoDaAreia(Double.parseDouble(textInputInchamentoDaAreia.getText().toString()));
-            dosagem.setLarguraDaPadiola(Double.parseDouble(textInputLarguraDaPadiola.getText().toString()));
-            dosagem.setComprimentoDaPadiola(Double.parseDouble(textInputComprimentoDaPadiola.getText().toString()));
+            areia.setUmidadeDaAreia(Double.parseDouble(textInputUmidadeDaAreia.getText().toString().replace(",",".")));
+            areia.setInchamentoDaAreia(Double.parseDouble(textInputInchamentoDaAreia.getText().toString().replace(",",".")));
+            dosagem.setLarguraDaPadiola(Double.parseDouble(textInputLarguraDaPadiola.getText().toString().replace(",",".")));
+            dosagem.setComprimentoDaPadiola(Double.parseDouble(textInputComprimentoDaPadiola.getText().toString().replace(",",".")));
         }
 
     }

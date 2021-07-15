@@ -48,11 +48,16 @@ public class TracoDAO implements ITracoDAO{
         cv.put("moduloDeFinuraAreia", dosagem.areia.getModuloDefinura());
         cv.put("massaEspecificaAreia", dosagem.areia.getMassaEspecifica());
         cv.put("massaUnitariaAreia", dosagem.areia.getMassaUnitaria());
+        cv.put("umidadeAreia", dosagem.areia.getUmidadeDaAreia());
+        cv.put("inchamentoAreia", dosagem.areia.getInchamentoDaAreia());
 
         cv.put("diametroMaximoBrita", dosagem.brita.getDiametroMaximo());
         cv.put("massaEspecificaBrita", dosagem.brita.getMassaEspecifica());
         cv.put("massaUnitariaCompBrita", dosagem.brita.getMassaUnitariaComp());
         cv.put("massaUnitariaBrita", dosagem.brita.getMassaUnitaria());
+
+        cv.put("larguraDaPadiola", dosagem.getLarguraDaPadiola());
+        cv.put("comprimentoDaPadiola", dosagem.getComprimentoDaPadiola());
 
         try {
             escreve.insert(DbHelper.TABELA_TRACOS, null, cv);
@@ -84,11 +89,16 @@ public class TracoDAO implements ITracoDAO{
         cv.put("moduloDeFinuraAreia", dosagem.areia.getModuloDefinura());
         cv.put("massaEspecificaAreia", dosagem.areia.getMassaEspecifica());
         cv.put("massaUnitariaAreia", dosagem.areia.getMassaUnitaria());
+        cv.put("umidadeAreia", dosagem.areia.getUmidadeDaAreia());
+        cv.put("inchamentoAreia", dosagem.areia.getInchamentoDaAreia());
 
         cv.put("diametroMaximoBrita", dosagem.brita.getDiametroMaximo());
         cv.put("massaEspecificaBrita", dosagem.brita.getMassaEspecifica());
         cv.put("massaUnitariaCompBrita", dosagem.brita.getMassaUnitariaComp());
         cv.put("massaUnitariaBrita", dosagem.brita.getMassaUnitaria());
+
+        cv.put("larguraDaPadiola", dosagem.getLarguraDaPadiola());
+        cv.put("comprimentoDaPadiola", dosagem.getComprimentoDaPadiola());
 
         try {
             String[] args = {dosagem.getId().toString()};
@@ -149,11 +159,16 @@ public class TracoDAO implements ITracoDAO{
             Double moduloDeFinuraAreia = cursor.getDouble( cursor.getColumnIndex("moduloDeFinuraAreia") );
             Double massaEspecificaAreia = cursor.getDouble( cursor.getColumnIndex("massaEspecificaAreia") );
             Double massaUnitariaAreia = cursor.getDouble( cursor.getColumnIndex("massaUnitariaAreia") );
+            Double umidadeAreia = cursor.getDouble( cursor.getColumnIndex("umidadeAreia") );
+            Double inchamentoAreia = cursor.getDouble( cursor.getColumnIndex("inchamentoAreia") );
 
             Double diametroMaximoBrita = cursor.getDouble( cursor.getColumnIndex("diametroMaximoBrita") );
             Double massaEspecificaBrita = cursor.getDouble( cursor.getColumnIndex("massaEspecificaBrita") );
             Double massaUnitariaCompBrita = cursor.getDouble( cursor.getColumnIndex("massaUnitariaCompBrita") );
             Double massaUnitariaBrita = cursor.getDouble( cursor.getColumnIndex("massaUnitariaBrita") );
+
+            Double larguraDaPadiola = cursor.getDouble( cursor.getColumnIndex("larguraDaPadiola") );
+            Double comprimentoDaPadiola = cursor.getDouble( cursor.getColumnIndex("comprimentoDaPadiola") );
 
             dosagem.setId(id);
             dosagem.traco.setNomeDoTraco(nomeTraco);
@@ -171,6 +186,8 @@ public class TracoDAO implements ITracoDAO{
             areia.setModuloDefinura(moduloDeFinuraAreia);
             areia.setMassaEspecifica(massaEspecificaAreia);
             areia.setMassaUnitaria(massaUnitariaAreia);
+            areia.setUmidadeDaAreia(umidadeAreia);
+            areia.setInchamentoDaAreia(inchamentoAreia);
 
             brita.setDiametroMaximo(diametroMaximoBrita);
             brita.setMassaEspecifica(massaEspecificaBrita);
@@ -178,6 +195,9 @@ public class TracoDAO implements ITracoDAO{
             brita.setMassaUnitaria(massaUnitariaBrita);
 
             dosagem.inserirInformacoesIncicias(concreto, cimento, areia, brita, agua);
+
+            dosagem.setLarguraDaPadiola(larguraDaPadiola);
+            dosagem.setComprimentoDaPadiola(comprimentoDaPadiola);
 
             listaDeTracos.add( dosagem );
         }

@@ -33,11 +33,14 @@ public class DbHelper extends SQLiteOpenHelper {
                      // Dados cimento
                      "tipoDeCimento TEXT, massaEspecificaCimento REAL, " +
 
-                     // Areia
-                     "moduloDeFinuraAreia REAL, massaEspecificaAreia REAL, massaUnitariaAreia REAL," +
+                     // Dados Areia
+                     "moduloDeFinuraAreia REAL, massaEspecificaAreia REAL, massaUnitariaAreia REAL, umidadeAreia REAL, inchamentoAreia REAL, " +
 
-                     // Brita
-                     "diametroMaximoBrita REAL, massaEspecificaBrita REAL, massaUnitariaCompBrita REAL, massaUnitariaBrita REAL); ";
+                     // Dados Brita
+                     "diametroMaximoBrita REAL, massaEspecificaBrita REAL, massaUnitariaCompBrita REAL, massaUnitariaBrita REAL, " +
+
+                     // Dados Padiola
+                     "larguraDaPadiola REAL, comprimentoDaPadiola REAL); ";
 
         try {
             sqLiteDatabase.execSQL( sql );

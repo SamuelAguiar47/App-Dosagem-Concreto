@@ -103,6 +103,10 @@ public class ResultadosActivity extends AppCompatActivity {
         textViewTituloTipoDeTraco = findViewById(R.id.textViewTituloTipoDeTraco);
         textViewTituloTipoDeTraco.setText(dosagem.traco.getTipoDeTraco());
 
+        textViewRotuloTracoCimento = findViewById(R.id.textViewRotuloTracoCimento);
+        textViewRotuloTracoAreia = findViewById(R.id.textViewRotuloTracoAreia);
+        textViewRotuloTracoBrita = findViewById(R.id.textViewRotuloTracoBrita);
+
         buttonExibirMemoriaDeCalculo = findViewById(R.id.buttonExibirMemoriaDeCalculo);
         linearLayoutMemoriaDeCalculo = findViewById(R.id.linearLayoutMemoriaDeCalculo);
         buttonExibirCurvaDeAbrams = findViewById(R.id.buttonVisualizarCurvaDeAbrams);
@@ -326,12 +330,9 @@ public class ResultadosActivity extends AppCompatActivity {
 
             dosagem.traco.setTracoExibido(textViewTracoPara1M3DeConcretoEmMassaResultado.getText().toString());
 
-            textViewRotuloTracoCimento = findViewById(R.id.textViewRotuloTracoCimento);
             textViewRotuloTracoCimento.setPadding(0,0,0,0);
-            textViewRotuloTracoAreia = findViewById(R.id.textViewRotuloTracoAreia);
-            textViewRotuloTracoAreia.setPadding(0,0,10,0);
-            textViewRotuloTracoBrita = findViewById(R.id.textViewRotuloTracoBrita);
-            textViewRotuloTracoBrita.setPadding(0,0,12,0);
+            textViewRotuloTracoAreia.setPadding(0,0,20,0);
+            textViewRotuloTracoBrita.setPadding(0,0,24,0);
 
         } else if (dosagem.traco.getTipoDeTraco().equals("Traço unitário em massa")) {
             editTextTracoExibidoCimento.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[0]));
@@ -346,13 +347,9 @@ public class ResultadosActivity extends AppCompatActivity {
 
             dosagem.traco.setTracoExibido(textViewTracoEmMassaResultado.getText().toString());
 
-            textViewRotuloTracoCimento = findViewById(R.id.textViewRotuloTracoCimento);
-            textViewRotuloTracoAreia = findViewById(R.id.textViewRotuloTracoAreia);
-            textViewRotuloTracoBrita = findViewById(R.id.textViewRotuloTracoBrita);
-
             textViewRotuloTracoCimento.setPadding(0,0,0,0);
-            textViewRotuloTracoAreia.setPadding(0,0,10,0);
-            textViewRotuloTracoBrita.setPadding(0,0,12,0);
+            textViewRotuloTracoAreia.setPadding(0,0,20,0);
+            textViewRotuloTracoBrita.setPadding(0,0,24,0);
 
         } else if (dosagem.traco.getTipoDeTraco().equals("Traço para 1 saco (50kg) de cimento em massa")) {
             editTextTracoExibidoCimento.setText(arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmMassa()[0]));
@@ -367,13 +364,9 @@ public class ResultadosActivity extends AppCompatActivity {
 
             textViewRotuloTracoCimento.setText("Cimento (Sacos)");
 
-            textViewRotuloTracoCimento = findViewById(R.id.textViewRotuloTracoCimento);
-            textViewRotuloTracoAreia = findViewById(R.id.textViewRotuloTracoAreia);
-            textViewRotuloTracoBrita = findViewById(R.id.textViewRotuloTracoBrita);
-
             textViewRotuloTracoCimento.setPadding(0,0,36,0);
-            textViewRotuloTracoAreia.setPadding(0,0,10,0);
-            textViewRotuloTracoBrita.setPadding(0,0,12,0);
+            textViewRotuloTracoAreia.setPadding(0,0,20,0);
+            textViewRotuloTracoBrita.setPadding(0,0,24,0);
 
         } else if (dosagem.traco.getTipoDeTraco().equals("Traço para 1 saco (50kg) de cimento em volume")) {
             editTextTracoExibidoCimento.setText(arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmVolume()[0]));
@@ -382,10 +375,6 @@ public class ResultadosActivity extends AppCompatActivity {
             editTextTracoExibidoAgua.setText(arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmVolume()[3]));
 
             dosagem.traco.setTracoExibido(textViewTracoPara1SacoDeCimentoEmVolumeResultado.getText().toString());
-
-            textViewRotuloTracoCimento = findViewById(R.id.textViewRotuloTracoCimento);
-            textViewRotuloTracoAreia = findViewById(R.id.textViewRotuloTracoAreia);
-            textViewRotuloTracoBrita = findViewById(R.id.textViewRotuloTracoBrita);
 
             textViewRotuloTracoCimento.setText("Cimento (Sacos)");
             textViewRotuloTracoAreia.setText("Areia (l)");
@@ -634,6 +623,8 @@ public class ResultadosActivity extends AppCompatActivity {
                         intentAbrirInserirDadosActivity.putExtra("brita", dosagem.brita);
                         intentAbrirInserirDadosActivity.putExtra("agua", dosagem.agua);
                         intentAbrirInserirDadosActivity.putExtra("traco", dosagem.traco);
+                        intentAbrirInserirDadosActivity.putExtra("larguraDaPadiola", dosagem.getLarguraDaPadiola());
+                        intentAbrirInserirDadosActivity.putExtra("comprimentoDaPadiola", dosagem.getComprimentoDaPadiola());
 
                         intentAbrirInserirDadosActivity.putExtra("position", position);
                         startActivityForResult(intentAbrirInserirDadosActivity, codigosDeActivity.resultadosActivity);
