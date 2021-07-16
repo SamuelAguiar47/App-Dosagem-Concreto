@@ -2605,6 +2605,200 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="800dp"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="-78dp"
+            tools:layout_editor_absoluteY="3212dp">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="- Cálculo do traço para 1 saco de cimento em padiolas -"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaCimento2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:text="Vc = 1 saco"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/divider9"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/colorTracoDivisao" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaConsumoDeAreiaUmida"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:text="Careia (úmida) = Careia *(1 + h)"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeCalculoConsumoDeAreiaUmida"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:text='Careia (úmida) = "cálculo"'
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeResultadoConsumoDeAreiaUmida"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:text='Careia (úmida) = "resultado"'
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaQtdeDePadiolasAreia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Qtde. de pad. de areia = Careia / 60Kg (aproximar sempre para mais)"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeCalculoQtdeDePadiolasAreia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Qtde. de pad. de areia = *cálculo*"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeResultadoQtdeDePadiolasAreia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text='Qtde. de pad. de areia = *resultado*  = "resultado aproximado"'
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaVolumePadiolaAreia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Vol. da pad. de areia = Vareia/ (Qtde de pad. de areia)"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeCalculoVolumePadiolaAreia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Vol. da pad. de areia = *cálculo*"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeResultadoVolumePadiolaAreia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Vol. da pad. de areia = *resultado*"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaVolumePadiolaAreia2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Alt. da pad. de areia = Vareia / (Vol. da pad. de areia)"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeCalculoVolumePadiolaAreia3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Alt. da pad. de areia = *cálculo*"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeResultadoVolumePadiolaAreia3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="28dp"
+                android:text="Alt. da pad. de areia = *resultado*"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/divider10"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginBottom="4dp"
+                android:background="@color/colorTracoDivisao" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

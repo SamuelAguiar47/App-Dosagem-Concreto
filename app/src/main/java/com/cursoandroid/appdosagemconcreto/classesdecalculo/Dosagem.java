@@ -33,7 +33,10 @@ public class Dosagem implements Serializable {
 
     private Double larguraDaPadiola;
     private Double comprimentoDaPadiola;
-    private Double alturaDaPadiola;
+    private Double alturaDaPadiolaDeAreia;
+    private Double alturaDaPadiolaDeBrita;
+    private Double volumeDaPadiolaDeAreia;
+    private Double volumeDaPadiolaDeBrita;
 
 
     // Classes de arredondamento
@@ -207,12 +210,36 @@ public class Dosagem implements Serializable {
         this.comprimentoDaPadiola = comprimentoDaPadiola;
     }
 
-    public Double getAlturaDaPadiola() {
-        return alturaDaPadiola;
+    public Double getAlturaDaPadiolaDeAreia() {
+        return alturaDaPadiolaDeAreia;
     }
 
-    public void setAlturaDaPadiola(Double alturaDaPadiola) {
-        this.alturaDaPadiola = alturaDaPadiola;
+    public void setAlturaDaPadiolaDeAreia(Double alturaDaPadiolaDeAreia) {
+        this.alturaDaPadiolaDeAreia = alturaDaPadiolaDeAreia;
+    }
+
+    public Double getAlturaDaPadiolaDeBrita() {
+        return alturaDaPadiolaDeBrita;
+    }
+
+    public void setAlturaDaPadiolaDeBrita(Double alturaDaPadiolaDeBrita) {
+        this.alturaDaPadiolaDeBrita = alturaDaPadiolaDeBrita;
+    }
+
+    public Double getVolumeDaPadiolaDeAreia() {
+        return volumeDaPadiolaDeAreia;
+    }
+
+    public void setVolumeDaPadiolaDeAreia(Double volumeDaPadiolaDeAreia) {
+        this.volumeDaPadiolaDeAreia = volumeDaPadiolaDeAreia;
+    }
+
+    public Double getVolumeDaPadiolaDeBrita() {
+        return volumeDaPadiolaDeBrita;
+    }
+
+    public void setVolumeDaPadiolaDeBrita(Double volumeDaPadiolaDeBrita) {
+        this.volumeDaPadiolaDeBrita = volumeDaPadiolaDeBrita;
     }
 
     public CurvaDeAbrams getCurvaDeAbrams() {
