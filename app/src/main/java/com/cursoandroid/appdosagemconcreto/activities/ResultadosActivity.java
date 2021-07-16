@@ -308,6 +308,8 @@ public class ResultadosActivity extends AppCompatActivity {
                         arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmVolume()[3])
         );
 
+        // Cálculo do traço para 1 saco de cimento em padiolas
+
         TextView textViewTracoPara1SacoDeCimentoEmVolumeCalculoConsumoDeAreiaUmida = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeCalculoConsumoDeAreiaUmida);
         TextView textViewTracoPara1SacoDeCimentoEmVolumeResultadoConsumoDeAreiaUmida = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeResultadoConsumoDeAreiaUmida);
         TextView textViewTracoPara1SacoDeCimentoEmVolumeCalculoQtdeDePadiolasAreia = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeCalculoQtdeDePadiolasAreia);
@@ -325,7 +327,29 @@ public class ResultadosActivity extends AppCompatActivity {
         TextView textViewTracoPara1SacoDeCimentoEmPadiolasResultadoAgua = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmPadiolasResultadoAgua);
         TextView textViewTracoPara1SacoDeCimentoEmPadiolasResultado = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmPadiolasResultado);
 
+        textViewTracoPara1SacoDeCimentoEmVolumeCalculoConsumoDeAreiaUmida.setText("Careia (umida) = " + arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmMassa()[1]) + "*(1 + " + arred2x.format(dosagem.areia.getUmidadeDaAreia()/100) + ")");
+        textViewTracoPara1SacoDeCimentoEmVolumeResultadoConsumoDeAreiaUmida.setText("Careia (umida) = " + arred2x.format(dosagem.areia.getConsumoDeAreiaUmida()) + " Kg");
+        textViewTracoPara1SacoDeCimentoEmVolumeCalculoQtdeDePadiolasAreia.setText("QPareia = " + arred2x.format(dosagem.areia.getConsumoDeAreiaUmida()) + " / 60");
+        textViewTracoPara1SacoDeCimentoEmVolumeResultadoQtdeDePadiolasAreia.setText("QPareia = " + arred2x.format(dosagem.areia.getConsumoDeAreiaUmida() / 60) + " ➔ " + arred2x.format(dosagem.quantidadeDePadiolasDeAreia) + " padiolas");
+        textViewTracoPara1SacoDeCimentoEmVolumeCalculoVolumePadiolaAreia.setText("VPareia = " + arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmVolume()[1]) + " / " + arred2x.format(dosagem.quantidadeDePadiolasDeAreia));
+        textViewTracoPara1SacoDeCimentoEmVolumeResultadoVolumePadiolaAreia.setText("VPareia = " + arred2x.format(dosagem.volumeDaPadiolaDeAreia) + " litros = " + arred2x.format(dosagem.volumeDaPadiolaDeAreia*1000) + " cm³");
+        textViewTracoPara1SacoDeCimentoEmVolumeCalculoAlturaPadiolaAreia.setText("AltPareia = " + arred2x.format(dosagem.volumeDaPadiolaDeAreia*1000) + " / (" + arred2x.format(dosagem.larguraDaPadiola) + " * " + arred2x.format(dosagem.comprimentoDaPadiola) + ")");
+        textViewTracoPara1SacoDeCimentoEmVolumeResultadoAlturaPadiolaAreia.setText("AltPareia = " + arred2x.format(dosagem.alturaDaPadiolaDeAreia) + " cm");
 
+        textViewTracoPara1SacoDeCimentoEmVolumeCalculoQtdeDePadiolasBrita.setText("QPb = " + arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmMassa()[2]) + " / 60");
+        textViewTracoPara1SacoDeCimentoEmVolumeResultadoQtdeDePadiolasBrita.setText("QPb = " + arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmMassa()[2] / 60) + " ➔ " + arred2x.format(dosagem.quantidadeDePadiolasDeBrita) + " padiolas");
+        textViewTracoPara1SacoDeCimentoEmVolumeCalculoVolumePadiolaBrita.setText("VPb = " + arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmVolume()[2]) + " / " + arred2x.format(dosagem.quantidadeDePadiolasDeBrita));
+        textViewTracoPara1SacoDeCimentoEmVolumeResultadoVolumePadiolaBrita.setText("VPb = " + arred2x.format(dosagem.volumeDaPadiolaDeBrita) + " litros = " + arred2x.format(dosagem.volumeDaPadiolaDeBrita*1000) + " cm³");
+        textViewTracoPara1SacoDeCimentoEmVolumeCalculoAlturaPadiolaBrita.setText("AltPb = " + arred2x.format(dosagem.volumeDaPadiolaDeBrita*1000) + " / (" + arred2x.format(dosagem.larguraDaPadiola) + " * " + arred2x.format(dosagem.comprimentoDaPadiola) + ")");
+        textViewTracoPara1SacoDeCimentoEmVolumeResultadoAlturaPadiolaBrita.setText("AltPb = " + arred2x.format(dosagem.alturaDaPadiolaDeBrita) + " cm");
+        textViewTracoPara1SacoDeCimentoEmPadiolasResultadoAgua.setText("Va = " + arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmPadiolas()[3]) + " litros");
+
+        textViewTracoPara1SacoDeCimentoEmPadiolasResultado.setText(
+                arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmPadiolas()[0]) + " : " +
+                        arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmPadiolas()[1]) + " : " +
+                        arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmPadiolas()[2]) + " : " +
+                        arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmPadiolas()[3])
+        );
 
         dosagem.traco.setDataDoTraco(formataData.format(data));
 
@@ -402,6 +426,22 @@ public class ResultadosActivity extends AppCompatActivity {
             textViewRotuloTracoCimento.setPadding(0,0,36,0);
             textViewRotuloTracoAreia.setPadding(0,0,0,0);
             textViewRotuloTracoBrita.setPadding(0,0,0,0);
+        } else if (dosagem.traco.getTipoDeTraco().equals("Traço para 1 saco (50kg) de cimento em padiolas")) {
+            editTextTracoExibidoCimento.setText(arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmPadiolas()[0]));
+            editTextTracoExibidoAreia.setText(arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmPadiolas()[1]));
+            editTextTracoExibidoBrita.setText(arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmPadiolas()[2]));
+            editTextTracoExibidoAgua.setText(arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmPadiolas()[3]));
+
+            dosagem.traco.setTracoExibido(textViewTracoPara1SacoDeCimentoEmPadiolasResultado.getText().toString());
+
+            textViewRotuloTracoCimento.setText("Cimento (Sacos)");
+            textViewRotuloTracoAreia.setText("Areia (Padiolas)");
+            textViewRotuloTracoBrita.setText("Brita (Padiolas)");
+
+            textViewRotuloTracoCimento.setPadding(0,0,36,0);
+            textViewRotuloTracoAreia.setPadding(0,0,140,0);
+            textViewRotuloTracoBrita.setPadding(0,0,144,0);
+
         }
 
         final Double[] tracoProporcao = new Double[4];

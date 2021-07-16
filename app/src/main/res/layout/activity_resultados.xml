@@ -2740,7 +2740,8 @@
                 android:layout_marginRight="28dp"
                 android:text='QPareia = *resultado*  = "resultado aproximado"'
                 android:textAllCaps="false"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewTituloVolumeDaPadiolaDeAreia"
@@ -2907,7 +2908,7 @@
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="2dp"
-                android:text="Volume da padiola de areia:"
+                android:text="Volume da padiola de brita:"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />

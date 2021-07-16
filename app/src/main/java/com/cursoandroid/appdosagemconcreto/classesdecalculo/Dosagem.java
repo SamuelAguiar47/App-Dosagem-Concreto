@@ -31,14 +31,14 @@ public class Dosagem implements Serializable {
     private Double[] tracoUnitarioEmMassa = new Double[4];
     //private String tracoExibido;
 
-    private Double larguraDaPadiola;
-    private Double comprimentoDaPadiola;
-    private Double alturaDaPadiolaDeAreia;
-    private Double alturaDaPadiolaDeBrita;
-    private Double volumeDaPadiolaDeAreia;
-    private Double volumeDaPadiolaDeBrita;
-    private Double quantidadeDePadiolasDeAreia;
-    private Double quantidadeDePadiolasDeBrita;
+    public Double larguraDaPadiola;
+    public Double comprimentoDaPadiola;
+    public Double alturaDaPadiolaDeAreia;
+    public Double alturaDaPadiolaDeBrita;
+    public Double volumeDaPadiolaDeAreia;
+    public Double volumeDaPadiolaDeBrita;
+    public Double quantidadeDePadiolasDeAreia;
+    public Double quantidadeDePadiolasDeBrita;
 
 
     // Classes de arredondamento
@@ -153,19 +153,19 @@ public class Dosagem implements Serializable {
         if (this.areia.getConsumoDeAreiaUmida()/60 <= 1) {
             quantidadeDePadiolasDeAreia = 1.0;
         } else {
-            quantidadeDePadiolasDeAreia = (this.areia.getConsumoDeAreiaUmida() % 60) + 1;
+            quantidadeDePadiolasDeAreia = (double) ((int) (this.areia.getConsumoDeAreiaUmida() / 60) + 1);
         }
         volumeDaPadiolaDeAreia = this.traco.getTracoPara1Saco50KgDeCimentoEmVolume()[1] / quantidadeDePadiolasDeAreia;
-        alturaDaPadiolaDeAreia = volumeDaPadiolaDeAreia/(larguraDaPadiola*comprimentoDaPadiola);
+        alturaDaPadiolaDeAreia = (volumeDaPadiolaDeAreia*1000)/(larguraDaPadiola*comprimentoDaPadiola);
         this.traco.tracoPara1Saco50KgDeCimentoEmPadiolas[1] = quantidadeDePadiolasDeAreia;
 
         if (this.traco.tracoPara1Saco50KgDeCimentoEmMassa[2]/60 <= 1) {
             quantidadeDePadiolasDeBrita = 1.0;
         } else {
-            quantidadeDePadiolasDeBrita = (this.traco.tracoPara1Saco50KgDeCimentoEmMassa[2] % 60) + 1;
+            quantidadeDePadiolasDeBrita = (double) ((int)(this.traco.tracoPara1Saco50KgDeCimentoEmMassa[2] / 60) + 1);
         }
         volumeDaPadiolaDeBrita = this.traco.getTracoPara1Saco50KgDeCimentoEmVolume()[2] / quantidadeDePadiolasDeBrita;
-        alturaDaPadiolaDeBrita = volumeDaPadiolaDeBrita/(larguraDaPadiola*comprimentoDaPadiola);
+        alturaDaPadiolaDeBrita = (volumeDaPadiolaDeBrita*1000)/(larguraDaPadiola*comprimentoDaPadiola);
         this.traco.tracoPara1Saco50KgDeCimentoEmPadiolas[2] = quantidadeDePadiolasDeBrita;
 
         this.traco.tracoPara1Saco50KgDeCimentoEmPadiolas[3] = this.traco.tracoPara1Saco50KgDeCimentoEmVolume[3];
