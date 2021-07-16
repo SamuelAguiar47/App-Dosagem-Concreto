@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.TracoAdapter;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.Dosagem;
+import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
 import com.cursoandroid.appdosagemconcreto.helper.RecyclerItemClickListener;
 import com.cursoandroid.appdosagemconcreto.helper.TracoDAO;
 import com.cursoandroid.appdosagemconcreto.materiais.Agua;
@@ -49,6 +50,9 @@ public class TracosSalvosActivity extends AppCompatActivity {
     // Adapter
     private TracoAdapter tracoAdapter;
 
+    // Helper
+    CodigosDeActivity codigosDeActivity = new CodigosDeActivity();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +80,7 @@ public class TracosSalvosActivity extends AppCompatActivity {
                                     intentAbrirResultadosActivity.putExtra("position", position);
 
                                     // Iniciar a Activity dos Resultados
-                                    startActivity(intentAbrirResultadosActivity);
+                                    startActivityForResult(intentAbrirResultadosActivity, codigosDeActivity.tracosSalvosActivity);
                                     //finish();
                                 } catch (Exception e) {
                                     Toast.makeText(TracosSalvosActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -140,8 +144,21 @@ public class TracosSalvosActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( getApplicationContext() );
         recyclerTracosSalvos.setLayoutManager( layoutManager );
         recyclerTracosSalvos.setHasFixedSize(true);
-        recyclerTracosSalvos.addItemDecoration(new DividerItemDecoration( getApplicationContext(), LinearLayout.VERTICAL));
+        //recyclerTracosSalvos.addItemDecoration(new DividerItemDecoration( getApplicationContext(), LinearLayout.VERTICAL));
         recyclerTracosSalvos.setAdapter(tracoAdapter);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+        if (requestCode == codigosDeActivity.tracosSalvosActivity) {
+            if (resultCode == codigosDeActivity.tracosSalvosActivity) {
+                //Intent i = getIntent();
+                //overridePendingTransition(0,0);
+                //i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                finish();
+            }
+        }
+
     }
 
     @Override

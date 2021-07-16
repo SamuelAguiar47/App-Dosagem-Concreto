@@ -10,11 +10,15 @@ import android.view.View;
 import android.widget.Button;
 
 import com.cursoandroid.appdosagemconcreto.R;
+import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
 import com.cursoandroid.appdosagemconcreto.helper.DbHelper;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonNovoTraco, buttonTracosSalvos, buttonAjuda, buttonSobreOApp;
+
+    // Helper
+    CodigosDeActivity codigosDeActivity = new CodigosDeActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

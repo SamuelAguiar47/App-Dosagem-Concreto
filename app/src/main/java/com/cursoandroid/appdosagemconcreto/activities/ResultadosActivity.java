@@ -751,9 +751,12 @@ public class ResultadosActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Erro ao salvar traço!", Toast.LENGTH_SHORT).show();
                 }
 
-                Intent intentAbrirTracosSalvosActivity = new Intent(getApplicationContext(), TracosSalvosActivity.class);
-                startActivity(intentAbrirTracosSalvosActivity);
-                setResult(codigosDeActivity.inserirDadosActivity);
+                if (acao.equals("calcularNovoTraco")) {
+                    Intent intentAbrirTracosSalvosActivity = new Intent(getApplicationContext(), TracosSalvosActivity.class);
+                    startActivity(intentAbrirTracosSalvosActivity);
+                    setResult(codigosDeActivity.inserirDadosActivity);
+                }
+
                 finish();
 
             }
