@@ -308,6 +308,25 @@ public class ResultadosActivity extends AppCompatActivity {
                         arred2x.format(dosagem.traco.getTracoPara1Saco50KgDeCimentoEmVolume()[3])
         );
 
+        TextView textViewTracoPara1SacoDeCimentoEmVolumeCalculoConsumoDeAreiaUmida = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeCalculoConsumoDeAreiaUmida);
+        TextView textViewTracoPara1SacoDeCimentoEmVolumeResultadoConsumoDeAreiaUmida = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeResultadoConsumoDeAreiaUmida);
+        TextView textViewTracoPara1SacoDeCimentoEmVolumeCalculoQtdeDePadiolasAreia = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeCalculoQtdeDePadiolasAreia);
+        TextView textViewTracoPara1SacoDeCimentoEmVolumeResultadoQtdeDePadiolasAreia = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeResultadoQtdeDePadiolasAreia);
+        TextView textViewTracoPara1SacoDeCimentoEmVolumeCalculoVolumePadiolaAreia = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeCalculoVolumePadiolaAreia);
+        TextView textViewTracoPara1SacoDeCimentoEmVolumeResultadoVolumePadiolaAreia = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeResultadoVolumePadiolaAreia);
+        TextView textViewTracoPara1SacoDeCimentoEmVolumeCalculoAlturaPadiolaAreia = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeCalculoAlturaPadiolaAreia);
+        TextView textViewTracoPara1SacoDeCimentoEmVolumeResultadoAlturaPadiolaAreia = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeResultadoAlturaPadiolaAreia);
+        TextView textViewTracoPara1SacoDeCimentoEmVolumeCalculoQtdeDePadiolasBrita = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeCalculoQtdeDePadiolasBrita);
+        TextView textViewTracoPara1SacoDeCimentoEmVolumeResultadoQtdeDePadiolasBrita = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeResultadoQtdeDePadiolasBrita);
+        TextView textViewTracoPara1SacoDeCimentoEmVolumeCalculoVolumePadiolaBrita = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeCalculoVolumePadiolaBrita);
+        TextView textViewTracoPara1SacoDeCimentoEmVolumeResultadoVolumePadiolaBrita = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeResultadoVolumePadiolaBrita);
+        TextView textViewTracoPara1SacoDeCimentoEmVolumeCalculoAlturaPadiolaBrita = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeCalculoAlturaPadiolaBrita);
+        TextView textViewTracoPara1SacoDeCimentoEmVolumeResultadoAlturaPadiolaBrita = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmVolumeResultadoAlturaPadiolaBrita);
+        TextView textViewTracoPara1SacoDeCimentoEmPadiolasResultadoAgua = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmPadiolasResultadoAgua);
+        TextView textViewTracoPara1SacoDeCimentoEmPadiolasResultado = findViewById(R.id.textViewTracoPara1SacoDeCimentoEmPadiolasResultado);
+
+
+
         dosagem.traco.setDataDoTraco(formataData.format(data));
 
         final TextView editTextTracoExibidoCimento = findViewById(R.id.editTextTracoExibidoCimento);
@@ -663,6 +682,8 @@ public class ResultadosActivity extends AppCompatActivity {
         dosagem.determinarTracoPara1Saco50KGDeCimentoEmMassa();
 
         dosagem.determinarTracoPara1Saco50KGDeCimentoEmVolume();
+
+        dosagem.determinarTracoPara1Saco50KGDeCimentoEmPadiolas();
     }
 
     public void abrirDialogSalvar(final View view) {

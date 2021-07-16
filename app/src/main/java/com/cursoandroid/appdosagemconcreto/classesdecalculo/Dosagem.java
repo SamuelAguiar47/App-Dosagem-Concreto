@@ -37,6 +37,8 @@ public class Dosagem implements Serializable {
     private Double alturaDaPadiolaDeBrita;
     private Double volumeDaPadiolaDeAreia;
     private Double volumeDaPadiolaDeBrita;
+    private Double quantidadeDePadiolasDeAreia;
+    private Double quantidadeDePadiolasDeBrita;
 
 
     // Classes de arredondamento
@@ -142,6 +144,31 @@ public class Dosagem implements Serializable {
         this.traco.tracoPara1Saco50KgDeCimentoEmVolume[1] = this.traco.tracoPara1Saco50KgDeCimentoEmMassa[1]/(this.areia.getMassaUnitaria()/1000)*(1 + areia.getInchamentoDaAreia()/100);
         this.traco.tracoPara1Saco50KgDeCimentoEmVolume[2] = this.traco.tracoPara1Saco50KgDeCimentoEmMassa[2]/(this.brita.getMassaUnitaria()/1000);
         this.traco.tracoPara1Saco50KgDeCimentoEmVolume[3] = this.traco.tracoPara1Saco50KgDeCimentoEmMassa[3] - (this.traco.tracoPara1Saco50KgDeCimentoEmMassa[1]*(areia.getUmidadeDaAreia()/100));
+    }
+
+    public void determinarTracoPara1Saco50KGDeCimentoEmPadiolas() {
+        this.traco.tracoPara1Saco50KgDeCimentoEmPadiolas[0] = 1.0;
+
+        this.areia.setConsumoDeAreiaUmida(this.traco.tracoPara1Saco50KgDeCimentoEmMassa[1]*(1+this.areia.getUmidadeDaAreia()/100));
+        if (this.areia.getConsumoDeAreiaUmida()/60 <= 1) {
+            quantidadeDePadiolasDeAreia = 1.0;
+        } else {
+            quantidadeDePadiolasDeAreia = (this.areia.getConsumoDeAreiaUmida() % 60) + 1;
+        }
+        volumeDaPadiolaDeAreia = this.traco.getTracoPara1Saco50KgDeCimentoEmVolume()[1] / quantidadeDePadiolasDeAreia;
+        alturaDaPadiolaDeAreia = volumeDaPadiolaDeAreia/(larguraDaPadiola*comprimentoDaPadiola);
+        this.traco.tracoPara1Saco50KgDeCimentoEmPadiolas[1] = quantidadeDePadiolasDeAreia;
+
+        if (this.traco.tracoPara1Saco50KgDeCimentoEmMassa[2]/60 <= 1) {
+            quantidadeDePadiolasDeBrita = 1.0;
+        } else {
+            quantidadeDePadiolasDeBrita = (this.traco.tracoPara1Saco50KgDeCimentoEmMassa[2] % 60) + 1;
+        }
+        volumeDaPadiolaDeBrita = this.traco.getTracoPara1Saco50KgDeCimentoEmVolume()[2] / quantidadeDePadiolasDeBrita;
+        alturaDaPadiolaDeBrita = volumeDaPadiolaDeBrita/(larguraDaPadiola*comprimentoDaPadiola);
+        this.traco.tracoPara1Saco50KgDeCimentoEmPadiolas[2] = quantidadeDePadiolasDeBrita;
+
+        this.traco.tracoPara1Saco50KgDeCimentoEmPadiolas[3] = this.traco.tracoPara1Saco50KgDeCimentoEmVolume[3];
     }
 
     public void recalcularTraco(String unidadeCimento,String unidadeAreia, String unidadeBrita, String unidadeAgua) {

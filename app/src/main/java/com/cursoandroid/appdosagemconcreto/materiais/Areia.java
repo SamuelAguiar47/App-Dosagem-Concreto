@@ -13,6 +13,7 @@ public class Areia implements Serializable {
     private Double inchamentoDaAreia;
     private Double consumoDeAreia;
     private Double volumeDeAreia;
+    private Double consumoDeAreiaUmida;
 
     // Métodos
 
@@ -92,4 +93,11 @@ public class Areia implements Serializable {
         this.volumeDeAreia = volumeDeAreia;
     }
 
+    public Double getConsumoDeAreiaUmida() {
+        return consumoDeAreiaUmida;
+    }
+
+    public void setConsumoDeAreiaUmida(Double consumoDeAreiaUmida) {
+        this.consumoDeAreiaUmida = consumoDeAreiaUmida;
+    }
 }
