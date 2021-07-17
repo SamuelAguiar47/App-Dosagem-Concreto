@@ -228,10 +228,12 @@ public class InserirDadosActivity extends AppCompatActivity {
             }
             spinnerTipoDeTraco.setSelection(spinnerPosition);
 
-            if (tipoDeTraco.equals("Traço para 1 saco (50kg) de cimento em volume") || tipoDeTraco.equals("Traço para 1 saco (50kg) de cimento em padiolas")) {
+            if (tipoDeTraco.equals("Traço para 1 saco (50kg) de cimento em volume")) {
                 textInputUmidadeDaAreia.setText(arred3x.format(dosagem.areia.getUmidadeDaAreia()));
                 textInputInchamentoDaAreia.setText(arred3x.format(dosagem.areia.getInchamentoDaAreia()));
             } else if (tipoDeTraco.equals("Traço para 1 saco (50kg) de cimento em padiolas")) {
+                textInputUmidadeDaAreia.setText(arred3x.format(dosagem.areia.getUmidadeDaAreia()));
+                textInputInchamentoDaAreia.setText(arred3x.format(dosagem.areia.getInchamentoDaAreia()));
                 textInputLarguraDaPadiola.setText(arred3x.format(dosagem.getLarguraDaPadiola()));
                 textInputComprimentoDaPadiola.setText(arred3x.format(dosagem.getComprimentoDaPadiola()));
             }
