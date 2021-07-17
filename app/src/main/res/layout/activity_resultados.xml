@@ -269,6 +269,16 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/textViewDesvioPadrao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:text="Desvio padrão (Sd) = "
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+
+        <TextView
             android:id="@+id/textViewCimento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -316,7 +326,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginLeft="28dp"
-            android:text="Mód. de finura = "
+            android:text="Mód. de finura (MF) = "
             android:textAllCaps="false"
             android:textSize="16sp" />
 
@@ -337,6 +347,26 @@
             android:layout_marginStart="28dp"
             android:layout_marginLeft="28dp"
             android:text="Massa unit. = "
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewUmidadeAreia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:text="Umidade (h) = "
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewInchamentoAreia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:text="Coef. de Inchamento (CI) = "
             android:textAllCaps="false"
             android:textSize="16sp" />
 
@@ -392,23 +422,33 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/textViewDesvioPadraoTitulo"
+            android:id="@+id/textViewPadiolaTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:text="Desvio Padrão"
+            android:text="Padiola"
             android:textAllCaps="false"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewDesvioPadrao"
+            android:id="@+id/textViewLarguraDaPadiola"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginLeft="28dp"
-            android:text="Sd = "
+            android:text="Larg.Pad. = "
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewComprimentoDaPadiola"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:text="Comp.Pad. = "
             android:textAllCaps="false"
             android:textSize="16sp" />
 
@@ -2606,6 +2646,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayoutCalculoTracoPara1SacoDeCimentoEmPadiolas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -2664,8 +2705,8 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaConsumoDeAreiaUmida"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
                 android:text="Careia (úmida) = Careia *(1 + h)"
                 android:textAllCaps="false"
@@ -2675,8 +2716,8 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeCalculoConsumoDeAreiaUmida"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
                 android:text='Careia (úmida) = "cálculo"'
                 android:textAllCaps="false"
@@ -2686,8 +2727,8 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeResultadoConsumoDeAreiaUmida"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
                 android:text='Careia (úmida) = "resultado"'
                 android:textAllCaps="false"
@@ -2710,8 +2751,8 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaQtdeDePadiolasAreia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginRight="28dp"
                 android:text="QPareia = Careia / 60Kg (aproximar para mais)"
@@ -2722,10 +2763,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeCalculoQtdeDePadiolasAreia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text="QPareia = *cálculo*"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
@@ -2734,10 +2774,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeResultadoQtdeDePadiolasAreia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text='QPareia = *resultado*  = "resultado aproximado"'
                 android:textAllCaps="false"
                 android:textSize="16sp"
@@ -2760,8 +2799,8 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaVolumePadiolaAreia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginRight="28dp"
                 android:text="VPareia = Vareia/ QPareia"
@@ -2772,10 +2811,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeCalculoVolumePadiolaAreia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text="VPareia = *cálculo*"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
@@ -2784,10 +2822,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeResultadoVolumePadiolaAreia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text="VPareia = *resultado em l* = *resultado em cm³*"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
@@ -2809,10 +2846,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaAlturaPadiolaAreia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text="AltPareia = VPareia / (Larg.Pad. * Comp.Pad.)"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
@@ -2821,10 +2857,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeCalculoAlturaPadiolaAreia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text="AltPareia = *cálculo*"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
@@ -2833,10 +2868,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeResultadoAlturaPadiolaAreia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text="AltPareia = *resultado*"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
@@ -2868,10 +2902,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaQtdeDePadiolasBrita"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text="QPb = Cb / 60Kg (aproximar para mais)"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
@@ -2880,10 +2913,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeCalculoQtdeDePadiolasBrita"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text="QPb = *cálculo*"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
@@ -2892,13 +2924,13 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeResultadoQtdeDePadiolasBrita"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text='QPb = *resultado*  = "resultado aproximado"'
                 android:textAllCaps="false"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewTituloVolumeDaPadiolaDeAreia3"
@@ -2917,10 +2949,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaVolumePadiolaBrita"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text="VPb = Vb/ QPb"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
@@ -2929,10 +2960,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeCalculoVolumePadiolaBrita"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text="VPb = *cálculo*"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
@@ -2941,10 +2971,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeResultadoVolumePadiolaBrita"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text="VPb = *resultado em l* = *resultados em cm³*"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
@@ -2966,10 +2995,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeFormulaAlturaPadiolaBrita"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text="AltPb = VPb / (Larg.Pad. * Comp.Pad.)"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
@@ -2978,10 +3006,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeCalculoAlturaPadiolaBrita"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text="AltPb = *cálculo*"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
@@ -2990,10 +3017,9 @@
                 android:id="@+id/textViewTracoPara1SacoDeCimentoEmVolumeResultadoAlturaPadiolaBrita"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginLeft="38dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="28dp"
                 android:text="AltPb = *resultado*"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
