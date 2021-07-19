@@ -64,13 +64,13 @@ public class ResultadosActivity extends AppCompatActivity {
     //Tabelas e Abacos
 
     // Classes de arredondamento e formatação
-    private DecimalFormat arred0 = new DecimalFormat("####");
-    private DecimalFormat arred1 = new DecimalFormat("##0.0");
-    private DecimalFormat arred1X = new DecimalFormat("##0.#");
-    private DecimalFormat arred2 = new DecimalFormat("##0.00");
-    private DecimalFormat arred2x = new DecimalFormat("##0.##");
-    private DecimalFormat arred3 = new DecimalFormat("##0.000");
-    private DecimalFormat arred3x = new DecimalFormat("##0.###");
+    private DecimalFormat arred0 = new DecimalFormat("#,###");
+    private DecimalFormat arred1 = new DecimalFormat("#,##0.0");
+    private DecimalFormat arred1X = new DecimalFormat("#,##0.#");
+    private DecimalFormat arred2 = new DecimalFormat("#,##0.00");
+    private DecimalFormat arred2x = new DecimalFormat("#,##0.##");
+    private DecimalFormat arred3 = new DecimalFormat("#,##0.000");
+    private DecimalFormat arred3x = new DecimalFormat("#,##0.###");
 
     SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
     Date data = new Date();
@@ -147,6 +147,12 @@ public class ResultadosActivity extends AppCompatActivity {
         TextView textViewMassaUnitariaAreia = findViewById(R.id.textViewMassaUnitariaAreia);
         textViewMassaUnitariaAreia.setText("Massa unit. = " + arred1X.format(dosagem.areia.getMassaUnitaria()) + " kg/m³");
 
+        TextView textViewUmidadeAreia = findViewById(R.id.textViewUmidadeAreia);
+        textViewUmidadeAreia.setText("Umidade (h) = " + arred2x.format(dosagem.areia.getUmidadeDaAreia()) + "%");
+
+        TextView textViewInchamentoAreia = findViewById(R.id.textViewInchamentoAreia);
+        textViewInchamentoAreia.setText("Coef. de Inchamento (CI) = " + arred2x.format(dosagem.areia.getInchamentoDaAreia()) + "%");
+
         TextView textViewDiametroMaximoBrita = findViewById(R.id.textViewDiametroMaximoBrita);
         textViewDiametroMaximoBrita.setText("Diâm. máx. = " + arred1.format(dosagem.brita.getDiametroMaximo()) + " mm");
 
@@ -161,6 +167,12 @@ public class ResultadosActivity extends AppCompatActivity {
 
         TextView textViewDesvioPadrao = findViewById(R.id.textViewDesvioPadrao);
         textViewDesvioPadrao.setText("Sd = " + arred1.format(dosagem.concreto.getDesvioPadrao()));
+
+        TextView textViewLarguraDaPadiola = findViewById(R.id.textViewLarguraDaPadiola);
+        textViewLarguraDaPadiola.setText("Larg.Pad. = " + arred1X.format(dosagem.getLarguraDaPadiola()) + " cm");
+
+        TextView textViewComprimentoDaPadiola = findViewById(R.id.textViewComprimentoDaPadiola);
+        textViewComprimentoDaPadiola.setText("Comp.Pad. = " + arred1X.format(dosagem.getComprimentoDaPadiola()) + " cm");
 
         calculoDosagem();
 
@@ -409,6 +421,13 @@ public class ResultadosActivity extends AppCompatActivity {
             LinearLayout linearLayoutCalculoTracoPara1SacoDeCimentoEmPadiolas = findViewById(R.id.linearLayoutCalculoTracoPara1SacoDeCimentoEmPadiolas);
             linearLayoutCalculoTracoPara1SacoDeCimentoEmPadiolas.setVisibility(View.GONE);
 
+            textViewUmidadeAreia.setVisibility(View.GONE);
+            textViewInchamentoAreia.setVisibility(View.GONE);
+            TextView textViewPadiolaTitulo = findViewById(R.id.textViewPadiolaTitulo);
+            textViewPadiolaTitulo.setVisibility(View.GONE);
+            textViewLarguraDaPadiola.setVisibility(View.GONE);
+            textViewComprimentoDaPadiola.setVisibility(View.GONE);
+
             dosagem.traco.setTracoExibido(textViewTracoPara1SacoDeCimentoEmMassaResultado.getText().toString());
 
             textViewRotuloTracoCimento.setText("Cimento (Sacos)");
@@ -425,6 +444,11 @@ public class ResultadosActivity extends AppCompatActivity {
 
             LinearLayout linearLayoutCalculoTracoPara1SacoDeCimentoEmPadiolas = findViewById(R.id.linearLayoutCalculoTracoPara1SacoDeCimentoEmPadiolas);
             linearLayoutCalculoTracoPara1SacoDeCimentoEmPadiolas.setVisibility(View.GONE);
+
+            TextView textViewPadiolaTitulo = findViewById(R.id.textViewPadiolaTitulo);
+            textViewPadiolaTitulo.setVisibility(View.GONE);
+            textViewLarguraDaPadiola.setVisibility(View.GONE);
+            textViewComprimentoDaPadiola.setVisibility(View.GONE);
 
             dosagem.traco.setTracoExibido(textViewTracoPara1SacoDeCimentoEmVolumeResultado.getText().toString());
 
