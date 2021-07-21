@@ -64,13 +64,13 @@ public class ResultadosActivity extends AppCompatActivity {
     //Tabelas e Abacos
 
     // Classes de arredondamento e formatação
-    private DecimalFormat arred0 = new DecimalFormat("#,###");
-    private DecimalFormat arred1 = new DecimalFormat("#,##0.0");
-    private DecimalFormat arred1X = new DecimalFormat("#,##0.#");
-    private DecimalFormat arred2 = new DecimalFormat("#,##0.00");
-    private DecimalFormat arred2x = new DecimalFormat("#,##0.##");
-    private DecimalFormat arred3 = new DecimalFormat("#,##0.000");
-    private DecimalFormat arred3x = new DecimalFormat("#,##0.###");
+    private DecimalFormat arred0 = new DecimalFormat("####");
+    private DecimalFormat arred1X = new DecimalFormat("##0.#");
+    private DecimalFormat arred1 = new DecimalFormat("##0.0");
+    private DecimalFormat arred2 = new DecimalFormat("##0.00");
+    private DecimalFormat arred2x = new DecimalFormat("##0.##");
+    private DecimalFormat arred3 = new DecimalFormat("##0.000");
+    private DecimalFormat arred3x = new DecimalFormat("##0.###");
 
     SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
     Date data = new Date();

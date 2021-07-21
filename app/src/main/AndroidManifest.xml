@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.TracosSalvosActivity"></activity>
+        <activity android:name=".activities.AdicionarEditarCimentoActivity"></activity>
+        <activity android:name=".activities.DadosCimentoActivity" />
+        <activity android:name=".activities.CimentosSalvosActivity" />
+        <activity android:name=".activities.TracosSalvosActivity" />
         <activity android:name=".activities.ResultadosActivity" />
-        <activity android:name=".activities.InserirDadosActivity"/>
+        <activity android:name=".activities.InserirDadosActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
