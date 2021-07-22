@@ -15,7 +15,7 @@ import com.cursoandroid.appdosagemconcreto.helper.DbHelper;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonNovoTraco, buttonTracosSalvos, buttonAjuda, buttonSobreOApp;
+    private Button buttonNovoTraco, buttonTracosSalvos, buttonAjuda, buttonSobreOApp, buttonCimentosSalvos;
 
     // Helper
     CodigosDeActivity codigosDeActivity = new CodigosDeActivity();
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         buttonNovoTraco = findViewById(R.id.buttonNovoTraco);
         buttonTracosSalvos = findViewById(R.id.buttonTracosSalvos);
+        buttonCimentosSalvos = findViewById(R.id.buttonCimentosSalvos);
         buttonAjuda = findViewById(R.id.buttonAjuda);
         buttonSobreOApp = findViewById(R.id.buttonSobreOApp);
 
@@ -44,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intentAbrirTracosSalvosActivity = new Intent(getApplicationContext(), TracosSalvosActivity.class);
                 startActivity(intentAbrirTracosSalvosActivity);
+            }
+        });
+
+        buttonCimentosSalvos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentAbrirCimentosSalvosActivty = new Intent(getApplicationContext(), CimentosSalvosActivity.class);
+                startActivity(intentAbrirCimentosSalvosActivty);
             }
         });
 
