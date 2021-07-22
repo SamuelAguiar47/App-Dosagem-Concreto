@@ -14,35 +14,35 @@
     <Button
         android:id="@+id/buttonNovoTraco"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:text="Novo Traço"
         android:textSize="16sp" />
 
     <Button
         android:id="@+id/buttonTracosSalvos"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:text="Traços Salvos"
         android:textSize="16sp" />
 
     <Button
         android:id="@+id/buttonCimentosSalvos"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:text="Cimentos"
         android:textSize="16sp" />
 
     <Button
         android:id="@+id/buttonAjuda"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:text="Ajuda"
         android:textSize="16sp" />
 
     <Button
         android:id="@+id/buttonSobreOApp"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:text="Sobre o App"
         android:textSize="16sp" />
 
