@@ -56,5 +56,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        buttonAjuda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 }
