@@ -38,20 +38,20 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         listaPontosCimento.add( ponto1 );
 
         ItemPontoCimento ponto2 = new ItemPontoCimento();
-        ponto1.setNomeDoPonto("a/c = 0,45 , Fck = 31.8 MPa");
-        listaPontosCimento.add( ponto1 );
+        ponto2.setNomeDoPonto("a/c = 0,45 , Fck = 31.8 MPa");
+        listaPontosCimento.add( ponto2 );
 
         ItemPontoCimento ponto3 = new ItemPontoCimento();
-        ponto1.setNomeDoPonto("a/c = 0,50 , Fck = 31.8 MPa");
-        listaPontosCimento.add( ponto1 );
+        ponto3.setNomeDoPonto("a/c = 0,50 , Fck = 31.8 MPa");
+        listaPontosCimento.add( ponto3 );
 
         ItemPontoCimento ponto4 = new ItemPontoCimento();
-        ponto1.setNomeDoPonto("a/c = 0,55 , Fck = 31.8 MPa");
-        listaPontosCimento.add( ponto1 );
+        ponto4.setNomeDoPonto("a/c = 0,55 , Fck = 31.8 MPa");
+        listaPontosCimento.add( ponto4 );
 
         ItemPontoCimento ponto5 = new ItemPontoCimento();
-        ponto1.setNomeDoPonto("a/c = 0,60 , Fck = 31.8 MPa");
-        listaPontosCimento.add( ponto1 );
+        ponto5.setNomeDoPonto("a/c = 0,60 , Fck = 31.8 MPa");
+        listaPontosCimento.add( ponto5 );
 
 
         /*
@@ -68,5 +68,11 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         recyclerViewAdicionarEditarCimentos.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
         recyclerViewAdicionarEditarCimentos.setAdapter(pontosDoCimentoAdapter);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        carregarListaDeCimentos();
     }
 }
