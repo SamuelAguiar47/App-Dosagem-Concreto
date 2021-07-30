@@ -6,10 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.PontosDoCimentoAdapter;
+import com.cursoandroid.appdosagemconcreto.helper.RecyclerItemClickListener;
 import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
 
 import java.util.ArrayList;
@@ -27,6 +31,30 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adicionar_editar_cimento);
 
         recyclerViewAdicionarEditarCimentos = findViewById(R.id.RecyclerViewAdicionarEditarCimentos);
+
+        //Adicionar evento de clique
+        recyclerViewAdicionarEditarCimentos.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        getApplicationContext(),
+                        recyclerViewAdicionarEditarCimentos,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Toast.makeText(AdicionarEditarCimentoActivity.this, "clique curto", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+                                Toast.makeText(AdicionarEditarCimentoActivity.this, "clique longo", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            }
+                        }
+                )
+        );
 
     }
 
