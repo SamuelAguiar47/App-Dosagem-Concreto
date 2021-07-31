@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -24,13 +25,22 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     private RecyclerView recyclerViewAdicionarEditarCimentos;
     private PontosDoCimentoAdapter pontosDoCimentoAdapter;
     private List<ItemPontoCimento> listaPontosCimento = new ArrayList<>();
+    private Button buttonAdicionarDados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_editar_cimento);
 
+        buttonAdicionarDados = findViewById(R.id.buttonAdicionarDados);
         recyclerViewAdicionarEditarCimentos = findViewById(R.id.RecyclerViewAdicionarEditarCimentos);
+
+        buttonAdicionarDados.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRestart();
+            }
+        });
 
         //Adicionar evento de clique
         recyclerViewAdicionarEditarCimentos.addOnItemTouchListener(
@@ -102,5 +112,10 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         carregarListaDeCimentos();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
     }
 }
