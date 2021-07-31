@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.PontosDoCimentoAdapter;
+import com.cursoandroid.appdosagemconcreto.helper.DbCimentoCurvaProvisoria;
 import com.cursoandroid.appdosagemconcreto.helper.RecyclerItemClickListener;
 import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
 
@@ -33,7 +35,6 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adicionar_editar_cimento);
 
         buttonAdicionarDados = findViewById(R.id.buttonAdicionarDados);
-        recyclerViewAdicionarEditarCimentos = findViewById(R.id.RecyclerViewAdicionarEditarCimentos);
 
         buttonAdicionarDados.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +42,16 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                 onRestart();
             }
         });
+
+        //Configurar RecyclerView
+        recyclerViewAdicionarEditarCimentos = findViewById(R.id.RecyclerViewAdicionarEditarCimentos);
+
+        DbCimentoCurvaProvisoria dbCimentoCurvaProvisoria = new DbCimentoCurvaProvisoria(getApplicationContext());
+
+        ContentValues cv = new ContentValues();
+        cv.put("ac", 0.4);
+        cv.put("fck", 31.8);
+        dbCimentoCurvaProvisoria.getWritableDatabase().insert("tabelaDadosCimento", null, cv);
 
         //Adicionar evento de clique
         recyclerViewAdicionarEditarCimentos.addOnItemTouchListener(

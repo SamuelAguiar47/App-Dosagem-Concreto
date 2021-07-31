@@ -26,6 +26,7 @@ public class DbCimentoCurvaProvisoria extends SQLiteOpenHelper {
 
         try {
             sqLiteDatabase.execSQL(sql);
+            Log.i("INFO DB", "Sucesso ao criar tabela de dados do cimento provisória! ");
         } catch (Exception e) {
             Log.i("INFO DB", "Erro ao criar tabela de dados do cimento provisória! " + e.getMessage());
         }
