@@ -29,7 +29,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     private RecyclerView recyclerViewAdicionarEditarCimentos;
     private PontosDoCimentoAdapter pontosDoCimentoAdapter;
     private List<ItemPontoCimento> listaPontosCimento = new ArrayList<>();
-    private ItemPontoCimento itemPontoCimento;
+    private ItemPontoCimento itemPontoCimento = new ItemPontoCimento();
     private TextInputEditText textInputValorDeAC, textInputValorDeFck;
     private Button buttonAdicionarDados;
 
@@ -46,23 +46,20 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         buttonAdicionarDados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemPontoCimento.setValorDeAC(Double.parseDouble(textInputValorDeAC.getText().toString()));
-                itemPontoCimento.setValorDeFck(Double.parseDouble(textInputValorDeFck.getText().toString()));
-                CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
-                curvaCimentoProvisoriaDAO.salvar(itemPontoCimento);
-                onRestart();
+                if ((textInputValorDeAC.getText().toString().equals("")) || textInputValorDeFck.getText().toString().equals("")) {
+                    Toast.makeText(AdicionarEditarCimentoActivity.this, "Preencha os campos para adicionar um novo ponto.", Toast.LENGTH_LONG).show();
+                } else {
+                    itemPontoCimento.setValorDeAC(Double.parseDouble(textInputValorDeAC.getText().toString()));
+                    itemPontoCimento.setValorDeFck(Double.parseDouble(textInputValorDeFck.getText().toString()));
+                    CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
+                    curvaCimentoProvisoriaDAO.salvar(itemPontoCimento);
+                    carregarListaDeCimentos();
+                }
             }
         });
 
         //Configurar RecyclerView
         recyclerViewAdicionarEditarCimentos = findViewById(R.id.RecyclerViewAdicionarEditarCimentos);
-
-        DbCimentoCurvaProvisoria dbCimentoCurvaProvisoria = new DbCimentoCurvaProvisoria(getApplicationContext());
-
-        ContentValues cv = new ContentValues();
-        cv.put("ac", 0.4);
-        cv.put("fck", 31.8);
-        dbCimentoCurvaProvisoria.getWritableDatabase().insert("tabelaDadosCimento", null, cv);
 
         //Adicionar evento de clique
         recyclerViewAdicionarEditarCimentos.addOnItemTouchListener(
