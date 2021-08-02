@@ -6,6 +6,8 @@ public class ItemPontoCimento implements Serializable {
     //Atributos
     private Long Id;
     private String nomeDoPonto;
+    private Double ValorDeAC;
+    private Double ValorDeFck;
 
     //Métodos
     public Long getId() {
@@ -22,5 +24,21 @@ public class ItemPontoCimento implements Serializable {
 
     public void setNomeDoPonto(String nomeDoPonto) {
         this.nomeDoPonto = nomeDoPonto;
+    }
+
+    public Double getValorDeAC() {
+        return ValorDeAC;
+    }
+
+    public void setValorDeAC(Double valorDeAC) {
+        ValorDeAC = valorDeAC;
+    }
+
+    public Double getValorDeFck() {
+        return ValorDeFck;
+    }
+
+    public void setValorDeFck(Double valorDeFck) {
+        ValorDeFck = valorDeFck;
     }
 }
