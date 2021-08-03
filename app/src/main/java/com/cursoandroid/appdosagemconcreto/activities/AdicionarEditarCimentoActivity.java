@@ -72,68 +72,12 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-
-                                pontoCimentoSelecionado = listaPontosCimento.get(position);
-
-                                AlertDialog.Builder dialogExcluirPontoCimento = new AlertDialog.Builder(AdicionarEditarCimentoActivity.this);
-
-                                //Configurar titulo e mensagem
-                                dialogExcluirPontoCimento.setTitle("Excluir ponto");
-                                dialogExcluirPontoCimento.setMessage("Deseja realmente excluir este ponto dos dados do cimento?");
-
-                                //Configurar botões
-                                dialogExcluirPontoCimento.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
-                                        if ( curvaCimentoProvisoriaDAO.deletar(pontoCimentoSelecionado) ) {
-                                            carregarListaDePontosDoCimentos();
-                                            Toast.makeText(AdicionarEditarCimentoActivity.this, "Sucesso ao deletar ponto!", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(AdicionarEditarCimentoActivity.this, "Erro ao deletar ponto!", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-
-                                dialogExcluirPontoCimento.setNeutralButton("Não", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    }
-                                });
-
-                                //Configurar criação e exibição da dialog
-                                dialogExcluirPontoCimento.create();
-                                dialogExcluirPontoCimento.show();
+                                deletarPontoCimento(position);
                             }
 
                             @Override
                             public void onLongItemClick(View view, int position) {
-                                AlertDialog.Builder dialogExcluirPontoCimento = new AlertDialog.Builder(AdicionarEditarCimentoActivity.this);
-
-                                //Configurar titulo e mensagem
-                                dialogExcluirPontoCimento.setTitle("Excluir ponto");
-                                dialogExcluirPontoCimento.setMessage("Deseja realmente excluir este ponto dos dados do cimento?");
-
-                                //Configurar botões
-                                dialogExcluirPontoCimento.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    }
-                                });
-
-                                dialogExcluirPontoCimento.setNeutralButton("Não", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    }
-                                });
-
-                                //Configurar criação e exibição da dialog
-                                dialogExcluirPontoCimento.create();
-                                dialogExcluirPontoCimento.show();
-
+                                deletarPontoCimento(position);
                             }
 
                             @Override
@@ -164,7 +108,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewAdicionarEditarCimentos.setLayoutManager( layoutManager );
         recyclerViewAdicionarEditarCimentos.setHasFixedSize(true);
-        recyclerViewAdicionarEditarCimentos.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
+        //recyclerViewAdicionarEditarCimentos.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
         recyclerViewAdicionarEditarCimentos.setAdapter(pontosDoCimentoAdapter);
 
     }
@@ -178,5 +122,40 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+    }
+
+    public void deletarPontoCimento(int position) {
+        pontoCimentoSelecionado = listaPontosCimento.get(position);
+
+        AlertDialog.Builder dialogExcluirPontoCimento = new AlertDialog.Builder(AdicionarEditarCimentoActivity.this);
+
+        //Configurar titulo e mensagem
+        dialogExcluirPontoCimento.setTitle("Excluir ponto");
+        dialogExcluirPontoCimento.setMessage("Deseja realmente excluir este ponto dos dados do cimento?");
+
+        //Configurar botões
+        dialogExcluirPontoCimento.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
+                if ( curvaCimentoProvisoriaDAO.deletar(pontoCimentoSelecionado) ) {
+                    carregarListaDePontosDoCimentos();
+                    Toast.makeText(AdicionarEditarCimentoActivity.this, "Sucesso ao deletar ponto!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(AdicionarEditarCimentoActivity.this, "Erro ao deletar ponto!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        dialogExcluirPontoCimento.setNeutralButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        //Configurar criação e exibição da dialog
+        dialogExcluirPontoCimento.create();
+        dialogExcluirPontoCimento.show();
     }
 }
