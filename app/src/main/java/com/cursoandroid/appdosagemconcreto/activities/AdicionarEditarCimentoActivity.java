@@ -1,11 +1,13 @@
 package com.cursoandroid.appdosagemconcreto.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,6 +32,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     private PontosDoCimentoAdapter pontosDoCimentoAdapter;
     private List<ItemPontoCimento> listaPontosCimento = new ArrayList<>();
     private ItemPontoCimento itemPontoCimento = new ItemPontoCimento();
+    private ItemPontoCimento pontoCimentoSelecionado = new ItemPontoCimento();
     private TextInputEditText textInputValorDeAC, textInputValorDeFck;
     private Button buttonAdicionarDados;
 
@@ -53,7 +56,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                     itemPontoCimento.setValorDeFck(Double.parseDouble(textInputValorDeFck.getText().toString()));
                     CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
                     curvaCimentoProvisoriaDAO.salvar(itemPontoCimento);
-                    carregarListaDeCimentos();
+                    carregarListaDePontosDoCimentos();
                 }
             }
         });
@@ -69,12 +72,68 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                                Toast.makeText(AdicionarEditarCimentoActivity.this, "clique curto", Toast.LENGTH_SHORT).show();
+
+                                pontoCimentoSelecionado = listaPontosCimento.get(position);
+
+                                AlertDialog.Builder dialogExcluirPontoCimento = new AlertDialog.Builder(AdicionarEditarCimentoActivity.this);
+
+                                //Configurar titulo e mensagem
+                                dialogExcluirPontoCimento.setTitle("Excluir ponto");
+                                dialogExcluirPontoCimento.setMessage("Deseja realmente excluir este ponto dos dados do cimento?");
+
+                                //Configurar botões
+                                dialogExcluirPontoCimento.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
+                                        if ( curvaCimentoProvisoriaDAO.deletar(pontoCimentoSelecionado) ) {
+                                            carregarListaDePontosDoCimentos();
+                                            Toast.makeText(AdicionarEditarCimentoActivity.this, "Sucesso ao deletar ponto!", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(AdicionarEditarCimentoActivity.this, "Erro ao deletar ponto!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+
+                                dialogExcluirPontoCimento.setNeutralButton("Não", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+
+                                //Configurar criação e exibição da dialog
+                                dialogExcluirPontoCimento.create();
+                                dialogExcluirPontoCimento.show();
                             }
 
                             @Override
                             public void onLongItemClick(View view, int position) {
-                                Toast.makeText(AdicionarEditarCimentoActivity.this, "clique longo", Toast.LENGTH_SHORT).show();
+                                AlertDialog.Builder dialogExcluirPontoCimento = new AlertDialog.Builder(AdicionarEditarCimentoActivity.this);
+
+                                //Configurar titulo e mensagem
+                                dialogExcluirPontoCimento.setTitle("Excluir ponto");
+                                dialogExcluirPontoCimento.setMessage("Deseja realmente excluir este ponto dos dados do cimento?");
+
+                                //Configurar botões
+                                dialogExcluirPontoCimento.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+
+                                dialogExcluirPontoCimento.setNeutralButton("Não", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+
+                                //Configurar criação e exibição da dialog
+                                dialogExcluirPontoCimento.create();
+                                dialogExcluirPontoCimento.show();
+
                             }
 
                             @Override
@@ -87,7 +146,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
 
     }
 
-    public void carregarListaDeCimentos() {
+    public void carregarListaDePontosDoCimentos() {
 
         //Listar Tarefas
         CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
@@ -113,7 +172,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        carregarListaDeCimentos();
+        carregarListaDePontosDoCimentos();
     }
 
     @Override

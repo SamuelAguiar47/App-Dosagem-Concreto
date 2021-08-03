@@ -49,7 +49,16 @@ public class CurvaCimentoProvisoriaDAO implements ICurvaCimentoProvisoriaDAO{
 
     @Override
     public boolean deletar(ItemPontoCimento itemPontoCimento) {
-        return false;
+
+        try {
+            String[] args = {itemPontoCimento.getId().toString()};
+            escreve.delete(DbCimentoCurvaProvisoria.TABELA_DADOS_CIMENTO, "id=?", args);
+            Log.i("INFO","Sucesso ao deletar ponto.");
+        } catch (Exception e) {
+            Log.i("INFO","Erro ao deletar ponto.");
+        }
+
+        return true;
     }
 
     @Override
