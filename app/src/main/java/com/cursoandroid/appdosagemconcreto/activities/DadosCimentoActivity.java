@@ -1,22 +1,75 @@
 package com.cursoandroid.appdosagemconcreto.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.cursoandroid.appdosagemconcreto.R;
+import com.cursoandroid.appdosagemconcreto.adapter.PontosDoCimentoAdapter;
+import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaDAO;
+import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DadosCimentoActivity extends AppCompatActivity {
 
-    RecyclerView recyClerViewDadosCimento;
+    private TextView textViewRotuloDoCimento, textViewDadosNomeDoCimento, textViewDadosTempoDeCura;
+    private RecyclerView recyClerViewDadosCimento;
+    private PontosDoCimentoAdapter pontosDoCimentoAdapter;
+    private List<ItemPontoCimento> listaPontosCimento = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dados_cimento);
 
+        Bundle dados = getIntent().getExtras();
+
+        //Configurar elementos de interface
+        textViewRotuloDoCimento = findViewById(R.id.textViewRotuloDoCimento);
+        textViewDadosNomeDoCimento = findViewById(R.id.textViewDadosNomeDoCimento);
+        textViewDadosTempoDeCura = findViewById(R.id.textViewDadosTempoDeCura);
         recyClerViewDadosCimento = findViewById(R.id.recyclerViewDadosCimento);
 
+        textViewRotuloDoCimento.setText("Cimento " + dados.getString("nome do cimento"));
+        textViewDadosNomeDoCimento.setText("Nome do cimento: "  + dados.getString("nome do cimento"));
+        textViewDadosTempoDeCura.setText("Tempo de cura: "  + dados.getString("tempo de cura") + " dias");
+
+
+
+
+    }
+
+    public void carregarListaDePontosDoCimentos() {
+
+        //Listar Tarefas
+        CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
+        listaPontosCimento = curvaCimentoProvisoriaDAO.listar();
+
+        /*
+            Exibe pontos do cimento no RecyclerView
+         */
+
+        //Configurar um adapter
+        pontosDoCimentoAdapter = new PontosDoCimentoAdapter((ArrayList<ItemPontoCimento>) listaPontosCimento);
+
+        //Configurar um RecyclerView
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyClerViewDadosCimento.setLayoutManager( layoutManager );
+        recyClerViewDadosCimento.setHasFixedSize(true);
+        //recyclerViewAdicionarEditarCimentos.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
+        recyClerViewDadosCimento.setAdapter(pontosDoCimentoAdapter);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        carregarListaDePontosDoCimentos();
     }
 }

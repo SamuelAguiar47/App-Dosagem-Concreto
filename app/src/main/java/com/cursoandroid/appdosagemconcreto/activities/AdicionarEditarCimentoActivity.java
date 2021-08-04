@@ -34,8 +34,12 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     private List<ItemPontoCimento> listaPontosCimento = new ArrayList<>();
     private ItemPontoCimento itemPontoCimento = new ItemPontoCimento();
     private ItemPontoCimento pontoCimentoSelecionado = new ItemPontoCimento();
-    private TextInputEditText textInputValorDeAC, textInputValorDeFck;
+    private TextInputEditText textInputNomeDoCimento, textInputTempoDeCura, textInputValorDeAC, textInputValorDeFck;
     private Button buttonAdicionarDados, buttonConfirmar;
+
+    //Dados do cimento inseridos
+    private String nomeDoCimento;
+    private String tempoDeCura;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,8 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adicionar_editar_cimento);
 
         //Configuara elementos de interface
+        textInputNomeDoCimento = findViewById(R.id.textInputNomeDoCimento);
+        textInputTempoDeCura = findViewById(R.id.textInputTempoDeCura);
         textInputValorDeAC = findViewById(R.id.textInputValorDeAC);
         textInputValorDeFck = findViewById(R.id.textInputValorDeFck);
 
@@ -52,8 +58,23 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         buttonConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentAbrirDadosCimentoActivity = new Intent(getApplicationContext(), DadosCimentoActivity.class);
-                startActivity(intentAbrirDadosCimentoActivity);
+                if (textInputTempoDeCura.getText().toString().equals("")) {
+                    Toast.makeText(AdicionarEditarCimentoActivity.this, "Informe o tempo de curar para continuar.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (textInputNomeDoCimento.getText().toString().equals("")) {
+                        nomeDoCimento = "sem nome";
+                    } else {
+                        nomeDoCimento = textInputNomeDoCimento.getText().toString();
+                    }
+
+                    tempoDeCura = textInputTempoDeCura.getText().toString();
+
+                    Intent intentAbrirDadosCimentoActivity = new Intent(getApplicationContext(), DadosCimentoActivity.class);
+                    intentAbrirDadosCimentoActivity.putExtra("nome do cimento", nomeDoCimento);
+                    intentAbrirDadosCimentoActivity.putExtra("tempo de cura", tempoDeCura);
+
+                    startActivity(intentAbrirDadosCimentoActivity);
+                }
             }
         });
 
@@ -109,7 +130,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
 
 
         /*
-            Exibe tarefas no RecyclerView
+            Exibe pontos do cimento no RecyclerView
          */
 
         //Configurar um adapter
