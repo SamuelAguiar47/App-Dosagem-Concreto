@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,17 +35,27 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     private ItemPontoCimento itemPontoCimento = new ItemPontoCimento();
     private ItemPontoCimento pontoCimentoSelecionado = new ItemPontoCimento();
     private TextInputEditText textInputValorDeAC, textInputValorDeFck;
-    private Button buttonAdicionarDados;
+    private Button buttonAdicionarDados, buttonConfirmar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_editar_cimento);
 
+        //Configuara elementos de interface
         textInputValorDeAC = findViewById(R.id.textInputValorDeAC);
         textInputValorDeFck = findViewById(R.id.textInputValorDeFck);
 
         buttonAdicionarDados = findViewById(R.id.buttonAdicionarDados);
+        buttonConfirmar = findViewById(R.id.buttonConfirmar);
+
+        buttonConfirmar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentAbrirDadosCimentoActivity = new Intent(getApplicationContext(), DadosCimentoActivity.class);
+                startActivity(intentAbrirDadosCimentoActivity);
+            }
+        });
 
         buttonAdicionarDados.setOnClickListener(new View.OnClickListener() {
             @Override
