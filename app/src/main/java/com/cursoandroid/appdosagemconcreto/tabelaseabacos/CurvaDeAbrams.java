@@ -299,10 +299,7 @@ public class CurvaDeAbrams implements Serializable {
     }
 
     public Double calcularFcjPeloFatorAC(Double fatorAC) {
-        K1 = regressaoLinear.getK1();
-        K2 = regressaoLinear.getK2();
-        Double fcj = K1/Math.pow(K2, fatorAC);
-        return fcj;
+        return regressaoLinear.calcularFcjPeloFatorAC(fatorAC);
     }
 
     // Getters e Setters

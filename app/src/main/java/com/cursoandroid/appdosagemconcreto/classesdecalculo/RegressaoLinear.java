@@ -116,6 +116,11 @@ public class RegressaoLinear {
         fatorAC = (-Math.log10(fcj) + Math.log10(K1)) / Math.log10(K2);
     }
 
+    public Double calcularFcjPeloFatorAC(Double fatorAC) {
+        Double fcjObtido = K1/Math.pow(K2, fatorAC);
+        return fcjObtido;
+    }
+
     //------------------------------------------------------------------------
     // 2.3 - Métodos Getters e Setters
 
