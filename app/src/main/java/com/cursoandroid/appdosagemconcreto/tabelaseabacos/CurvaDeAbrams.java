@@ -2,6 +2,8 @@ package com.cursoandroid.appdosagemconcreto.tabelaseabacos;
 
 import android.util.Log;
 
+import com.cursoandroid.appdosagemconcreto.classesdecalculo.RegressaoLinear;
+
 import java.io.Serializable;
 
 public class CurvaDeAbrams implements Serializable {
@@ -9,6 +11,7 @@ public class CurvaDeAbrams implements Serializable {
     // Atributos
     private Double fcj;
     private Double fatorAguaCimentoObtido;
+    private RegressaoLinear regressaoLinear;
 
     //Curvas
     private Double[][] curva28DiasCP29 = new Double[9][2];
@@ -290,83 +293,14 @@ public class CurvaDeAbrams implements Serializable {
 
     public Double calcularRegressaoLinear(Double fcj, Double[][] arrayCurva) {
         this.fcj = fcj;
-        int n = 9;
-
-        Double somax = 0.0;
-        int c = 0;
-        while (c < n) {
-            somax += arrayCurva[c][1];
-            c += 1;
-        }
-
-        Double somay = 0.0;
-        c = 0;
-        while (c < n) {
-            somay += arrayCurva[c][0];
-            c += 1;
-        }
-
-        Double somayLinha = 0.0;
-        c = 0;
-        while (c < n) {
-            Double y = arrayCurva[c][0];
-            Double yLinha = Math.log10(y);
-            somayLinha += yLinha;
-            Log.i("SOMAYLINHA", "y= " + y + " y'= " + yLinha);
-            c += 1;
-        }
-        Log.i("SOMAYLINHA", "Somay'= " + somayLinha);
-
-        Double somaxAoQuadrado = 0.0;
-        c = 0;
-        while (c < n) {
-            Double x = arrayCurva[c][1];
-            Double xAoQuadrado = Math.pow(x, 2);
-            somaxAoQuadrado += xAoQuadrado;
-            Log.i("SOMAYLINHA", "x= " + x + " x²= " + xAoQuadrado);
-            c += 1;
-        }
-        Log.i("SOMAYLINHA", "Somax'= " + somaxAoQuadrado);
-
-        Double somayLinhaAoQuadrado = 0.0;
-        c = 0;
-        while (c < n) {
-            Double y = arrayCurva[c][0];
-            Double yLinha = Math.log10(y);
-            Double yLinhaAoQuadrado = Math.pow(yLinha, 2);
-            somayLinhaAoQuadrado += yLinhaAoQuadrado;
-            Log.i("SOMAYLINHA", "y'= " + yLinha + " y'²= " + yLinhaAoQuadrado);
-            c += 1;
-        }
-        Log.i("SOMAYLINHA", "Somay'²= " + somayLinhaAoQuadrado);
-
-        Double somaxyLinha = 0.0;
-        c = 0;
-        while (c < n) {
-            Double x = arrayCurva[c][1];
-            Double y = arrayCurva[c][0];
-            Double yLinha = Math.log10(y);
-            Double xyLinha = x*yLinha;
-            somaxyLinha += xyLinha;
-            Log.i("SOMAYLINHA", "x= " + x + "y'= " + yLinha + " xy'= " + xyLinha);
-            c += 1;
-        }
-        Log.i("SOMAYLINHA", "Somaxy'= " + somaxyLinha);
-
-
-        Double Sxx = somaxAoQuadrado-Math.pow(somax, 2)/n;
-        Double Syy = somayLinhaAoQuadrado-Math.pow(somayLinha, 2)/n;
-        Double Sxy = somaxyLinha-(somayLinha*somax)/n;
-        Double b = Sxy/Sxx;
-        Double a = (somayLinha/n)-(b*(somax/n));
-        K1 = Math.pow(10, a);
-        K2 = 1/Math.pow(10, b);
-        Double fatorAC = (-Math.log10(fcj)+Math.log10(K1))/Math.log10(K2);
-        return (fatorAC);
+        regressaoLinear = new RegressaoLinear(fcj, arrayCurva);
+        return (regressaoLinear.getFatorAC());
 
     }
 
     public Double calcularFcjPeloFatorAC(Double fatorAC) {
+        K1 = regressaoLinear.getK1();
+        K2 = regressaoLinear.getK2();
         Double fcj = K1/Math.pow(K2, fatorAC);
         return fcj;
     }
