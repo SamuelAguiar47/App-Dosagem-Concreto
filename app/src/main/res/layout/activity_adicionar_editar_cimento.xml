@@ -125,7 +125,8 @@
                     android:id="@+id/textInputValorDeAC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Valor de a/c" />
+                    android:hint="Valor de a/c"
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -137,7 +138,8 @@
                     android:id="@+id/textInputValorDeFck"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Valor de Fck" />
+                    android:hint="Valor de Fck"
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 

@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,15 @@ public class CurvaCimentoProvisoriaDAO implements ICurvaCimentoProvisoriaDAO{
 
     private SQLiteDatabase escreve;
     private SQLiteDatabase le;
+
+    // Classes de arredondamento e formatação
+    private DecimalFormat arred0 = new DecimalFormat("####");
+    private DecimalFormat arred1X = new DecimalFormat("##0.#");
+    private DecimalFormat arred1 = new DecimalFormat("##0.0");
+    private DecimalFormat arred2 = new DecimalFormat("##0.00");
+    private DecimalFormat arred2x = new DecimalFormat("##0.##");
+    private DecimalFormat arred3 = new DecimalFormat("##0.000");
+    private DecimalFormat arred3x = new DecimalFormat("##0.###");
 
     public CurvaCimentoProvisoriaDAO(Context context) {
         DbCimentoCurvaProvisoria dbCCP = new DbCimentoCurvaProvisoria( context );
@@ -79,7 +89,7 @@ public class CurvaCimentoProvisoriaDAO implements ICurvaCimentoProvisoriaDAO{
             itemPontoCimento.setId(id);
             itemPontoCimento.setValorDeAC(valorDeAC);
             itemPontoCimento.setValorDeFck(valorDeFck);
-            itemPontoCimento.setNomeDoPonto("a/c: " + valorDeAC + " ; Fck: " + valorDeFck);
+            itemPontoCimento.setNomeDoPonto("a/c: " + arred2.format(valorDeAC) + "   ➔   Fck: " + arred2x.format(valorDeFck) + " MPa");
 
             listaPontosCimento.add(itemPontoCimento);
 
