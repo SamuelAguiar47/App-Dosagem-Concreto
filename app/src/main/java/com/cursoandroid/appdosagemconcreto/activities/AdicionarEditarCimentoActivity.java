@@ -50,6 +50,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         //Configuara elementos de interface
         textInputNomeDoCimento = findViewById(R.id.textInputNomeDoCimento);
         textInputTempoDeCura = findViewById(R.id.textInputTempoDeCura);
+        textInputTempoDeCura.setText("28");
         textInputValorDeAC = findViewById(R.id.textInputValorDeAC);
         textInputValorDeFck = findViewById(R.id.textInputValorDeFck);
 

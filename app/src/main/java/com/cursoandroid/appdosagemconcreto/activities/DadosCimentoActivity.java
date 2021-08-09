@@ -12,21 +12,34 @@ import android.widget.TextView;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.PontosDoCimentoAdapter;
+import com.cursoandroid.appdosagemconcreto.classesdecalculo.RegressaoLinear;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaDAO;
 import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DadosCimentoActivity extends AppCompatActivity {
 
-    private TextView textViewRotuloDoCimento, textViewDadosNomeDoCimento, textViewDadosTempoDeCura, textViewQtdeDePontos;
+    private TextView textViewRotuloDoCimento, textViewDadosNomeDoCimento, textViewDadosTempoDeCura,
+                     textViewQtdeDePontos, textViewFormulaDeAbrams;
     private Button buttonExibirPontos;
     private RecyclerView recyClerViewDadosCimento;
     private PontosDoCimentoAdapter pontosDoCimentoAdapter;
     private List<ItemPontoCimento> listaPontosCimento = new ArrayList<>();
     private CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO;
-    private int qtdeDePontos;
+    private Double[][] arrayCurva;
+    private RegressaoLinear regressaoLinear;
+
+    // Classes de arredondamento e formatação
+    private DecimalFormat arred0 = new DecimalFormat("####");
+    private DecimalFormat arred1X = new DecimalFormat("##0.#");
+    private DecimalFormat arred1 = new DecimalFormat("##0.0");
+    private DecimalFormat arred2 = new DecimalFormat("##0.00");
+    private DecimalFormat arred2x = new DecimalFormat("##0.##");
+    private DecimalFormat arred3 = new DecimalFormat("##0.000");
+    private DecimalFormat arred3x = new DecimalFormat("##0.###");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,5 +106,18 @@ public class DadosCimentoActivity extends AppCompatActivity {
         carregarListaDePontosDoCimentos();
 
         textViewQtdeDePontos.setText("Qtde de pontos: " + listaPontosCimento.size());
+
+        arrayCurva = new Double[listaPontosCimento.size()][2];
+        int c = 0;
+        while (c < listaPontosCimento.size()) {
+            ItemPontoCimento itemPontoCursor = listaPontosCimento.get(c);
+            arrayCurva[c][0] = itemPontoCursor.getValorDeAC();
+            arrayCurva[c][1] = itemPontoCursor.getValorDeFck();
+            c += 1;
+        }
+        regressaoLinear = new RegressaoLinear(arrayCurva);
+
+        textViewFormulaDeAbrams = findViewById(R.id.textViewFormulaDeAbrams);
+        textViewFormulaDeAbrams.setText("Lei de Abrams: fcj = " + arred2x.format(regressaoLinear.getK1()) + " / [" + arred2x.format(regressaoLinear.getK2()) +"^(a/c)]");
     }
 }

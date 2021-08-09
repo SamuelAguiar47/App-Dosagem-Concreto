@@ -30,6 +30,20 @@ public class RegressaoLinear {
         calcularFatorAC();
     }
 
+    public RegressaoLinear(Double[][] arrayCurva) {
+        this.fcj = fcj;
+        this.arrayCurva = arrayCurva;
+        n = arrayCurva.length;
+
+        calcularSomaX();
+        calcularSomaY();
+        calcularSomaYLinha();
+        calcularSomaXAoQuadrado();
+        calcularSomaYLinhaAoQuadrado();
+        calcularSomaXYLinha();
+        calcularK1eK2();
+    }
+
     //------------------------------------------------------------
     // 2.2 - Métodos do cálculo
     public void calcularSomaX() {
@@ -113,6 +127,20 @@ public class RegressaoLinear {
         a = (somayLinha / n) - (b * (somax / n));
         K1 = Math.pow(10, a);
         K2 = 1 / Math.pow(10, b);
+        fatorAC = (-Math.log10(fcj) + Math.log10(K1)) / Math.log10(K2);
+    }
+
+    public void calcularK1eK2() {
+        Sxx = somaxAoQuadrado - Math.pow(somax, 2) / n;
+        Syy = somayLinhaAoQuadrado - Math.pow(somayLinha, 2) / n;
+        Sxy = somaxyLinha - (somayLinha * somax) / n;
+        b = Sxy / Sxx;
+        a = (somayLinha / n) - (b * (somax / n));
+        K1 = Math.pow(10, a);
+        K2 = 1 / Math.pow(10, b);
+    }
+
+    public void calcularFatorAC(Double fcj) {
         fatorAC = (-Math.log10(fcj) + Math.log10(K1)) / Math.log10(K2);
     }
 
