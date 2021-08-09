@@ -106,6 +106,14 @@
             android:layout_marginLeft="16dp"
             android:text="Tempo de cura:"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewQtdeDePontos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="Qtde de pontos:"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <Button

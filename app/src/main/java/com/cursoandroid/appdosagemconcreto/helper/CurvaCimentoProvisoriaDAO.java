@@ -78,6 +78,7 @@ public class CurvaCimentoProvisoriaDAO implements ICurvaCimentoProvisoriaDAO{
         String sql = "SELECT * FROM " + DbCimentoCurvaProvisoria.TABELA_DADOS_CIMENTO + " ;";
         Cursor c = le.rawQuery(sql, null);
 
+
         while ( c.moveToNext() ) {
 
             ItemPontoCimento itemPontoCimento = new ItemPontoCimento();
@@ -92,8 +93,8 @@ public class CurvaCimentoProvisoriaDAO implements ICurvaCimentoProvisoriaDAO{
             itemPontoCimento.setNomeDoPonto("a/c: " + arred2.format(valorDeAC) + "   ➔   Fck: " + arred2x.format(valorDeFck) + " MPa");
 
             listaPontosCimento.add(itemPontoCimento);
-
         }
+
 
         return listaPontosCimento;
     }

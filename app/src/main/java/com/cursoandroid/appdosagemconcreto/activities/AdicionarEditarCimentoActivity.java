@@ -36,6 +36,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     private ItemPontoCimento pontoCimentoSelecionado = new ItemPontoCimento();
     private TextInputEditText textInputNomeDoCimento, textInputTempoDeCura, textInputValorDeAC, textInputValorDeFck;
     private Button buttonAdicionarDados, buttonConfirmar;
+    private CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO;
 
     //Dados do cimento inseridos
     private String nomeDoCimento;
@@ -60,7 +61,9 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (textInputTempoDeCura.getText().toString().equals("")) {
                     Toast.makeText(AdicionarEditarCimentoActivity.this, "Informe o tempo de curar para continuar.", Toast.LENGTH_SHORT).show();
-                } else {
+                } else if (curvaCimentoProvisoriaDAO.listar().size() < 5) {
+                    Toast.makeText(AdicionarEditarCimentoActivity.this, "Devem ser inseridos pelo menos 5 pontos.", Toast.LENGTH_SHORT).show();
+                }else {
                     if (textInputNomeDoCimento.getText().toString().equals("")) {
                         nomeDoCimento = "sem nome";
                     } else {
@@ -125,7 +128,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     public void carregarListaDePontosDoCimentos() {
 
         //Listar Tarefas
-        CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
+        curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
         listaPontosCimento = curvaCimentoProvisoriaDAO.listar();
 
 

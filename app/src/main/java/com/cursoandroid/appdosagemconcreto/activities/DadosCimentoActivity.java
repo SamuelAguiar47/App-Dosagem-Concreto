@@ -20,11 +20,13 @@ import java.util.List;
 
 public class DadosCimentoActivity extends AppCompatActivity {
 
-    private TextView textViewRotuloDoCimento, textViewDadosNomeDoCimento, textViewDadosTempoDeCura;
+    private TextView textViewRotuloDoCimento, textViewDadosNomeDoCimento, textViewDadosTempoDeCura, textViewQtdeDePontos;
     private Button buttonExibirPontos;
     private RecyclerView recyClerViewDadosCimento;
     private PontosDoCimentoAdapter pontosDoCimentoAdapter;
     private List<ItemPontoCimento> listaPontosCimento = new ArrayList<>();
+    private CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO;
+    private int qtdeDePontos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
         textViewRotuloDoCimento = findViewById(R.id.textViewRotuloDoCimento);
         textViewDadosNomeDoCimento = findViewById(R.id.textViewDadosNomeDoCimento);
         textViewDadosTempoDeCura = findViewById(R.id.textViewDadosTempoDeCura);
+        textViewQtdeDePontos = findViewById(R.id.textViewQtdeDePontos);
         buttonExibirPontos = findViewById(R.id.buttonExibirPontos);
         recyClerViewDadosCimento = findViewById(R.id.recyclerViewDadosCimento);
 
@@ -65,7 +68,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
     public void carregarListaDePontosDoCimentos() {
 
         //Listar Tarefas
-        CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
+        curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
         listaPontosCimento = curvaCimentoProvisoriaDAO.listar();
 
         /*
@@ -88,5 +91,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         carregarListaDePontosDoCimentos();
+
+        textViewQtdeDePontos.setText("Qtde de pontos: " + listaPontosCimento.size());
     }
 }
