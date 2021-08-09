@@ -105,7 +105,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
         super.onStart();
         carregarListaDePontosDoCimentos();
 
-        textViewQtdeDePontos.setText("Qtde de pontos: " + listaPontosCimento.size());
+        textViewQtdeDePontos.setText("Qtde de pontos de amostras: " + listaPontosCimento.size());
 
         arrayCurva = new Double[listaPontosCimento.size()][2];
         int c = 0;
