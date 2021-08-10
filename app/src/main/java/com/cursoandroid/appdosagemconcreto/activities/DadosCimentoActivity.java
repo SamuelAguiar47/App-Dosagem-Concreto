@@ -82,8 +82,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
         textViewRotuloDoCimento.setText("Cimento " + dados.getString("nome do cimento"));
         textViewDadosNomeDoCimento.setText("Nome do cimento: "  + dados.getString("nome do cimento"));
         textViewDadosTempoDeCura.setText("Tempo de cura: "  + dados.getString("tempo de cura") + " dias");
-        configurarGraficoCurvaDeAbrams();
-        textViewObservacoes.setText("Observações:   " + dados.getString("observações"));
+        textViewObservacoes.setText("Observações: " + dados.getString("observações"));
 
         buttonEditarCimento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,13 +140,14 @@ public class DadosCimentoActivity extends AppCompatActivity {
         int c = 0;
         while (c < listaPontosCimento.size()) {
             ItemPontoCimento itemPontoCursor = listaPontosCimento.get(c);
-            arrayCurva[c][0] = itemPontoCursor.getValorDeAC();
-            arrayCurva[c][1] = itemPontoCursor.getValorDeFck();
+            arrayCurva[c][1] = itemPontoCursor.getValorDeAC();
+            arrayCurva[c][0] = itemPontoCursor.getValorDeFck();
             c += 1;
         }
         regressaoLinear = new RegressaoLinear(arrayCurva);
 
         textViewFormulaDeAbrams.setText("Lei de Abrams: fcj = " + arred2x.format(regressaoLinear.getK1()) + " / [" + arred2x.format(regressaoLinear.getK2()) +"^(a/c)]");
+        configurarGraficoCurvaDeAbrams();
     }
 
     private void configurarGraficoCurvaDeAbrams() {
@@ -156,6 +156,14 @@ public class DadosCimentoActivity extends AppCompatActivity {
         graficoCurvaDeAbramsCimento.setScaleEnabled(true);
 
         ArrayList<Entry> yValues = new ArrayList<>();
+
+        Double cont = 0.0;
+        while (cont < 1.0) {
+            Float x = Float.valueOf(arred3x.format(cont).replace(",","."));
+            Float y = Float.parseFloat(arred3x.format(regressaoLinear.calcularFcjPeloFatorAC(cont)).replace(",","."));
+            yValues.add(new Entry( x , y));
+            cont += 0.01;
+        }
 
         LineDataSet set1 = new LineDataSet(yValues, "Data Set 1");
 
