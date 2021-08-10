@@ -23,8 +23,8 @@ import java.util.List;
 public class DadosCimentoActivity extends AppCompatActivity {
 
     private TextView textViewRotuloDoCimento, textViewDadosNomeDoCimento, textViewDadosTempoDeCura,
-                     textViewQtdeDePontos, textViewFormulaDeAbrams;
-    private Button buttonExibirPontos;
+                     textViewQtdeDePontos, textViewFormulaDeAbrams, textViewObservacoes;
+    private Button buttonEditarCimento, buttonExibirPontos;
     private RecyclerView recyClerViewDadosCimento;
     private PontosDoCimentoAdapter pontosDoCimentoAdapter;
     private List<ItemPontoCimento> listaPontosCimento = new ArrayList<>();
@@ -53,12 +53,24 @@ public class DadosCimentoActivity extends AppCompatActivity {
         textViewDadosNomeDoCimento = findViewById(R.id.textViewDadosNomeDoCimento);
         textViewDadosTempoDeCura = findViewById(R.id.textViewDadosTempoDeCura);
         textViewQtdeDePontos = findViewById(R.id.textViewQtdeDePontos);
+        textViewFormulaDeAbrams = findViewById(R.id.textViewFormulaDeAbrams);
+        textViewObservacoes = findViewById(R.id.textViewObservacoes);
+        buttonEditarCimento = findViewById(R.id.buttonEditarCimento);
         buttonExibirPontos = findViewById(R.id.buttonExibirPontos);
         recyClerViewDadosCimento = findViewById(R.id.recyclerViewDadosCimento);
 
         textViewRotuloDoCimento.setText("Cimento " + dados.getString("nome do cimento"));
         textViewDadosNomeDoCimento.setText("Nome do cimento: "  + dados.getString("nome do cimento"));
         textViewDadosTempoDeCura.setText("Tempo de cura: "  + dados.getString("tempo de cura") + " dias");
+        textViewObservacoes.setText("Observações:\n   " + dados.getString("observações"));
+
+        buttonEditarCimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentAbrirAdicionarEditarCimentoActivity = new Intent(getApplicationContext(), AdicionarEditarCimentoActivity.class);
+                startActivity(intentAbrirAdicionarEditarCimentoActivity);
+            }
+        });
 
         buttonExibirPontos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,9 +84,6 @@ public class DadosCimentoActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
 
     }
 
@@ -117,7 +126,6 @@ public class DadosCimentoActivity extends AppCompatActivity {
         }
         regressaoLinear = new RegressaoLinear(arrayCurva);
 
-        textViewFormulaDeAbrams = findViewById(R.id.textViewFormulaDeAbrams);
         textViewFormulaDeAbrams.setText("Lei de Abrams: fcj = " + arred2x.format(regressaoLinear.getK1()) + " / [" + arred2x.format(regressaoLinear.getK2()) +"^(a/c)]");
     }
 }

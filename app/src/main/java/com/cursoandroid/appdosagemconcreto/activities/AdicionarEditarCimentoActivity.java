@@ -34,28 +34,35 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     private List<ItemPontoCimento> listaPontosCimento = new ArrayList<>();
     private ItemPontoCimento itemPontoCimento = new ItemPontoCimento();
     private ItemPontoCimento pontoCimentoSelecionado = new ItemPontoCimento();
-    private TextInputEditText textInputNomeDoCimento, textInputTempoDeCura, textInputValorDeAC, textInputValorDeFck;
+    private TextInputEditText textInputNomeDoCimento, textInputTempoDeCura, textInputobservacoes, textInputValorDeAC, textInputValorDeFck;
     private Button buttonAdicionarDados, buttonConfirmar;
     private CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO;
 
     //Dados do cimento inseridos
-    private String nomeDoCimento;
-    private String tempoDeCura;
+    private String nomeDoCimento, tempoDeCura, observacoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_editar_cimento);
 
-        //Configuara elementos de interface
+        //Configuar elementos de interface
         textInputNomeDoCimento = findViewById(R.id.textInputNomeDoCimento);
         textInputTempoDeCura = findViewById(R.id.textInputTempoDeCura);
-        textInputTempoDeCura.setText("28");
+        textInputobservacoes = findViewById(R.id.textInputObservacoes);
         textInputValorDeAC = findViewById(R.id.textInputValorDeAC);
         textInputValorDeFck = findViewById(R.id.textInputValorDeFck);
 
         buttonAdicionarDados = findViewById(R.id.buttonAdicionarDados);
         buttonConfirmar = findViewById(R.id.buttonConfirmar);
+
+        //Pré-configuração de teste
+        textInputNomeDoCimento.setText("CP32 teste");
+        textInputTempoDeCura.setText("28");
+        textInputobservacoes.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                                    "Aliquam venenatis velit id urna vulputate euismod. Aenean " +
+                                    "arcu elit, rhoncus id sem in, hendrerit vulputate dolor. " +
+                                    "Proin odio tellus, consectetur in nulla a, ultricies lobortis odio.");
 
         buttonConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,12 +77,18 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                     } else {
                         nomeDoCimento = textInputNomeDoCimento.getText().toString();
                     }
+                    if(textInputobservacoes.getText().toString().equals("")) {
+                        observacoes = "nenhuma";
+                    } else {
+                        observacoes = textInputobservacoes.getText().toString();
+                    }
 
                     tempoDeCura = textInputTempoDeCura.getText().toString();
 
                     Intent intentAbrirDadosCimentoActivity = new Intent(getApplicationContext(), DadosCimentoActivity.class);
                     intentAbrirDadosCimentoActivity.putExtra("nome do cimento", nomeDoCimento);
                     intentAbrirDadosCimentoActivity.putExtra("tempo de cura", tempoDeCura);
+                    intentAbrirDadosCimentoActivity.putExtra("observações", observacoes);
 
                     startActivity(intentAbrirDadosCimentoActivity);
                 }
