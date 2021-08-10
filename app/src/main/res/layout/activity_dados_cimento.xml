@@ -123,6 +123,12 @@
             android:text="Fórmula de Abrams:"
             android:textSize="18sp" />
 
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/graficoCurvaDeAbramsCimento"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="16dp" />
+
         <TextView
             android:id="@+id/textViewObservacoes"
             android:layout_width="match_parent"

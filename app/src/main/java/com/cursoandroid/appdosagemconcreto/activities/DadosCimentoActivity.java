@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,6 +17,14 @@ import com.cursoandroid.appdosagemconcreto.adapter.PontosDoCimentoAdapter;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.RegressaoLinear;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaDAO;
 import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
+import com.cursoandroid.appdosagemconcreto.tabelaseabacos.CurvaDeAbrams;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -31,6 +41,9 @@ public class DadosCimentoActivity extends AppCompatActivity {
     private CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO;
     private Double[][] arrayCurva;
     private RegressaoLinear regressaoLinear;
+    private LineChart graficoCurvaDeAbramsCimento;
+
+    private String nomeDoCimento, tempoDeCura, obsevacoes;
 
     // Classes de arredondamento e formatação
     private DecimalFormat arred0 = new DecimalFormat("####");
@@ -48,6 +61,11 @@ public class DadosCimentoActivity extends AppCompatActivity {
 
         Bundle dados = getIntent().getExtras();
 
+        nomeDoCimento = dados.getString("nome do cimento");
+        tempoDeCura = dados.getString("nome do cimento");
+        obsevacoes = dados.getString("observações");
+
+
         //Configurar elementos de interface
         textViewRotuloDoCimento = findViewById(R.id.textViewRotuloDoCimento);
         textViewDadosNomeDoCimento = findViewById(R.id.textViewDadosNomeDoCimento);
@@ -59,10 +77,13 @@ public class DadosCimentoActivity extends AppCompatActivity {
         buttonExibirPontos = findViewById(R.id.buttonExibirPontos);
         recyClerViewDadosCimento = findViewById(R.id.recyclerViewDadosCimento);
 
+        graficoCurvaDeAbramsCimento = findViewById(R.id.graficoCurvaDeAbramsCimento);
+
         textViewRotuloDoCimento.setText("Cimento " + dados.getString("nome do cimento"));
         textViewDadosNomeDoCimento.setText("Nome do cimento: "  + dados.getString("nome do cimento"));
         textViewDadosTempoDeCura.setText("Tempo de cura: "  + dados.getString("tempo de cura") + " dias");
-        textViewObservacoes.setText("Observações:\n   " + dados.getString("observações"));
+        configurarGraficoCurvaDeAbrams();
+        textViewObservacoes.setText("Observações:   " + dados.getString("observações"));
 
         buttonEditarCimento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,5 +148,80 @@ public class DadosCimentoActivity extends AppCompatActivity {
         regressaoLinear = new RegressaoLinear(arrayCurva);
 
         textViewFormulaDeAbrams.setText("Lei de Abrams: fcj = " + arred2x.format(regressaoLinear.getK1()) + " / [" + arred2x.format(regressaoLinear.getK2()) +"^(a/c)]");
+    }
+
+    private void configurarGraficoCurvaDeAbrams() {
+
+        graficoCurvaDeAbramsCimento.setDragEnabled(true);
+        graficoCurvaDeAbramsCimento.setScaleEnabled(true);
+
+        ArrayList<Entry> yValues = new ArrayList<>();
+
+        LineDataSet set1 = new LineDataSet(yValues, "Data Set 1");
+
+        set1.setColor(Color.RED, 255);
+        set1.setLineWidth(2f);
+        set1.setCircleColor(Color.TRANSPARENT);
+        set1.setCircleHoleColor(Color.TRANSPARENT);
+        set1.setValueTextSize(10f);
+        set1.setValueTextColor(Color.TRANSPARENT);
+        set1.setLabel("Curva " + nomeDoCimento + " - 28 dias");
+        set1.setHighLightColor(Color.TRANSPARENT);
+
+        graficoCurvaDeAbramsCimento.getAxisRight().setEnabled(false);
+        graficoCurvaDeAbramsCimento.setDescription(null);
+        graficoCurvaDeAbramsCimento.setDrawBorders(true);
+        graficoCurvaDeAbramsCimento.setBorderColor(getResources().getColor(R.color.colorTracoDivisao));
+        graficoCurvaDeAbramsCimento.setBackgroundColor(Color.TRANSPARENT);
+
+        graficoCurvaDeAbramsCimento.setOnChartGestureListener(new OnChartGestureListener() {
+            @Override
+            public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+
+            }
+
+            @Override
+            public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+
+            }
+
+            @Override
+            public void onChartLongPressed(MotionEvent me) {
+
+            }
+
+            @Override
+            public void onChartDoubleTapped(MotionEvent me) {
+
+            }
+
+            @Override
+            public void onChartSingleTapped(MotionEvent me) {
+
+            }
+
+            @Override
+            public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+
+            }
+
+            @Override
+            public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+
+            }
+
+            @Override
+            public void onChartTranslate(MotionEvent me, float dX, float dY) {
+
+            }
+        });
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        LineData dadosGrafico = new LineData(dataSets);
+
+        graficoCurvaDeAbramsCimento.setData(dadosGrafico);
+
     }
 }
