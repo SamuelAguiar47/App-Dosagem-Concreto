@@ -34,7 +34,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     private List<ItemPontoCimento> listaPontosCimento = new ArrayList<>();
     private ItemPontoCimento itemPontoCimento = new ItemPontoCimento();
     private ItemPontoCimento pontoCimentoSelecionado = new ItemPontoCimento();
-    private TextInputEditText textInputNomeDoCimento, textInputTempoDeCura, textInputobservacoes, textInputValorDeAC, textInputValorDeFck;
+    private TextInputEditText textInputNomeDoCimento, textInputTempoDeCura, textInputobservacoes, textInputValorDeAC, textInputValorDeFcj;
     private Button buttonAdicionarDados, buttonConfirmar;
     private CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO;
 
@@ -51,7 +51,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         textInputTempoDeCura = findViewById(R.id.textInputTempoDeCura);
         textInputobservacoes = findViewById(R.id.textInputObservacoes);
         textInputValorDeAC = findViewById(R.id.textInputValorDeAC);
-        textInputValorDeFck = findViewById(R.id.textInputValorDeFck);
+        textInputValorDeFcj = findViewById(R.id.textInputValorDeFcj);
 
         buttonAdicionarDados = findViewById(R.id.buttonAdicionarDados);
         buttonConfirmar = findViewById(R.id.buttonConfirmar);
@@ -98,11 +98,11 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         buttonAdicionarDados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((textInputValorDeAC.getText().toString().equals("")) || textInputValorDeFck.getText().toString().equals("")) {
+                if ((textInputValorDeAC.getText().toString().equals("")) || textInputValorDeFcj.getText().toString().equals("")) {
                     Toast.makeText(AdicionarEditarCimentoActivity.this, "Preencha os campos para adicionar um novo ponto.", Toast.LENGTH_LONG).show();
                 } else {
                     itemPontoCimento.setValorDeAC(Double.parseDouble(textInputValorDeAC.getText().toString()));
-                    itemPontoCimento.setValorDeFck(Double.parseDouble(textInputValorDeFck.getText().toString()));
+                    itemPontoCimento.setValorDeFcj(Double.parseDouble(textInputValorDeFcj.getText().toString()));
                     CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
                     curvaCimentoProvisoriaDAO.salvar(itemPontoCimento);
                     carregarListaDePontosDoCimentos();

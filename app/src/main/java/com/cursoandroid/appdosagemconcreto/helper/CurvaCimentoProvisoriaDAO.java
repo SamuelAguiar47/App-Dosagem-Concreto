@@ -38,7 +38,7 @@ public class CurvaCimentoProvisoriaDAO implements ICurvaCimentoProvisoriaDAO{
 
         ContentValues cv = new ContentValues();
         cv.put("ac", itemPontoCimento.getValorDeAC());
-        cv.put("fck", itemPontoCimento.getValorDeFck());
+        cv.put("fcj", itemPontoCimento.getValorDeFcj());
 
         try {
             escreve.insert(DbCimentoCurvaProvisoria.TABELA_DADOS_CIMENTO, null, cv);
@@ -85,12 +85,12 @@ public class CurvaCimentoProvisoriaDAO implements ICurvaCimentoProvisoriaDAO{
 
             Long id = c.getLong( c.getColumnIndex("id") );
             Double valorDeAC = c.getDouble( c.getColumnIndex("ac") );
-            Double valorDeFck = c.getDouble( c.getColumnIndex("fck") );
+            Double valorDeFcj = c.getDouble( c.getColumnIndex("fcj") );
 
             itemPontoCimento.setId(id);
             itemPontoCimento.setValorDeAC(valorDeAC);
-            itemPontoCimento.setValorDeFck(valorDeFck);
-            itemPontoCimento.setNomeDoPonto("a/c: " + arred2.format(valorDeAC) + "   ➔   Fck: " + arred2x.format(valorDeFck) + " MPa");
+            itemPontoCimento.setValorDeFcj(valorDeFcj);
+            itemPontoCimento.setNomeDoPonto("a/c: " + arred2.format(valorDeAC) + "   ➔   Fcj: " + arred2x.format(valorDeFcj) + " MPa");
 
             listaPontosCimento.add(itemPontoCimento);
         }

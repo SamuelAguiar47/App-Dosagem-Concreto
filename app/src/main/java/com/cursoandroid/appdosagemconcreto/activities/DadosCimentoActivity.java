@@ -142,7 +142,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
         while (c < listaPontosCimento.size()) {
             ItemPontoCimento itemPontoCursor = listaPontosCimento.get(c);
             arrayCurva[c][1] = itemPontoCursor.getValorDeAC();
-            arrayCurva[c][0] = itemPontoCursor.getValorDeFck();
+            arrayCurva[c][0] = itemPontoCursor.getValorDeFcj();
             c += 1;
         }
         regressaoLinear = new RegressaoLinear(arrayCurva);

@@ -7,7 +7,7 @@ public class ItemPontoCimento implements Serializable {
     private Long Id;
     private String nomeDoPonto;
     private Double ValorDeAC;
-    private Double ValorDeFck;
+    private Double ValorDeFcj;
 
     //Métodos
     public Long getId() {
@@ -34,11 +34,11 @@ public class ItemPontoCimento implements Serializable {
         ValorDeAC = valorDeAC;
     }
 
-    public Double getValorDeFck() {
-        return ValorDeFck;
+    public Double getValorDeFcj() {
+        return ValorDeFcj;
     }
 
-    public void setValorDeFck(Double valorDeFck) {
-        ValorDeFck = valorDeFck;
+    public void setValorDeFcj(Double valorDeFcj) {
+        ValorDeFcj = valorDeFcj;
     }
 }
