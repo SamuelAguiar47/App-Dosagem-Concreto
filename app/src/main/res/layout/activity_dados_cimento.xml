@@ -93,7 +93,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="8dp"
             android:text="Dados:"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewDadosNomeDoCimento"
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:text="Nome do cimento: "
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textViewDadosTempoDeCura"
@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:text="Tempo de cura:"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textViewQtdeDePontos"
@@ -117,21 +117,92 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:text="Qtde de pontos:"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewFormulaDeAbrams"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:text="Fórmula de Abrams:  "
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textViewFormulaDeAbrams2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Fcj = "
+                android:textSize="16dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewFormulaDeAbramsK1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:text="K1"
+                    android:textSize="16dp" />
+
+                <View
+                    android:id="@+id/divider13"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorTracoDivisao" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewFormulaDeAbramsK2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:text="K2"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/textViewFormulaDeAbrams5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginLeft="4dp"
+                        android:text="a/c"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/textViewFormulaDeAbrams"
+            android:id="@+id/textView17"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="Fórmula de Abrams:"
-            android:textSize="18sp" />
+            android:layout_marginTop="4dp"
+            android:text="Curva de Abrams:"
+            android:textSize="16dp" />
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/graficoCurvaDeAbramsCimento"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginLeft="16dp" />
+            android:layout_marginTop="12dp" />
 
         <TextView
             android:id="@+id/textViewObservacoes"
@@ -140,7 +211,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:text="Observações:"
-            android:textSize="18sp" />
+            android:textSize="16dp" />
 
     </LinearLayout>
 

@@ -33,7 +33,7 @@ import java.util.List;
 public class DadosCimentoActivity extends AppCompatActivity {
 
     private TextView textViewRotuloDoCimento, textViewDadosNomeDoCimento, textViewDadosTempoDeCura,
-                     textViewQtdeDePontos, textViewFormulaDeAbrams, textViewObservacoes;
+                     textViewQtdeDePontos, textViewFormulaDeAbramsK1, textViewFormulaDeAbramsK2, textViewObservacoes;
     private Button buttonEditarCimento, buttonExibirPontos;
     private RecyclerView recyClerViewDadosCimento;
     private PontosDoCimentoAdapter pontosDoCimentoAdapter;
@@ -71,7 +71,8 @@ public class DadosCimentoActivity extends AppCompatActivity {
         textViewDadosNomeDoCimento = findViewById(R.id.textViewDadosNomeDoCimento);
         textViewDadosTempoDeCura = findViewById(R.id.textViewDadosTempoDeCura);
         textViewQtdeDePontos = findViewById(R.id.textViewQtdeDePontos);
-        textViewFormulaDeAbrams = findViewById(R.id.textViewFormulaDeAbrams);
+        textViewFormulaDeAbramsK1 = findViewById(R.id.textViewFormulaDeAbramsK1);
+        textViewFormulaDeAbramsK2 = findViewById(R.id.textViewFormulaDeAbramsK2);
         textViewObservacoes = findViewById(R.id.textViewObservacoes);
         buttonEditarCimento = findViewById(R.id.buttonEditarCimento);
         buttonExibirPontos = findViewById(R.id.buttonExibirPontos);
@@ -146,7 +147,8 @@ public class DadosCimentoActivity extends AppCompatActivity {
         }
         regressaoLinear = new RegressaoLinear(arrayCurva);
 
-        textViewFormulaDeAbrams.setText("Lei de Abrams: fcj = " + arred2x.format(regressaoLinear.getK1()) + " / [" + arred2x.format(regressaoLinear.getK2()) +"^(a/c)]");
+        textViewFormulaDeAbramsK1.setText(arred2x.format(regressaoLinear.getK1()));
+        textViewFormulaDeAbramsK2.setText(arred2x.format(regressaoLinear.getK2()));
         configurarGraficoCurvaDeAbrams();
     }
 
