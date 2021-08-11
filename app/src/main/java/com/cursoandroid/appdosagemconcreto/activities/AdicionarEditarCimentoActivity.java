@@ -141,7 +141,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
 
     public void carregarListaDePontosDoCimentos() {
 
-        //Listar Tarefas
+        //Listar pontos
         curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
         listaPontosCimento = curvaCimentoProvisoriaDAO.listar();
 
