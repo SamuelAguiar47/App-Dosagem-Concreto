@@ -6,7 +6,7 @@ public class ItemCimentoSalvo implements Serializable {
 
     // Atributos
     private Long Id;
-    private String nomeDoCimento, tempoDeCura;
+    private String nomeDoCimento, tempoDeCura, data;
     private int QtdeDePontos;
     private Double K1, K2;
 
@@ -34,6 +34,14 @@ public class ItemCimentoSalvo implements Serializable {
 
     public void setTempoDeCura(String tempoDeCura) {
         this.tempoDeCura = tempoDeCura;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public int getQtdeDePontos() {

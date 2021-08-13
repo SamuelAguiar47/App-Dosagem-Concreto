@@ -39,6 +39,7 @@ public class CimentoAdapter extends RecyclerView.Adapter<CimentoAdapter.MyViewHo
         ItemCimentoSalvo itemCimentoSalvo = listaDeCimentosSalvos.get(position);
         holder.nomeDoCimento.setText(itemCimentoSalvo.getNomeDoCimento());
         holder.tempoDeCura.setText("Cura: " + itemCimentoSalvo.getTempoDeCura() + " dias");
+        holder.data.setText(itemCimentoSalvo.getData());
         holder.qtdeDePontos.setText(itemCimentoSalvo.getQtdeDePontos() + " amostras");
 
     }
