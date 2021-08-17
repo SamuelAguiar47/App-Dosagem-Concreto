@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.PontosDoCimentoAdapter;
+import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaDAO;
 import com.cursoandroid.appdosagemconcreto.helper.DbCimentoCurvaProvisoria;
 import com.cursoandroid.appdosagemconcreto.helper.RecyclerItemClickListener;
@@ -36,10 +37,14 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     private ItemPontoCimento pontoCimentoSelecionado = new ItemPontoCimento();
     private TextInputEditText textInputNomeDoCimento, textInputTempoDeCura, textInputobservacoes, textInputValorDeAC, textInputValorDeFcj;
     private Button buttonAdicionarDados, buttonConfirmar;
-    private CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO;
+
 
     //Dados do cimento inseridos
     private String nomeDoCimento, tempoDeCura, observacoes;
+
+    // Helper
+    private CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO;
+    private CodigosDeActivity codigosDeActivity = new CodigosDeActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +95,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                     intentAbrirDadosCimentoActivity.putExtra("tempo de cura", tempoDeCura);
                     intentAbrirDadosCimentoActivity.putExtra("observações", observacoes);
 
-                    startActivity(intentAbrirDadosCimentoActivity);
+                    startActivityForResult(intentAbrirDadosCimentoActivity, codigosDeActivity.adicionarEditarCimentoActivity);
                 }
             }
         });
@@ -206,5 +211,18 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         //Configurar criação e exibição da dialog
         dialogExcluirPontoCimento.create();
         dialogExcluirPontoCimento.show();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+        if (requestCode == codigosDeActivity.adicionarEditarCimentoActivity) {
+            if (resultCode == codigosDeActivity.adicionarEditarCimentoActivity) {
+                //Intent i = getIntent();
+                //overridePendingTransition(0,0);
+                //i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                finish();
+            }
+        }
+
     }
 }

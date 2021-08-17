@@ -15,7 +15,9 @@ import android.widget.TextView;
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.PontosDoCimentoAdapter;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.RegressaoLinear;
+import com.cursoandroid.appdosagemconcreto.helper.CimentosSalvosDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaDAO;
+import com.cursoandroid.appdosagemconcreto.model.ItemCimentoSalvo;
 import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
 import com.cursoandroid.appdosagemconcreto.tabelaseabacos.CurvaDeAbrams;
 import com.github.mikephil.charting.charts.LineChart;
@@ -34,11 +36,12 @@ public class DadosCimentoActivity extends AppCompatActivity {
 
     private TextView textViewRotuloDoCimento, textViewDadosNomeDoCimento, textViewDadosTempoDeCura,
                      textViewQtdeDePontos, textViewFormulaDeAbramsK1, textViewFormulaDeAbramsK2, textViewObservacoes;
-    private Button buttonEditarCimento, buttonExibirPontos;
+    private Button buttonDescartarCimento, buttonEditarCimento, buttonSalvarCimento, buttonExibirPontos;
     private RecyclerView recyClerViewDadosCimento;
     private PontosDoCimentoAdapter pontosDoCimentoAdapter;
     private List<ItemPontoCimento> listaPontosCimento = new ArrayList<>();
     private CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO;
+    private ItemCimentoSalvo itemCimentoSalvo = new ItemCimentoSalvo();
     private Double[][] arrayCurva;
     private RegressaoLinear regressaoLinear;
     private LineChart graficoCurvaDeAbramsCimento;
@@ -74,22 +77,35 @@ public class DadosCimentoActivity extends AppCompatActivity {
         textViewFormulaDeAbramsK1 = findViewById(R.id.textViewFormulaDeAbramsK1);
         textViewFormulaDeAbramsK2 = findViewById(R.id.textViewFormulaDeAbramsK2);
         textViewObservacoes = findViewById(R.id.textViewObservacoes);
+        buttonDescartarCimento = findViewById(R.id.buttonDescartarCimento);
         buttonEditarCimento = findViewById(R.id.buttonEditarCimento);
+        buttonSalvarCimento = findViewById(R.id.buttonSalvarCimento);
         buttonExibirPontos = findViewById(R.id.buttonExibirPontos);
         recyClerViewDadosCimento = findViewById(R.id.recyclerViewDadosCimento);
 
         graficoCurvaDeAbramsCimento = findViewById(R.id.graficoCurvaDeAbramsCimento);
 
-        textViewRotuloDoCimento.setText("Cimento " + dados.getString("nome do cimento"));
-        textViewDadosNomeDoCimento.setText("Nome do cimento: "  + dados.getString("nome do cimento"));
-        textViewDadosTempoDeCura.setText("Tempo de cura: "  + dados.getString("tempo de cura") + " dias");
-        textViewObservacoes.setText("Observações: " + dados.getString("observações"));
+        textViewRotuloDoCimento.setText("Cimento " + nomeDoCimento);
+        textViewDadosNomeDoCimento.setText("Nome do cimento: "  + nomeDoCimento);
+        textViewDadosTempoDeCura.setText("Tempo de cura: "  + tempoDeCura + " dias");
+        textViewObservacoes.setText("Observações: " + obsevacoes);
 
         buttonEditarCimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intentAbrirAdicionarEditarCimentoActivity = new Intent(getApplicationContext(), AdicionarEditarCimentoActivity.class);
                 startActivity(intentAbrirAdicionarEditarCimentoActivity);
+            }
+        });
+
+        buttonSalvarCimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemCimentoSalvo.setNomeDoCimento(nomeDoCimento);
+                itemCimentoSalvo.setTempoDeCura(tempoDeCura);
+                itemCimentoSalvo.setQtdeDePontos(listaPontosCimento.size());
+                CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
+                cimentosSalvosDAO.salvar(itemCimentoSalvo);
             }
         });
 

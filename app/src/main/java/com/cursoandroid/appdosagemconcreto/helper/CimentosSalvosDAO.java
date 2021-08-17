@@ -2,12 +2,14 @@ package com.cursoandroid.appdosagemconcreto.helper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.cursoandroid.appdosagemconcreto.model.ItemCimentoSalvo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CimentosSalvosDAO implements ICimentosSalvosDAO {
@@ -50,11 +52,45 @@ public class CimentosSalvosDAO implements ICimentosSalvosDAO {
 
     @Override
     public boolean deletar(ItemCimentoSalvo itemCimentoSalvo) {
-        return false;
+
+        try {
+            String[] args = {itemCimentoSalvo.getId().toString()};
+            escreve.delete(DbCimentosSalvos.TABELA_CIMENTOS_SALVOS, "id=?", args);
+            Log.i("INFO","Sucesso ao deletar cimento.");
+        } catch (Exception e) {
+            Log.i("INFO","Erro ao deletar cimento.");
+        }
+
+        return true;
     }
 
     @Override
     public List<ItemCimentoSalvo> listar() {
-        return null;
+
+        List<ItemCimentoSalvo> listaCimentosSalvos = new ArrayList<>();
+
+        String sql = "SELECT * FROM " + DbCimentosSalvos.TABELA_CIMENTOS_SALVOS + " ;";
+        Cursor c = le.rawQuery(sql, null);
+
+        while ( c.moveToNext() ) {
+
+            ItemCimentoSalvo itemCimentoSalvo = new ItemCimentoSalvo();
+
+            Long id = c.getLong( c.getColumnIndex("id") );
+            String nomeDoCimento = c.getString( c.getColumnIndex("nomeDoCimento") );
+            String tempoDeCura = c.getString( c.getColumnIndex("tempoDeCura") );
+            String data = c.getString( c.getColumnIndex("data") );
+            int qtdeDePontos = c.getInt( c.getColumnIndex("qtdeDePontos") );
+
+            itemCimentoSalvo.setId(id);
+            itemCimentoSalvo.setNomeDoCimento(nomeDoCimento);
+            itemCimentoSalvo.setTempoDeCura(tempoDeCura);
+            itemCimentoSalvo.setData(data);
+            itemCimentoSalvo.setQtdeDePontos(qtdeDePontos);
+
+            listaCimentosSalvos.add(itemCimentoSalvo);
+        }
+
+        return listaCimentosSalvos;
     }
 }
