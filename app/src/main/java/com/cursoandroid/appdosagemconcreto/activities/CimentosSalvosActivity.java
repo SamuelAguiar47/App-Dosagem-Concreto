@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.CimentoAdapter;
+import com.cursoandroid.appdosagemconcreto.helper.CimentosSalvosDAO;
 import com.cursoandroid.appdosagemconcreto.model.ItemCimentoSalvo;
 
 import java.util.ArrayList;
@@ -46,19 +47,8 @@ public class CimentosSalvosActivity extends AppCompatActivity {
     public void carregarListaDeCimentos() {
 
         //Listar cimentos
-        ItemCimentoSalvo cimento1 = new ItemCimentoSalvo();
-        cimento1.setNomeDoCimento("Cimento 1");
-        cimento1.setTempoDeCura("28");
-        cimento1.setData("13/08/2021");
-        cimento1.setQtdeDePontos(36);
-        listaDeCimentos.add(cimento1);
-
-        ItemCimentoSalvo cimento2 = new ItemCimentoSalvo();
-        cimento2.setNomeDoCimento("Cimento 2");
-        cimento2.setTempoDeCura("28");
-        cimento2.setData("13/08/2021");
-        cimento2.setQtdeDePontos(237);
-        listaDeCimentos.add(cimento2);
+        CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
+        listaDeCimentos = cimentosSalvosDAO.listar();
 
         /*
             Exibe pontos do cimento no RecyclerView
