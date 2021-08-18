@@ -1,14 +1,18 @@
 package com.cursoandroid.appdosagemconcreto.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.CimentoAdapter;
@@ -24,8 +28,8 @@ public class CimentosSalvosActivity extends AppCompatActivity {
     private Button buttonAdicionarCimento;
     private RecyclerView recyclerViewCimentosSalvos;
     private CimentoAdapter cimentoAdapter;
-    private ItemCimentoSalvo itemTipoDeCimento = new ItemCimentoSalvo();
     private List<ItemCimentoSalvo> listaDeCimentos = new ArrayList<>();
+    private ItemCimentoSalvo itemCimentoSelecionado = new ItemCimentoSalvo();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,35 @@ public class CimentosSalvosActivity extends AppCompatActivity {
 
                             @Override
                             public void onLongItemClick(View view, int position) {
+                                //Recuperar cimento para deletar
+                                itemCimentoSelecionado = listaDeCimentos.get(position);
+
+                                //Configurar Alert Dialog
+                                AlertDialog.Builder dialog = new AlertDialog.Builder(CimentosSalvosActivity.this);
+
+                                dialog.setTitle("Deletar Cimento");
+                                dialog.setTitle("Deseja realmente deletar o cimento " + itemCimentoSelecionado.getNomeDoCimento() + "?");
+
+                                dialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
+                                        if (cimentosSalvosDAO.deletar(itemCimentoSelecionado)) {
+                                            carregarListaDeCimentos();
+                                            Toast.makeText(CimentosSalvosActivity.this, "Sucesso ao deletar cimento.", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(CimentosSalvosActivity.this, "Erro ao deletar cimento.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+
+                                dialog.setNegativeButton("Não", null);
+
+                                //Exibir Dialog
+                                dialog.create();
+                                dialog.show();
+
 
                             }
 
