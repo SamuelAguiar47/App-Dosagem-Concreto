@@ -65,7 +65,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
         Bundle dados = getIntent().getExtras();
 
         nomeDoCimento = dados.getString("nome do cimento");
-        tempoDeCura = dados.getString("nome do cimento");
+        tempoDeCura = dados.getString("tempo de cura");
         obsevacoes = dados.getString("observações");
 
 

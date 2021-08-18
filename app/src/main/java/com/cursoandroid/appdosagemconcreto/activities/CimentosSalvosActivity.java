@@ -7,11 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.CimentoAdapter;
 import com.cursoandroid.appdosagemconcreto.helper.CimentosSalvosDAO;
+import com.cursoandroid.appdosagemconcreto.helper.RecyclerItemClickListener;
 import com.cursoandroid.appdosagemconcreto.model.ItemCimentoSalvo;
 
 import java.util.ArrayList;
@@ -33,6 +35,29 @@ public class CimentosSalvosActivity extends AppCompatActivity {
         // Carregar elementos de interface
         buttonAdicionarCimento = findViewById(R.id.buttonAdicionarCimento);
         recyclerViewCimentosSalvos = findViewById(R.id.recyclerViewCimentosSalvos);
+
+        recyclerViewCimentosSalvos.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        getApplicationContext(),
+                        recyclerViewCimentosSalvos,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            }
+                        }
+                )
+        );
 
         buttonAdicionarCimento.setOnClickListener(new View.OnClickListener() {
             @Override
