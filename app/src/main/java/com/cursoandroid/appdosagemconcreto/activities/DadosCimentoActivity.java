@@ -19,6 +19,7 @@ import com.cursoandroid.appdosagemconcreto.adapter.PontosDoCimentoAdapter;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.RegressaoLinear;
 import com.cursoandroid.appdosagemconcreto.helper.CimentosSalvosDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
+import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaDAO;
 import com.cursoandroid.appdosagemconcreto.model.ItemCimentoSalvo;
 import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
@@ -128,6 +129,18 @@ public class DadosCimentoActivity extends AppCompatActivity {
                         itemCimentoSalvo.setData(formataData.format(data));
                         CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
                         cimentosSalvosDAO.salvar(itemCimentoSalvo);
+
+                        CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext(), nomeDoCimento);
+                        int cont = 0;
+                        ItemPontoCimento itemPontoCimento;
+                        while (cont < listaPontosCimento.size()) {
+                            itemPontoCimento = listaPontosCimento.get(cont);
+                            curvaCimentoDAO.salvar(itemPontoCimento);
+                            cont += 1;
+                        }
+
+                        curvaCimentoProvisoriaDAO.limparTabela();
+
                         setResult(codigosDeActivity.adicionarEditarCimentoActivity);
                         finish();
                     }
