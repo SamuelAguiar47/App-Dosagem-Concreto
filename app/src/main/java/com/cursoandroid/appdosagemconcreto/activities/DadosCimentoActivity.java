@@ -1,9 +1,11 @@
 package com.cursoandroid.appdosagemconcreto.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.PontosDoCimentoAdapter;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.RegressaoLinear;
 import com.cursoandroid.appdosagemconcreto.helper.CimentosSalvosDAO;
+import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaDAO;
 import com.cursoandroid.appdosagemconcreto.model.ItemCimentoSalvo;
 import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
@@ -47,6 +50,9 @@ public class DadosCimentoActivity extends AppCompatActivity {
     private LineChart graficoCurvaDeAbramsCimento;
 
     private String nomeDoCimento, tempoDeCura, obsevacoes;
+
+    //Helper
+    private CodigosDeActivity codigosDeActivity = new CodigosDeActivity();
 
     // Classes de arredondamento e formatação
     private DecimalFormat arred0 = new DecimalFormat("####");
@@ -101,13 +107,36 @@ public class DadosCimentoActivity extends AppCompatActivity {
         buttonSalvarCimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemCimentoSalvo.setNomeDoCimento(nomeDoCimento);
-                itemCimentoSalvo.setTempoDeCura(tempoDeCura);
-                itemCimentoSalvo.setQtdeDePontos(listaPontosCimento.size());
-                CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
-                cimentosSalvosDAO.salvar(itemCimentoSalvo);
+
+                //Configura Alert Dialog
+                AlertDialog.Builder dialogSalvarNovoCimento = new AlertDialog.Builder(DadosCimentoActivity.this);
+
+                dialogSalvarNovoCimento.setTitle("Salvar novo cimento");
+                dialogSalvarNovoCimento.setMessage("Deseja realmente salvar o cimento " + nomeDoCimento + " como um novo cimento?");
+
+                dialogSalvarNovoCimento.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        itemCimentoSalvo.setNomeDoCimento(nomeDoCimento);
+                        itemCimentoSalvo.setTempoDeCura(tempoDeCura);
+                        itemCimentoSalvo.setQtdeDePontos(listaPontosCimento.size());
+                        CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
+                        cimentosSalvosDAO.salvar(itemCimentoSalvo);
+                        setResult(codigosDeActivity.adicionarEditarCimentoActivity);
+                        finish();
+                    }
+                });
+
+                dialogSalvarNovoCimento.setNegativeButton("Não", null);
+
+                dialogSalvarNovoCimento.create();
+                dialogSalvarNovoCimento.show();
+
+
             }
         });
+
+        recyClerViewDadosCimento.setVisibility(View.GONE);
 
         buttonExibirPontos.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -81,7 +81,6 @@ public class CimentosSalvosActivity extends AppCompatActivity {
                                 dialog.create();
                                 dialog.show();
 
-
                             }
 
                             @Override
