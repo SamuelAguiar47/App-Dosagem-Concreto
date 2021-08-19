@@ -32,7 +32,9 @@ import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DadosCimentoActivity extends AppCompatActivity {
@@ -50,6 +52,9 @@ public class DadosCimentoActivity extends AppCompatActivity {
     private LineChart graficoCurvaDeAbramsCimento;
 
     private String nomeDoCimento, tempoDeCura, obsevacoes;
+
+    SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
+    Date data = new Date();
 
     //Helper
     private CodigosDeActivity codigosDeActivity = new CodigosDeActivity();
@@ -120,6 +125,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
                         itemCimentoSalvo.setNomeDoCimento(nomeDoCimento);
                         itemCimentoSalvo.setTempoDeCura(tempoDeCura);
                         itemCimentoSalvo.setQtdeDePontos(listaPontosCimento.size());
+                        itemCimentoSalvo.setData(formataData.format(data));
                         CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
                         cimentosSalvosDAO.salvar(itemCimentoSalvo);
                         setResult(codigosDeActivity.adicionarEditarCimentoActivity);
