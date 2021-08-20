@@ -128,6 +128,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
                         itemCimentoSalvo.setTempoDeCura(tempoDeCura);
                         itemCimentoSalvo.setQtdeDePontos(listaPontosCimento.size());
                         itemCimentoSalvo.setData(formataData.format(data));
+                        itemCimentoSalvo.setObservacoes(obsevacoes);
                         CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
                         cimentosSalvosDAO.salvar(itemCimentoSalvo);
 
@@ -177,6 +178,17 @@ public class DadosCimentoActivity extends AppCompatActivity {
 
         //Listar Tarefas
         curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
+
+        if (acao.equals("abrir cimento salvo")) {
+            CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext(), nomeDoCimento, tempoDeCura);
+            List<ItemPontoCimento> listaPontosTransicao = curvaCimentoDAO.listar();
+            int cont = 0;
+            while (cont < listaPontosTransicao.size()) {
+                curvaCimentoProvisoriaDAO.salvar(listaPontosTransicao.get(cont));
+                cont += 1;
+            }
+        }
+
         listaPontosCimento = curvaCimentoProvisoriaDAO.listar();
 
         /*
@@ -215,6 +227,12 @@ public class DadosCimentoActivity extends AppCompatActivity {
         textViewFormulaDeAbramsK1.setText(arred2x.format(regressaoLinear.getK1()));
         textViewFormulaDeAbramsK2.setText(arred2x.format(regressaoLinear.getK2()));
         configurarGraficoCurvaDeAbrams();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        curvaCimentoProvisoriaDAO.limparTabela();
     }
 
     private void configurarGraficoCurvaDeAbrams() {

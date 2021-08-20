@@ -55,6 +55,7 @@ public class CimentosSalvosActivity extends AppCompatActivity {
                                 intentAbrirDadosCimentoActivity.putExtra("observações", itemCimentoSelecionado.getObservacoes());
                                 intentAbrirDadosCimentoActivity.putExtra("ação", "abrir cimento salvo");
 
+                                startActivity(intentAbrirDadosCimentoActivity);
                             }
 
                             @Override
