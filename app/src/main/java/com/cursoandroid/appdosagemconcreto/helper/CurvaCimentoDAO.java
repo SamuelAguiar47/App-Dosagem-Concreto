@@ -28,8 +28,8 @@ public class CurvaCimentoDAO implements ICurvaCimentoDAO {
     private DecimalFormat arred3 = new DecimalFormat("##0.000");
     private DecimalFormat arred3x = new DecimalFormat("##0.###");
 
-    public CurvaCimentoDAO(Context context, String nomeDoCimento) {
-        nomeDaTabela = "tabela" + nomeDoCimento.replace(" ", "");
+    public CurvaCimentoDAO(Context context, String nomeDoCimento, String tempoDeCura) {
+        nomeDaTabela = "tabela" + nomeDoCimento.replace(" ", "") + "para" + tempoDeCura + "dias";
         DbCimentoCurva dbCimentoCurva = new DbCimentoCurva(context, nomeDaTabela);
         escreve = dbCimentoCurva.getWritableDatabase();
         le = dbCimentoCurva.getReadableDatabase();

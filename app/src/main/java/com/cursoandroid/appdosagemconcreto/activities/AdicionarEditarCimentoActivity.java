@@ -94,6 +94,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                     intentAbrirDadosCimentoActivity.putExtra("nome do cimento", nomeDoCimento);
                     intentAbrirDadosCimentoActivity.putExtra("tempo de cura", tempoDeCura);
                     intentAbrirDadosCimentoActivity.putExtra("observações", observacoes);
+                    intentAbrirDadosCimentoActivity.putExtra("ação", "criar novo cimento");
 
                     startActivityForResult(intentAbrirDadosCimentoActivity, codigosDeActivity.adicionarEditarCimentoActivity);
                 }

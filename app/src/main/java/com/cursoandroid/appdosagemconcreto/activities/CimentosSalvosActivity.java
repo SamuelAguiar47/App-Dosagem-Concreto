@@ -47,6 +47,13 @@ public class CimentosSalvosActivity extends AppCompatActivity {
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
+                                itemCimentoSelecionado = listaDeCimentos.get(position);
+
+                                Intent intentAbrirDadosCimentoActivity = new Intent(getApplicationContext(), DadosCimentoActivity.class);
+                                intentAbrirDadosCimentoActivity.putExtra("nome do cimento", itemCimentoSelecionado.getNomeDoCimento());
+                                intentAbrirDadosCimentoActivity.putExtra("tempo de cura", itemCimentoSelecionado.getTempoDeCura());
+                                intentAbrirDadosCimentoActivity.putExtra("observações", itemCimentoSelecionado.getObservacoes());
+                                intentAbrirDadosCimentoActivity.putExtra("ação", "abrir cimento salvo");
 
                             }
 

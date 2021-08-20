@@ -52,7 +52,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
     private RegressaoLinear regressaoLinear;
     private LineChart graficoCurvaDeAbramsCimento;
 
-    private String nomeDoCimento, tempoDeCura, obsevacoes;
+    private String nomeDoCimento, tempoDeCura, obsevacoes, acao;
 
     SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
     Date data = new Date();
@@ -79,6 +79,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
         nomeDoCimento = dados.getString("nome do cimento");
         tempoDeCura = dados.getString("tempo de cura");
         obsevacoes = dados.getString("observações");
+        acao = dados.getString("ação");
 
 
         //Configurar elementos de interface
@@ -130,7 +131,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
                         CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
                         cimentosSalvosDAO.salvar(itemCimentoSalvo);
 
-                        CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext(), nomeDoCimento);
+                        CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext(), nomeDoCimento, tempoDeCura);
                         int cont = 0;
                         ItemPontoCimento itemPontoCimento;
                         while (cont < listaPontosCimento.size()) {

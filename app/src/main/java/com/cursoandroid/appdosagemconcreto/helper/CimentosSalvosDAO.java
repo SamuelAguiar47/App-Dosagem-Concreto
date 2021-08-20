@@ -31,6 +31,7 @@ public class CimentosSalvosDAO implements ICimentosSalvosDAO {
         cv.put("tempoDeCura", itemCimentoSalvo.getTempoDeCura());
         cv.put("data", itemCimentoSalvo.getData());
         cv.put("qtdeDePontos", itemCimentoSalvo.getQtdeDePontos());
+        cv.put("observacoes", itemCimentoSalvo.getObservacoes());
         cv.put("K1", itemCimentoSalvo.getK1());
         cv.put("K2", itemCimentoSalvo.getK2());
 
@@ -81,12 +82,14 @@ public class CimentosSalvosDAO implements ICimentosSalvosDAO {
             String tempoDeCura = c.getString( c.getColumnIndex("tempoDeCura") );
             String data = c.getString( c.getColumnIndex("data") );
             int qtdeDePontos = c.getInt( c.getColumnIndex("qtdeDePontos") );
+            String observacoes = c.getString( c.getColumnIndex("observacoes"));
 
             itemCimentoSalvo.setId(id);
             itemCimentoSalvo.setNomeDoCimento(nomeDoCimento);
             itemCimentoSalvo.setTempoDeCura(tempoDeCura);
             itemCimentoSalvo.setData(data);
             itemCimentoSalvo.setQtdeDePontos(qtdeDePontos);
+            itemCimentoSalvo.setObservacoes(observacoes);
 
             listaCimentosSalvos.add(itemCimentoSalvo);
         }

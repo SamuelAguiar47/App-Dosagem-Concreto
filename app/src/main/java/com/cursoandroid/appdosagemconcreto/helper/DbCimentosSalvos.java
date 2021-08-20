@@ -23,7 +23,7 @@ public class DbCimentosSalvos extends SQLiteOpenHelper {
         String sql = "CREATE TABLE IF NOT EXISTS " + TABELA_CIMENTOS_SALVOS
                 + " (id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " nomeDoCimento TEXT, tempoDeCura TEXT, data TEXT," +
-                " qtdeDePontos INTEGER, K1 REAL, K2 REAL); ";
+                " qtdeDePontos INTEGER, observacoes TEXT, K1 REAL, K2 REAL); ";
 
         try {
             sqLiteDatabase.execSQL(sql);
