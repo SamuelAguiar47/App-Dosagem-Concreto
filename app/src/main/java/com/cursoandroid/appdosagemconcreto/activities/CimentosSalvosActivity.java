@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.CimentoAdapter;
 import com.cursoandroid.appdosagemconcreto.helper.CimentosSalvosDAO;
+import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoDAO;
 import com.cursoandroid.appdosagemconcreto.helper.RecyclerItemClickListener;
 import com.cursoandroid.appdosagemconcreto.model.ItemCimentoSalvo;
 
@@ -56,6 +57,8 @@ public class CimentosSalvosActivity extends AppCompatActivity {
                                 intentAbrirDadosCimentoActivity.putExtra("ação", "abrir cimento salvo");
 
                                 startActivity(intentAbrirDadosCimentoActivity);
+                                /*CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext(), itemCimentoSelecionado.getNomeDoCimento(), itemCimentoSelecionado.getTempoDeCura());
+                                Toast.makeText(CimentosSalvosActivity.this, curvaCimentoDAO.nomeDaTabela, Toast.LENGTH_SHORT).show();*/
                             }
 
                             @Override

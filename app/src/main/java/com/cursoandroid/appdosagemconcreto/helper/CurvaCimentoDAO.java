@@ -17,7 +17,7 @@ public class CurvaCimentoDAO implements ICurvaCimentoDAO {
     private SQLiteDatabase escreve;
     private SQLiteDatabase le;
 
-    private String nomeDaTabela;
+    public String nomeDaTabela;
 
     // Classes de arredondamento e formatação
     private DecimalFormat arred0 = new DecimalFormat("####");
@@ -97,4 +97,5 @@ public class CurvaCimentoDAO implements ICurvaCimentoDAO {
 
         return listaPontosCimento;
     }
+
 }

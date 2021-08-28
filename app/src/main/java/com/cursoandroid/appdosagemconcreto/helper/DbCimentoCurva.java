@@ -27,9 +27,9 @@ public class DbCimentoCurva extends SQLiteOpenHelper {
 
         try {
             sqLiteDatabase.execSQL(sql);
-            Log.i("INFO DB", "Sucesso ao criar tabela de dados do cimento" + TABELA_DADOS_CIMENTO.replace("tabela","") + "definitiva! ");
+            Log.i("INFO DB", "Sucesso ao criar tabela de dados do cimento " + TABELA_DADOS_CIMENTO.replace("tabela","") + " definitiva! ");
         } catch (Exception e) {
-            Log.i("INFO DB", "Erro ao criar tabela de dados do cimento" + TABELA_DADOS_CIMENTO.replace("tabela", "") + "definitiva! " + e.getMessage());
+            Log.i("INFO DB", "Erro ao criar tabela de dados do cimento " + TABELA_DADOS_CIMENTO.replace("tabela", "") + " definitiva! " + e.getMessage());
         }
 
     }
