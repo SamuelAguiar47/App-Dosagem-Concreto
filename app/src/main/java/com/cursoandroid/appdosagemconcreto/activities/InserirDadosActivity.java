@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.Dosagem;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.Traco;
+import com.cursoandroid.appdosagemconcreto.helper.CimentosSalvosDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
 import com.cursoandroid.appdosagemconcreto.helper.TracoDAO;
 import com.cursoandroid.appdosagemconcreto.materiais.Agua;
@@ -30,6 +31,7 @@ import com.cursoandroid.appdosagemconcreto.materiais.Areia;
 import com.cursoandroid.appdosagemconcreto.materiais.Brita;
 import com.cursoandroid.appdosagemconcreto.materiais.Cimento;
 import com.cursoandroid.appdosagemconcreto.materiais.Concreto;
+import com.cursoandroid.appdosagemconcreto.model.ItemCimentoSalvo;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -403,9 +405,17 @@ public class InserirDadosActivity extends AppCompatActivity {
         spinnerDesvioPadrao.setAdapter(arrayAdapterDesviosPadrao);
 
         // Spinner Tipo de Cimento
-        String[] tiposDeCimento = new String[]{
+        CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
+        List<ItemCimentoSalvo> listaDeCimentos = cimentosSalvosDAO.listar();
+        String[] tiposDeCimento = new String[listaDeCimentos.size()];
+        int cont = 0;
+        while (cont < listaDeCimentos.size()) {
+            tiposDeCimento[cont] = listaDeCimentos.get(cont).getNomeDoCimento();
+            cont += 1;
+        }
+        /*String[] tiposDeCimento = new String[]{
                 "CP29", "CP32", "CP35", "CP38", "CP41", "CP44", "CP47", "CP50"
-        };
+        };*/
         ArrayAdapter<String> arrayAdapterTiposDeCimento = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item,
                 tiposDeCimento
