@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
 
@@ -96,6 +97,17 @@ public class CurvaCimentoDAO implements ICurvaCimentoDAO {
         }
 
         return listaPontosCimento;
+    }
+
+    public void deletarTabela(String nomeTabela) {
+        String sql = "DROP TABLE IF EXISTS " + nomeTabela + " ;";
+        try {
+            escreve.execSQL(sql);
+            Log.i("INFO", nomeTabela + " deletada com sucesso");
+        } catch (Exception e) {
+
+        }
+
     }
 
 }

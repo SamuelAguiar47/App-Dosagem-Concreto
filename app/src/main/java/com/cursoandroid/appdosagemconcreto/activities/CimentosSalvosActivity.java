@@ -78,6 +78,8 @@ public class CimentosSalvosActivity extends AppCompatActivity {
 
                                         CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
                                         if (cimentosSalvosDAO.deletar(itemCimentoSelecionado)) {
+                                            CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext(), itemCimentoSelecionado.getNomeDoCimento(), itemCimentoSelecionado.getTempoDeCura());
+                                            curvaCimentoDAO.deletarTabela(curvaCimentoDAO.nomeDaTabela);
                                             carregarListaDeCimentos();
                                             Toast.makeText(CimentosSalvosActivity.this, "Sucesso ao deletar cimento.", Toast.LENGTH_SHORT).show();
                                         } else {
