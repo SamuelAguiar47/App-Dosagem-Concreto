@@ -18,6 +18,7 @@ import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.CimentoAdapter;
 import com.cursoandroid.appdosagemconcreto.helper.CimentosSalvosDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoDAO;
+import com.cursoandroid.appdosagemconcreto.helper.DbCimentoCurva;
 import com.cursoandroid.appdosagemconcreto.helper.RecyclerItemClickListener;
 import com.cursoandroid.appdosagemconcreto.model.ItemCimentoSalvo;
 
@@ -58,7 +59,8 @@ public class CimentosSalvosActivity extends AppCompatActivity {
 
                                 startActivity(intentAbrirDadosCimentoActivity);
                                 /*CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext(), itemCimentoSelecionado.getNomeDoCimento(), itemCimentoSelecionado.getTempoDeCura());
-                                Toast.makeText(CimentosSalvosActivity.this, curvaCimentoDAO.nomeDaTabela, Toast.LENGTH_SHORT).show();*/
+                                DbCimentoCurva dbCimentoCurva = new DbCimentoCurva(getApplicationContext(), curvaCimentoDAO.nomeDaTabela);
+                                Toast.makeText(CimentosSalvosActivity.this, "NomeTabela: " + curvaCimentoDAO.nomeDaTabela , Toast.LENGTH_SHORT).show();*/
                             }
 
                             @Override
@@ -79,7 +81,6 @@ public class CimentosSalvosActivity extends AppCompatActivity {
                                         CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
                                         if (cimentosSalvosDAO.deletar(itemCimentoSelecionado)) {
                                             CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext(), itemCimentoSelecionado.getNomeDoCimento(), itemCimentoSelecionado.getTempoDeCura());
-                                            curvaCimentoDAO.deletarTabela(curvaCimentoDAO.nomeDaTabela);
                                             carregarListaDeCimentos();
                                             Toast.makeText(CimentosSalvosActivity.this, "Sucesso ao deletar cimento.", Toast.LENGTH_SHORT).show();
                                         } else {

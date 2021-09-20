@@ -109,6 +109,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                 } else {
                     itemPontoCimento.setValorDeAC(Double.parseDouble(textInputValorDeAC.getText().toString()));
                     itemPontoCimento.setValorDeFcj(Double.parseDouble(textInputValorDeFcj.getText().toString()));
+                    itemPontoCimento.setNomeDoCimento(textInputNomeDoCimento.getText().toString());
                     CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
                     curvaCimentoProvisoriaDAO.salvar(itemPontoCimento);
                     carregarListaDePontosDoCimentos();

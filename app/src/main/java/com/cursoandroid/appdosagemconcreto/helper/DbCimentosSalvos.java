@@ -37,5 +37,16 @@ public class DbCimentosSalvos extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
+        String sql1 = "DROP TABLE IF EXISTS " + TABELA_CIMENTOS_SALVOS + " ;";
+
+        try {
+            sqLiteDatabase.execSQL(sql1);
+            Log.i("INFO DB", "Sucesso ao criar tabela de cimentos salvos! ");
+        } catch (Exception e) {
+            Log.i("INFO DB", "Erro ao criar tabela de cimentos salvos! " + e.getMessage());
+        }
+
+        onCreate(sqLiteDatabase);
+
     }
 }

@@ -18,8 +18,6 @@ public class CurvaCimentoDAO implements ICurvaCimentoDAO {
     private SQLiteDatabase escreve;
     private SQLiteDatabase le;
 
-    public String nomeDaTabela;
-
     // Classes de arredondamento e formatação
     private DecimalFormat arred0 = new DecimalFormat("####");
     private DecimalFormat arred1X = new DecimalFormat("##0.#");
@@ -30,8 +28,8 @@ public class CurvaCimentoDAO implements ICurvaCimentoDAO {
     private DecimalFormat arred3x = new DecimalFormat("##0.###");
 
     public CurvaCimentoDAO(Context context, String nomeDoCimento, String tempoDeCura) {
-        nomeDaTabela = "tabela" + nomeDoCimento.replace(" ", "") + "para" + tempoDeCura + "dias";
-        DbCimentoCurva dbCimentoCurva = new DbCimentoCurva(context, nomeDaTabela);
+        //nomeDaTabela = "tabela" + nomeDoCimento.replace(" ", "") + "para" + tempoDeCura + "dias";
+        DbCimentoCurva dbCimentoCurva = new DbCimentoCurva(context);
         escreve = dbCimentoCurva.getWritableDatabase();
         le = dbCimentoCurva.getReadableDatabase();
     }
@@ -42,9 +40,10 @@ public class CurvaCimentoDAO implements ICurvaCimentoDAO {
         ContentValues cv = new ContentValues();
         cv.put("ac", itemPontoCimento.getValorDeAC());
         cv.put("fcj", itemPontoCimento.getValorDeFcj());
+        cv.put("nomeCimento", itemPontoCimento.getNomeDoCimento());
 
         try {
-            escreve.insert(nomeDaTabela, null, cv);
+            escreve.insert(DbCimentoCurva.TABELA_DADOS_CIMENTO, null, cv);
             Log.i("INFO", "Sucesso ao salvar ponto do cimento na tabela definitva.");
         } catch (Exception e) {
             Log.i("INFO", "Erro ao salvar ponto do cimento na tabela definitva.");
@@ -63,7 +62,7 @@ public class CurvaCimentoDAO implements ICurvaCimentoDAO {
 
         try {
             String[] args = {itemPontoCimento.getId().toString()};
-            escreve.delete(nomeDaTabela, "id=?", args);
+            escreve.delete(DbCimentoCurva.TABELA_DADOS_CIMENTO, "id=?", args);
             Log.i("INFO","Sucesso ao deletar ponto.");
         } catch (Exception e) {
             Log.i("INFO","Erro ao deletar ponto.");
@@ -73,11 +72,11 @@ public class CurvaCimentoDAO implements ICurvaCimentoDAO {
     }
 
     @Override
-    public List<ItemPontoCimento> listar() {
+    public List<ItemPontoCimento> listar(String nomeCimentoSelecionado) {
 
         List<ItemPontoCimento> listaPontosCimento = new ArrayList<>();
 
-        String sql = "SELECT * FROM " + nomeDaTabela + " ;";
+        String sql = "SELECT * FROM " + DbCimentoCurva.TABELA_DADOS_CIMENTO + " WHERE nomeCimento = '" + nomeCimentoSelecionado + "' ;";
         Cursor c = le.rawQuery(sql, null);
 
         while ( c.moveToNext() ) {
@@ -97,17 +96,6 @@ public class CurvaCimentoDAO implements ICurvaCimentoDAO {
         }
 
         return listaPontosCimento;
-    }
-
-    public void deletarTabela(String nomeTabela) {
-        String sql = "DROP TABLE IF EXISTS " + nomeTabela + " ;";
-        try {
-            escreve.execSQL(sql);
-            Log.i("INFO", nomeTabela + " deletada com sucesso");
-        } catch (Exception e) {
-
-        }
-
     }
 
 }

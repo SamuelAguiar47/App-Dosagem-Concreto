@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.PontosDoCimentoAdapter;
@@ -22,6 +23,7 @@ import com.cursoandroid.appdosagemconcreto.helper.CimentosSalvosDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaDAO;
+import com.cursoandroid.appdosagemconcreto.helper.DbCimentoCurva;
 import com.cursoandroid.appdosagemconcreto.model.ItemCimentoSalvo;
 import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
 import com.cursoandroid.appdosagemconcreto.tabelaseabacos.CurvaDeAbrams;
@@ -81,7 +83,6 @@ public class DadosCimentoActivity extends AppCompatActivity {
         tempoDeCura = dados.getString("tempo de cura");
         obsevacoes = dados.getString("observações");
         acao = dados.getString("ação");
-
 
         //Configurar elementos de interface
         textViewRotuloDoCimento = findViewById(R.id.textViewRotuloDoCimento);
@@ -182,12 +183,16 @@ public class DadosCimentoActivity extends AppCompatActivity {
 
         if (acao.equals("abrir cimento salvo")) {
             CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext(), nomeDoCimento, tempoDeCura);
-            List<ItemPontoCimento> listaPontosTransicao = curvaCimentoDAO.listar();
-            int cont = 0;
-            while (cont < listaPontosTransicao.size()) {
-                curvaCimentoProvisoriaDAO.salvar(listaPontosTransicao.get(cont));
-                Log.i("INFO", "a/c = " + listaPontosTransicao.get(cont).getValorDeAC().toString());
-                cont += 1;
+            try {
+                List<ItemPontoCimento> listaPontosTransicao = curvaCimentoDAO.listar(nomeDoCimento);
+                int cont = 0;
+                while (cont < listaPontosTransicao.size()) {
+                    curvaCimentoProvisoriaDAO.salvar(listaPontosTransicao.get(cont));
+                    Log.i("INFO", "a/c = " + listaPontosTransicao.get(cont).getValorDeAC().toString());
+                    cont += 1;
+                }
+            } catch (Exception e) {
+                Toast.makeText(this, "Erro ao listar pontos do cimento: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
 

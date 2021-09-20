@@ -9,6 +9,6 @@ public interface ICurvaCimentoDAO {
     public boolean salvar(ItemPontoCimento itemPontoCimento);
     public boolean atualizar(ItemPontoCimento itemPontoCimento);
     public boolean deletar(ItemPontoCimento itemPontoCimento);
-    public List<ItemPontoCimento> listar();
+    public List<ItemPontoCimento> listar(String nomeCimentoSelecionado);
 
 }
