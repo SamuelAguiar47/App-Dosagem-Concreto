@@ -24,7 +24,7 @@ public class DbCimentoCurva extends SQLiteOpenHelper {
 
         String sql = "CREATE TABLE IF NOT EXISTS " + TABELA_DADOS_CIMENTO
                 + " (id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " ac REAL, fcj REAL, nomeCimento String); ";
+                " ac REAL, fcj REAL, nomeCimento TEXT); ";
 
         try {
             sqLiteDatabase.execSQL(sql1);

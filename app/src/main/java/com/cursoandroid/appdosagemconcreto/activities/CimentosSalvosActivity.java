@@ -59,8 +59,8 @@ public class CimentosSalvosActivity extends AppCompatActivity {
 
                                 startActivity(intentAbrirDadosCimentoActivity);
                                 /*CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext(), itemCimentoSelecionado.getNomeDoCimento(), itemCimentoSelecionado.getTempoDeCura());
-                                DbCimentoCurva dbCimentoCurva = new DbCimentoCurva(getApplicationContext(), curvaCimentoDAO.nomeDaTabela);
-                                Toast.makeText(CimentosSalvosActivity.this, "NomeTabela: " + curvaCimentoDAO.nomeDaTabela , Toast.LENGTH_SHORT).show();*/
+                                DbCimentoCurva dbCimentoCurva = new DbCimentoCurva(getApplicationContext());
+                                Toast.makeText(CimentosSalvosActivity.this, "NomeCimento: " +  , Toast.LENGTH_SHORT).show();*/
                             }
 
                             @Override
@@ -80,7 +80,7 @@ public class CimentosSalvosActivity extends AppCompatActivity {
 
                                         CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
                                         if (cimentosSalvosDAO.deletar(itemCimentoSelecionado)) {
-                                            CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext(), itemCimentoSelecionado.getNomeDoCimento(), itemCimentoSelecionado.getTempoDeCura());
+                                            CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext());
                                             carregarListaDeCimentos();
                                             Toast.makeText(CimentosSalvosActivity.this, "Sucesso ao deletar cimento.", Toast.LENGTH_SHORT).show();
                                         } else {

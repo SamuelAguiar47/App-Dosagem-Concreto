@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.PontosDoCimentoAdapter;
 import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
+import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaDAO;
 import com.cursoandroid.appdosagemconcreto.helper.DbCimentoCurvaProvisoria;
 import com.cursoandroid.appdosagemconcreto.helper.RecyclerItemClickListener;
@@ -109,7 +110,6 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                 } else {
                     itemPontoCimento.setValorDeAC(Double.parseDouble(textInputValorDeAC.getText().toString()));
                     itemPontoCimento.setValorDeFcj(Double.parseDouble(textInputValorDeFcj.getText().toString()));
-                    itemPontoCimento.setNomeDoCimento(textInputNomeDoCimento.getText().toString());
                     CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
                     curvaCimentoProvisoriaDAO.salvar(itemPontoCimento);
                     carregarListaDePontosDoCimentos();

@@ -134,11 +134,12 @@ public class DadosCimentoActivity extends AppCompatActivity {
                         CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
                         cimentosSalvosDAO.salvar(itemCimentoSalvo);
 
-                        CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext(), nomeDoCimento, tempoDeCura);
+                        CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext());
                         int cont = 0;
                         ItemPontoCimento itemPontoCimento;
                         while (cont < listaPontosCimento.size()) {
                             itemPontoCimento = listaPontosCimento.get(cont);
+                            itemPontoCimento.setNomeDoCimento(nomeDoCimento);
                             curvaCimentoDAO.salvar(itemPontoCimento);
                             cont += 1;
                         }
@@ -182,7 +183,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
         curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
 
         if (acao.equals("abrir cimento salvo")) {
-            CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext(), nomeDoCimento, tempoDeCura);
+            CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext());
             try {
                 List<ItemPontoCimento> listaPontosTransicao = curvaCimentoDAO.listar(nomeDoCimento);
                 int cont = 0;
