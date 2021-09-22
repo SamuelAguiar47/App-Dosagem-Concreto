@@ -71,6 +71,24 @@ public class CurvaCimentoDAO implements ICurvaCimentoDAO {
         return true;
     }
 
+    public boolean deletarLista(List<ItemPontoCimento> listaPontosCimento) {
+
+        try {
+            int cont = 0;
+            while (cont < listaPontosCimento.size()) {
+                ItemPontoCimento itemPontoCimento = listaPontosCimento.get(cont);
+                String[] args = {itemPontoCimento.getId().toString()};
+                escreve.delete(DbCimentoCurva.TABELA_DADOS_CIMENTO, "id=?", args);
+                cont += 1;
+            }
+            Log.i("INFO", "Sucesso ao deletar lista de pontos de amostras do cimento!");
+        } catch (Exception e) {
+            Log.i("INFO", "Erro ao deletar lista de pontos de amostras do cimento!");
+            return false;
+        }
+        return true;
+    };
+
     @Override
     public List<ItemPontoCimento> listar(String nomeCimentoSelecionado) {
 

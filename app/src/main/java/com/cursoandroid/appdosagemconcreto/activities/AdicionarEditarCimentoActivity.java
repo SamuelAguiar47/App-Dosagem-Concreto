@@ -63,12 +63,10 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         buttonConfirmar = findViewById(R.id.buttonConfirmar);
 
         //Pré-configuração de teste
-        textInputNomeDoCimento.setText("CP32 teste");
+        textInputNomeDoCimento.setText("CP29");
         textInputTempoDeCura.setText("28");
-        textInputobservacoes.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-                                    "Aliquam venenatis velit id urna vulputate euismod. Aenean " +
-                                    "arcu elit, rhoncus id sem in, hendrerit vulputate dolor. " +
-                                    "Proin odio tellus, consectetur in nulla a, ultricies lobortis odio.");
+        textInputobservacoes.setText("Este é um campo destinado à descrição de detalhes do ensaio realizado," +
+                                     " como as características do solo utilizado no ensaio, por exemplo.");
 
         buttonConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
