@@ -147,6 +147,9 @@ public class DadosCimentoActivity extends AppCompatActivity {
                         curvaCimentoProvisoriaDAO.limparTabela();
 
                         setResult(codigosDeActivity.adicionarEditarCimentoActivity);
+                        if (acao.equals("criar novo cimento")) {
+                            curvaCimentoProvisoriaDAO.limparTabela();
+                        }
                         finish();
                     }
                 });
@@ -240,7 +243,9 @@ public class DadosCimentoActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        curvaCimentoProvisoriaDAO.limparTabela();
+        if (acao.equals("abrir cimento salvo")) {
+            curvaCimentoProvisoriaDAO.limparTabela();
+        }
     }
 
     private void configurarGraficoCurvaDeAbrams() {
