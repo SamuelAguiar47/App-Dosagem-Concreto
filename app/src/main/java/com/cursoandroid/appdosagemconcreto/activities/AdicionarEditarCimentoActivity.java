@@ -18,11 +18,13 @@ import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.PontosDoCimentoAdapter;
+import com.cursoandroid.appdosagemconcreto.helper.CimentosSalvosDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaDAO;
 import com.cursoandroid.appdosagemconcreto.helper.DbCimentoCurvaProvisoria;
 import com.cursoandroid.appdosagemconcreto.helper.RecyclerItemClickListener;
+import com.cursoandroid.appdosagemconcreto.model.ItemCimentoSalvo;
 import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -71,11 +73,16 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         buttonConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                List<ItemCimentoSalvo> listaCimentosIguais = new ArrayList<>();
+                CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
+                listaCimentosIguais = cimentosSalvosDAO.buscarCimento(textInputNomeDoCimento.getText().toString());
                 if (textInputTempoDeCura.getText().toString().equals("")) {
                     Toast.makeText(AdicionarEditarCimentoActivity.this, "Informe o tempo de curar para continuar.", Toast.LENGTH_SHORT).show();
                 } else if (curvaCimentoProvisoriaDAO.listar().size() < 5) {
                     Toast.makeText(AdicionarEditarCimentoActivity.this, "Devem ser inseridos pelo menos 5 pontos.", Toast.LENGTH_SHORT).show();
-                }else {
+                }else if (listaCimentosIguais.size() > 0) {
+                    Toast.makeText(AdicionarEditarCimentoActivity.this, "Já existe um cimento com esse nome. Por favor, escolha outro nome ou edite o jé existente.", Toast.LENGTH_LONG).show();
+                } else{
                     if (textInputNomeDoCimento.getText().toString().equals("")) {
                         nomeDoCimento = "sem nome";
                     } else {

@@ -96,4 +96,37 @@ public class CimentosSalvosDAO implements ICimentosSalvosDAO {
 
         return listaCimentosSalvos;
     }
+
+    public List<ItemCimentoSalvo> buscarCimento(String nomeCimento) {
+
+        List<ItemCimentoSalvo> listaCimentosSalvos = new ArrayList<>();
+
+        String sql = "SELECT * FROM " + DbCimentosSalvos.TABELA_CIMENTOS_SALVOS + " WHERE nomeDoCimento = '" + nomeCimento + "' ;";
+        Cursor c = le.rawQuery(sql, null);
+
+        while ( c.moveToNext() ) {
+
+            ItemCimentoSalvo itemCimentoSalvo = new ItemCimentoSalvo();
+
+            Long id = c.getLong( c.getColumnIndex("id") );
+            String nomeDoCimento = c.getString( c.getColumnIndex("nomeDoCimento") );
+            String tempoDeCura = c.getString( c.getColumnIndex("tempoDeCura") );
+            String data = c.getString( c.getColumnIndex("data") );
+            int qtdeDePontos = c.getInt( c.getColumnIndex("qtdeDePontos") );
+            String observacoes = c.getString( c.getColumnIndex("observacoes"));
+
+            itemCimentoSalvo.setId(id);
+            itemCimentoSalvo.setNomeDoCimento(nomeDoCimento);
+            itemCimentoSalvo.setTempoDeCura(tempoDeCura);
+            itemCimentoSalvo.setData(data);
+            itemCimentoSalvo.setQtdeDePontos(qtdeDePontos);
+            itemCimentoSalvo.setObservacoes(observacoes);
+
+            listaCimentosSalvos.add(itemCimentoSalvo);
+        }
+
+        return listaCimentosSalvos;
+    }
+
+
 }
