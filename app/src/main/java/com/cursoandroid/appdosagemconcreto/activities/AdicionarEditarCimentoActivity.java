@@ -185,6 +185,12 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         super.onRestart();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        curvaCimentoProvisoriaDAO.limparTabela();
+    }
+
     public void deletarPontoCimento(int position) {
         pontoCimentoSelecionado = listaPontosCimento.get(position);
 
