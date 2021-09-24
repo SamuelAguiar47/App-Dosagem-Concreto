@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -38,6 +39,7 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -274,6 +276,29 @@ public class DadosCimentoActivity extends AppCompatActivity {
         set1.setLabel("Curva " + nomeDoCimento + " - 28 dias");
         set1.setHighLightColor(Color.TRANSPARENT);
 
+        ArrayList<Entry> pontos = new ArrayList<>();
+        List<ItemPontoCimento> listaDePontos = curvaCimentoProvisoriaDAO.listar();
+        Collections.sort(listaDePontos);
+        int contPontos = 0;
+        while (contPontos < listaDePontos.size()) {
+            Float x = Float.valueOf(arred3x.format(listaDePontos.get(contPontos).getValorDeAC()).replace(",","."));
+            Float y = Float.valueOf(arred3x.format(listaDePontos.get(contPontos).getValorDeFcj()).replace(",","."));
+            pontos.add(new Entry( x, y));
+            contPontos += 1;
+        }
+
+        LineDataSet setPontos = new LineDataSet(pontos, "Data set pontos");
+
+        setPontos.setColor(getResources().getColor(R.color.colorGrafico));
+        setPontos.setLineWidth(0);
+        setPontos.setHighLightColor(Color.TRANSPARENT);
+        setPontos.setCircleColor(getResources().getColor(R.color.colorGrafico));
+        setPontos.setCircleHoleColor(Color.TRANSPARENT);
+        setPontos.setValueTextSize(10f);
+        setPontos.setValueTextColor(Color.TRANSPARENT);
+        setPontos.setLabel("Pontos inseridos");
+        //setPontos.setHighLightColor(Color.TRANSPARENT);
+
         graficoCurvaDeAbramsCimento.getAxisRight().setEnabled(false);
         graficoCurvaDeAbramsCimento.setDescription(null);
         graficoCurvaDeAbramsCimento.setDrawBorders(true);
@@ -324,6 +349,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(set1);
+        dataSets.add(setPontos);
 
         LineData dadosGrafico = new LineData(dataSets);
 

@@ -2,7 +2,7 @@ package com.cursoandroid.appdosagemconcreto.model;
 
 import java.io.Serializable;
 
-public class ItemPontoCimento implements Serializable {
+public class ItemPontoCimento implements Serializable, Comparable<ItemPontoCimento> {
     //Atributos
     private Long Id;
     private String nomeDoPonto;
@@ -49,5 +49,15 @@ public class ItemPontoCimento implements Serializable {
 
     public void setNomeDoCimento(String nomeDoCimento) {
         this.nomeDoCimento = nomeDoCimento;
+    }
+
+    @Override
+    public int compareTo(ItemPontoCimento outroPonto) {
+        if (this.ValorDeAC < outroPonto.getValorDeAC()) {
+            return -1;
+        } if (this.ValorDeAC > outroPonto.getValorDeAC()) {
+            return 1;
+        }
+        return 0;
     }
 }
