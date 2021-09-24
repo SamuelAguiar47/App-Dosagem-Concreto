@@ -191,6 +191,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
             CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext());
             try {
                 List<ItemPontoCimento> listaPontosTransicao = curvaCimentoDAO.listar(nomeDoCimento);
+                Collections.sort(listaPontosTransicao);
                 int cont = 0;
                 while (cont < listaPontosTransicao.size()) {
                     curvaCimentoProvisoriaDAO.salvar(listaPontosTransicao.get(cont));
