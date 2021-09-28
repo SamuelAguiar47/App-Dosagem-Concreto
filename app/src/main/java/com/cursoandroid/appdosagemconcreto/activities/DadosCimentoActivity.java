@@ -229,36 +229,6 @@ public class DadosCimentoActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        carregarListaDePontosDoCimentos();
-
-        textViewQtdeDePontos.setText("Qtde de pontos de amostras: " + listaPontosCimento.size());
-
-        arrayCurva = new Double[listaPontosCimento.size()][2];
-        int c = 0;
-        while (c < listaPontosCimento.size()) {
-            ItemPontoCimento itemPontoCursor = listaPontosCimento.get(c);
-            arrayCurva[c][1] = itemPontoCursor.getValorDeAC();
-            arrayCurva[c][0] = itemPontoCursor.getValorDeFcj();
-            c += 1;
-        }
-        regressaoLinear = new RegressaoLinear(arrayCurva);
-
-        textViewFormulaDeAbramsK1.setText(arred2x.format(regressaoLinear.getK1()));
-        textViewFormulaDeAbramsK2.setText(arred2x.format(regressaoLinear.getK2()));
-        configurarGraficoCurvaDeAbrams();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (acao.equals("abrir cimento salvo")) {
-            curvaCimentoProvisoriaDAO.limparTabela();
-        }
-    }
-
     private void configurarGraficoCurvaDeAbrams() {
 
         graficoCurvaDeAbramsCimento.setDragEnabled(true);
@@ -364,5 +334,42 @@ public class DadosCimentoActivity extends AppCompatActivity {
 
         graficoCurvaDeAbramsCimento.setData(dadosGrafico);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        carregarListaDePontosDoCimentos();
+
+        textViewQtdeDePontos.setText("Qtde de pontos de amostras: " + listaPontosCimento.size());
+
+        arrayCurva = new Double[listaPontosCimento.size()][2];
+        int c = 0;
+        while (c < listaPontosCimento.size()) {
+            ItemPontoCimento itemPontoCursor = listaPontosCimento.get(c);
+            arrayCurva[c][1] = itemPontoCursor.getValorDeAC();
+            arrayCurva[c][0] = itemPontoCursor.getValorDeFcj();
+            c += 1;
+        }
+        regressaoLinear = new RegressaoLinear(arrayCurva);
+
+        textViewFormulaDeAbramsK1.setText(arred2x.format(regressaoLinear.getK1()));
+        textViewFormulaDeAbramsK2.setText(arred2x.format(regressaoLinear.getK2()));
+        configurarGraficoCurvaDeAbrams();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //Toast.makeText(this, "onStop", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show();
+        if (acao.equals("abrir cimento salvo")) {
+            curvaCimentoProvisoriaDAO.limparTabela();
+        }
     }
 }

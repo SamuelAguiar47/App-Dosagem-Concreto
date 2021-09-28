@@ -174,30 +174,6 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        carregarListaDePontosDoCimentos();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        //Toast.makeText(this, "onStop", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //Toast.makeText(this, "OnDestroy", Toast.LENGTH_SHORT).show();
-        curvaCimentoProvisoriaDAO.limparTabela();
-    }
-
     public void deletarPontoCimento(int position) {
         pontoCimentoSelecionado = listaPontosCimento.get(position);
 
@@ -244,5 +220,29 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        carregarListaDePontosDoCimentos();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //Toast.makeText(this, "onStop", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Toast.makeText(this, "OnDestroy", Toast.LENGTH_SHORT).show();
+        curvaCimentoProvisoriaDAO.limparTabela();
     }
 }
