@@ -188,6 +188,13 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        //Toast.makeText(this, "onStop", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Toast.makeText(this, "OnDestroy", Toast.LENGTH_SHORT).show();
         curvaCimentoProvisoriaDAO.limparTabela();
     }
 
