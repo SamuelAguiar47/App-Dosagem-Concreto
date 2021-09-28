@@ -57,7 +57,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
     private RegressaoLinear regressaoLinear;
     private LineChart graficoCurvaDeAbramsCimento;
 
-    private String nomeDoCimento, tempoDeCura, obsevacoes, acao;
+    private String nomeDoCimento, tempoDeCura, observacoes, acao;
 
     SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
     Date data = new Date();
@@ -83,7 +83,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
 
         nomeDoCimento = dados.getString("nome do cimento");
         tempoDeCura = dados.getString("tempo de cura");
-        obsevacoes = dados.getString("observações");
+        observacoes = dados.getString("observações");
         acao = dados.getString("ação");
 
         //Configurar elementos de interface
@@ -105,7 +105,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
         textViewRotuloDoCimento.setText("Cimento " + nomeDoCimento);
         textViewDadosNomeDoCimento.setText("Nome do cimento: "  + nomeDoCimento);
         textViewDadosTempoDeCura.setText("Tempo de cura: "  + tempoDeCura + " dias");
-        textViewObservacoes.setText("Observações: " + obsevacoes);
+        textViewObservacoes.setText("Observações: " + observacoes);
 
         // Configuração de exibição do botão editar cimento
 
@@ -119,6 +119,10 @@ public class DadosCimentoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentAbrirAdicionarEditarCimentoActivity = new Intent(getApplicationContext(), AdicionarEditarCimentoActivity.class);
+                intentAbrirAdicionarEditarCimentoActivity.putExtra("nome do cimento", nomeDoCimento);
+                intentAbrirAdicionarEditarCimentoActivity.putExtra("tempo de cura", tempoDeCura);
+                intentAbrirAdicionarEditarCimentoActivity.putExtra("observações", observacoes);
+                intentAbrirAdicionarEditarCimentoActivity.putExtra("ação", "editar cimento salvo");
                 startActivity(intentAbrirAdicionarEditarCimentoActivity);
             }
         });
@@ -140,7 +144,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
                         itemCimentoSalvo.setTempoDeCura(tempoDeCura);
                         itemCimentoSalvo.setQtdeDePontos(listaPontosCimento.size());
                         itemCimentoSalvo.setData(formataData.format(data));
-                        itemCimentoSalvo.setObservacoes(obsevacoes);
+                        itemCimentoSalvo.setObservacoes(observacoes);
                         CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
                         cimentosSalvosDAO.salvar(itemCimentoSalvo);
 

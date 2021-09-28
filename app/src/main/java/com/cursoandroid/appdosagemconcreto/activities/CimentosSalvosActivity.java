@@ -114,6 +114,7 @@ public class CimentosSalvosActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentAbrirAdicionarEditarCimentoActivity = new Intent(getApplicationContext(), AdicionarEditarCimentoActivity.class);
+                intentAbrirAdicionarEditarCimentoActivity.putExtra("ação", "criar novo cimento");
                 startActivity(intentAbrirAdicionarEditarCimentoActivity);
             }
         });

@@ -43,7 +43,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
 
 
     //Dados do cimento inseridos
-    private String nomeDoCimento, tempoDeCura, observacoes;
+    private String nomeDoCimento, tempoDeCura, observacoes, acao;
 
     // Helper
     private CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO;
@@ -53,6 +53,10 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_editar_cimento);
+
+        Bundle dados = getIntent().getExtras();
+
+        acao = dados.getString("ação");
 
         //Configuar elementos de interface
         textInputNomeDoCimento = findViewById(R.id.textInputNomeDoCimento);
@@ -65,10 +69,22 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         buttonConfirmar = findViewById(R.id.buttonConfirmar);
 
         //Pré-configuração de teste
-        textInputNomeDoCimento.setText("CP29");
-        textInputTempoDeCura.setText("28");
-        textInputobservacoes.setText("Este é um campo destinado à descrição de detalhes do ensaio realizado," +
-                                     " como as características do solo utilizado no ensaio, por exemplo.");
+        if (acao.equals("criar novo cimento")) {
+            textInputNomeDoCimento.setText("CP29");
+            textInputTempoDeCura.setText("28");
+            textInputobservacoes.setText("Este é um campo destinado à descrição de detalhes do ensaio realizado," +
+                    " como as características do solo utilizado no ensaio, por exemplo.");
+        } else if (acao.equals("editar cimento salvo")) {
+            nomeDoCimento = dados.getString("nome do cimento");
+            tempoDeCura = dados.getString("tempo de cura");
+            observacoes = dados.getString("observações");
+
+            textInputNomeDoCimento.setText(nomeDoCimento);
+            textInputTempoDeCura.setText(tempoDeCura);
+            textInputobservacoes.setText(observacoes);
+        }
+
+        // configuração de eventos de clique
 
         buttonConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
