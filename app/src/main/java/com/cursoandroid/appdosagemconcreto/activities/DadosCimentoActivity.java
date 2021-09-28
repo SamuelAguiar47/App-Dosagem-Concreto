@@ -107,6 +107,14 @@ public class DadosCimentoActivity extends AppCompatActivity {
         textViewDadosTempoDeCura.setText("Tempo de cura: "  + tempoDeCura + " dias");
         textViewObservacoes.setText("Observações: " + obsevacoes);
 
+        // Configuração de exibição do botão editar cimento
+
+        if (acao.equals("criar novo cimento")) {
+            buttonEditarCimento.setVisibility(View.GONE);
+        }
+
+        // Configurações de eventos de clique
+
         buttonEditarCimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
