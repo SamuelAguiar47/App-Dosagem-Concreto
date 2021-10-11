@@ -179,6 +179,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
                 intentAbrirAdicionarEditarCimentoActivity.putExtra("observações", observacoes);
                 intentAbrirAdicionarEditarCimentoActivity.putExtra("ação", "editar cimento salvo");
                 startActivity(intentAbrirAdicionarEditarCimentoActivity);
+                listaPontosCimento.clear();
             }
         });
 
@@ -420,7 +421,8 @@ public class DadosCimentoActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        //Toast.makeText(this, "onStop", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "DadosCimentoActivity onStop", Toast.LENGTH_SHORT).show();
+        curvaCimentoProvisoriaDAO.limparTabela();
     }
 
     @Override

@@ -259,6 +259,8 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         //Toast.makeText(this, "OnDestroy", Toast.LENGTH_SHORT).show();
-        curvaCimentoProvisoriaDAO.limparTabela();
+        if (acao.equals("criar novo cimento")) {
+            curvaCimentoProvisoriaDAO.limparTabela();
+        }
     }
 }
