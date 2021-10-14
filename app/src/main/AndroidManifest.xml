@@ -9,13 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.AdicionarEditarCimentoActivity"></activity>
-        <activity android:name=".activities.DadosCimentoActivity" />
-        <activity android:name=".activities.CimentosSalvosActivity" />
-        <activity android:name=".activities.TracosSalvosActivity" />
-        <activity android:name=".activities.ResultadosActivity" />
-        <activity android:name=".activities.InserirDadosActivity" />
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.AdicionarEditarCimentoActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.DadosCimentoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.CimentosSalvosActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.TracosSalvosActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.ResultadosActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.InserirDadosActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
