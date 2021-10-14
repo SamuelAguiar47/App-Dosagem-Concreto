@@ -22,6 +22,7 @@ import com.cursoandroid.appdosagemconcreto.helper.CimentosSalvosDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaDAO;
+import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisóriaEditarDAO;
 import com.cursoandroid.appdosagemconcreto.helper.DbCimentoCurvaProvisoria;
 import com.cursoandroid.appdosagemconcreto.helper.RecyclerItemClickListener;
 import com.cursoandroid.appdosagemconcreto.model.ItemCimentoSalvo;
@@ -47,6 +48,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
 
     // Helper
     private CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO;
+    private CurvaCimentoProvisóriaEditarDAO curvaCimentoProvisoriaEditarDAO;
     private CodigosDeActivity codigosDeActivity = new CodigosDeActivity();
 
     @Override
@@ -171,8 +173,26 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
 
         //Listar pontos
         curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
-        listaPontosCimento = curvaCimentoProvisoriaDAO.listar();
+        curvaCimentoProvisoriaEditarDAO = new CurvaCimentoProvisóriaEditarDAO(getApplicationContext());
 
+        if (acao.equals("criar novo cimento")) {
+            listaPontosCimento = curvaCimentoProvisoriaDAO.listar();
+        } else if (acao.equals("editar cimento salvo")) {
+
+            int cont = 0;
+            List<ItemPontoCimento> listaPontosTransicao = new ArrayList<>();
+            listaPontosTransicao = curvaCimentoProvisoriaDAO.listar();
+            ItemPontoCimento itemPontoCimento;
+            while (cont < listaPontosTransicao.size()) {
+                itemPontoCimento = listaPontosTransicao.get(cont);
+                curvaCimentoProvisoriaEditarDAO.salvar(itemPontoCimento);
+                cont += 1;
+            }
+
+            curvaCimentoProvisoriaDAO.limparTabela();
+
+            listaPontosCimento = curvaCimentoProvisoriaEditarDAO.listar();
+        }
 
         /*
             Exibe pontos do cimento no RecyclerView
@@ -203,12 +223,21 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         dialogExcluirPontoCimento.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
-                if ( curvaCimentoProvisoriaDAO.deletar(pontoCimentoSelecionado) ) {
-                    carregarListaDePontosDoCimentos();
-                    Toast.makeText(AdicionarEditarCimentoActivity.this, "Sucesso ao deletar ponto!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(AdicionarEditarCimentoActivity.this, "Erro ao deletar ponto!", Toast.LENGTH_SHORT).show();
+                if (acao.equals("criar novo cimento")) {
+                    CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
+                    if (curvaCimentoProvisoriaDAO.deletar(pontoCimentoSelecionado)) {
+                        carregarListaDePontosDoCimentos();
+                        Toast.makeText(AdicionarEditarCimentoActivity.this, "Sucesso ao deletar ponto!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(AdicionarEditarCimentoActivity.this, "Erro ao deletar ponto!", Toast.LENGTH_SHORT).show();
+                    }
+                } else if (acao.equals("editar cimento salvo")) {
+                    if (curvaCimentoProvisoriaEditarDAO.deletar(pontoCimentoSelecionado)) {
+                        carregarListaDePontosDoCimentos();
+                        Toast.makeText(AdicionarEditarCimentoActivity.this, "Sucesso ao deletar ponto!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(AdicionarEditarCimentoActivity.this, "Erro ao deletar ponto!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -260,7 +289,9 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
         super.onDestroy();
         //Toast.makeText(this, "OnDestroy", Toast.LENGTH_SHORT).show();
         if (acao.equals("criar novo cimento")) {
-            //curvaCimentoProvisoriaDAO.limparTabela();
+            curvaCimentoProvisoriaDAO.limparTabela();
+        } else if (acao.equals("editar cimento salvo")) {
+            curvaCimentoProvisoriaEditarDAO.limparTabela();
         }
     }
 }

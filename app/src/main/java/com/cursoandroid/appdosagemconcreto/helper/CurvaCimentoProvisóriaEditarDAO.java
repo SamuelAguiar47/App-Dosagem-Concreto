@@ -97,4 +97,23 @@ public class CurvaCimentoProvisóriaEditarDAO implements ICurvaCimentoProvisoria
 
         return listaPontosCimento;
     }
+
+    public void limparTabela() {
+
+        String sql = "DROP TABLE IF EXISTS " + DbCimentoCurvaProvisoriaEditar.TABELA_DADOS_CIMENTO + " ;";
+        escreve.execSQL(sql);
+
+        sql = "CREATE TABLE IF NOT EXISTS " + DbCimentoCurvaProvisoriaEditar.TABELA_DADOS_CIMENTO
+                + " (id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " ac REAL, fcj REAL); ";
+
+        try {
+            escreve.execSQL(sql);
+            Log.i("INFO DB", "Sucesso ao criar tabela de dados do cimento provisória! ");
+        } catch (Exception e) {
+            Log.i("INFO DB", "Erro ao criar tabela de dados do cimento provisória! " + e.getMessage());
+        }
+
+    }
+
 }
