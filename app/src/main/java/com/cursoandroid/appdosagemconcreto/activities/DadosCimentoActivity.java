@@ -178,7 +178,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
                 intentAbrirAdicionarEditarCimentoActivity.putExtra("tempo de cura", tempoDeCura);
                 intentAbrirAdicionarEditarCimentoActivity.putExtra("observações", observacoes);
                 intentAbrirAdicionarEditarCimentoActivity.putExtra("ação", "editar cimento salvo");
-                startActivity(intentAbrirAdicionarEditarCimentoActivity);
+                startActivityForResult(intentAbrirAdicionarEditarCimentoActivity, codigosDeActivity.dadosCimentoActivty);
                 listaPontosCimento.clear();
             }
         });
