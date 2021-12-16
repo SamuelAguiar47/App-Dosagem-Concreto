@@ -2,28 +2,23 @@ package com.cursoandroid.appdosagemconcreto.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.PontosDoCimentoAdapter;
 import com.cursoandroid.appdosagemconcreto.helper.CimentosSalvosDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
-import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaDAO;
-import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisóriaEditarDAO;
-import com.cursoandroid.appdosagemconcreto.helper.DbCimentoCurvaProvisoria;
+import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaEditarDAO;
 import com.cursoandroid.appdosagemconcreto.helper.RecyclerItemClickListener;
 import com.cursoandroid.appdosagemconcreto.model.ItemCimentoSalvo;
 import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
@@ -48,7 +43,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
 
     // Helper
     private CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO;
-    private CurvaCimentoProvisóriaEditarDAO curvaCimentoProvisoriaEditarDAO;
+    private CurvaCimentoProvisoriaEditarDAO curvaCimentoProvisoriaEditarDAO;
     private CodigosDeActivity codigosDeActivity = new CodigosDeActivity();
 
     @Override
@@ -100,7 +95,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                     Toast.makeText(AdicionarEditarCimentoActivity.this, "Devem ser inseridos pelo menos 5 pontos.", Toast.LENGTH_SHORT).show();
                 } else if (acao.equals("criar novo cimento")) {
                     if (listaCimentosIguais.size() > 0) {
-                        Toast.makeText(AdicionarEditarCimentoActivity.this, "Já existe um cimento com esse nome. Por favor, escolha outro nome ou edite o jé existente.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(AdicionarEditarCimentoActivity.this, "Já existe um cimento com esse nome. Por favor, escolha outro nome ou edite o já existente.", Toast.LENGTH_LONG).show();
                     } else {
                         if (textInputNomeDoCimento.getText().toString().equals("")) {
                             nomeDoCimento = "sem nome";
@@ -126,6 +121,8 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                 } else if (acao.equals("editar cimento salvo")) {
                     if (textInputNomeDoCimento.getText().toString().equals("")) {
                         nomeDoCimento = "sem nome";
+                    } else if (listaCimentosIguais.size() > 0 && !textInputNomeDoCimento.getText().toString().equals(nomeDoCimento)) {
+                        Toast.makeText(AdicionarEditarCimentoActivity.this, "Já existe um outro cimento com esse nome. Por favor, escolha outro nome ou edite o já existente.", Toast.LENGTH_LONG).show();
                     } else {
                         nomeDoCimento = textInputNomeDoCimento.getText().toString();
                     }
@@ -198,7 +195,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
 
         //Listar pontos
         curvaCimentoProvisoriaDAO = new CurvaCimentoProvisoriaDAO(getApplicationContext());
-        curvaCimentoProvisoriaEditarDAO = new CurvaCimentoProvisóriaEditarDAO(getApplicationContext());
+        curvaCimentoProvisoriaEditarDAO = new CurvaCimentoProvisoriaEditarDAO(getApplicationContext());
 
         if (acao.equals("criar novo cimento")) {
             listaPontosCimento = curvaCimentoProvisoriaDAO.listar();

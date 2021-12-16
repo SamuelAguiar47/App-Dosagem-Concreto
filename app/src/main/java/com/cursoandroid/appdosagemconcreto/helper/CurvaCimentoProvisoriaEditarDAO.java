@@ -12,7 +12,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CurvaCimentoProvisóriaEditarDAO implements ICurvaCimentoProvisoriaEditarDAO {
+public class CurvaCimentoProvisoriaEditarDAO implements ICurvaCimentoProvisoriaEditarDAO {
 
     private SQLiteDatabase escreve;
     private SQLiteDatabase le;
@@ -26,7 +26,7 @@ public class CurvaCimentoProvisóriaEditarDAO implements ICurvaCimentoProvisoria
     private DecimalFormat arred3 = new DecimalFormat("##0.000");
     private DecimalFormat arred3x = new DecimalFormat("##0.###");
 
-    public CurvaCimentoProvisóriaEditarDAO(Context context) {
+    public CurvaCimentoProvisoriaEditarDAO(Context context) {
         DbCimentoCurvaProvisoriaEditar dbCCP = new DbCimentoCurvaProvisoriaEditar( context );
         escreve = dbCCP.getWritableDatabase();
         le = dbCCP.getReadableDatabase();
