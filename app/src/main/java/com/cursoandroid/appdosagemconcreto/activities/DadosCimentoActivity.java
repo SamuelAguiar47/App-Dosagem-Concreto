@@ -269,6 +269,8 @@ public class DadosCimentoActivity extends AppCompatActivity {
             } catch (Exception e) {
                 Toast.makeText(this, "Erro ao listar pontos do cimento: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
+        } else if (acao.equals("abrir cimento editado")) {
+
         }
 
         listaPontosCimento = curvaCimentoProvisoriaDAO.listar();
@@ -393,6 +395,19 @@ public class DadosCimentoActivity extends AppCompatActivity {
         LineData dadosGrafico = new LineData(dataSets);
 
         graficoCurvaDeAbramsCimento.setData(dadosGrafico);
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+        if (requestCode == codigosDeActivity.dadosCimentoActivty) {
+            if (resultCode == codigosDeActivity.dadosCimentoActivty) {
+                //Intent i = getIntent();
+                //overridePendingTransition(0,0);
+                //i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                finish();
+            }
+        }
 
     }
 

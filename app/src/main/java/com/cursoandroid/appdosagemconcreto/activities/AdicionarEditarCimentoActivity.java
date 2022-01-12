@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.adapter.PontosDoCimentoAdapter;
 import com.cursoandroid.appdosagemconcreto.helper.CimentosSalvosDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
+import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaDAO;
 import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoProvisoriaEditarDAO;
 import com.cursoandroid.appdosagemconcreto.helper.RecyclerItemClickListener;
@@ -25,6 +27,7 @@ import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AdicionarEditarCimentoActivity extends AppCompatActivity {
@@ -91,11 +94,11 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                 listaCimentosIguais = cimentosSalvosDAO.buscarCimento(textInputNomeDoCimento.getText().toString());
                 if (textInputTempoDeCura.getText().toString().equals("")) {
                     Toast.makeText(AdicionarEditarCimentoActivity.this, "Informe o tempo de cura para continuar.", Toast.LENGTH_SHORT).show();
-                } else if (curvaCimentoProvisoriaDAO.listar().size() < 5) {
-                    Toast.makeText(AdicionarEditarCimentoActivity.this, "Devem ser inseridos pelo menos 5 pontos.", Toast.LENGTH_SHORT).show();
                 } else if (acao.equals("criar novo cimento")) {
                     if (listaCimentosIguais.size() > 0) {
                         Toast.makeText(AdicionarEditarCimentoActivity.this, "Já existe um cimento com esse nome. Por favor, escolha outro nome ou edite o já existente.", Toast.LENGTH_LONG).show();
+                    } else if (curvaCimentoProvisoriaDAO.listar().size() < 5) {
+                        Toast.makeText(AdicionarEditarCimentoActivity.this, "Devem ser inseridos pelo menos 5 pontos.", Toast.LENGTH_SHORT).show();
                     } else {
                         if (textInputNomeDoCimento.getText().toString().equals("")) {
                             nomeDoCimento = "sem nome";
@@ -119,30 +122,50 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                         startActivityForResult(intentAbrirDadosCimentoActivity, codigosDeActivity.adicionarEditarCimentoActivity);
                     }
                 } else if (acao.equals("editar cimento salvo")) {
-                    if (textInputNomeDoCimento.getText().toString().equals("")) {
-                        nomeDoCimento = "sem nome";
-                    } else if (listaCimentosIguais.size() > 0 && !textInputNomeDoCimento.getText().toString().equals(nomeDoCimento)) {
-                        Toast.makeText(AdicionarEditarCimentoActivity.this, "Já existe um outro cimento com esse nome. Por favor, escolha outro nome ou edite o já existente.", Toast.LENGTH_LONG).show();
+                    if (curvaCimentoProvisoriaEditarDAO.listar().size() < 5) {
+                        Toast.makeText(AdicionarEditarCimentoActivity.this, "Devem ser inseridos pelo menos 5 pontos.", Toast.LENGTH_SHORT).show();
                     } else {
-                        nomeDoCimento = textInputNomeDoCimento.getText().toString();
+                        if (textInputNomeDoCimento.getText().toString().equals("")) {
+                            nomeDoCimento = "sem nome";
+                        } else if (listaCimentosIguais.size() > 0 && !textInputNomeDoCimento.getText().toString().equals(nomeDoCimento)) {
+                            Toast.makeText(AdicionarEditarCimentoActivity.this, "Já existe um outro cimento com esse nome. Por favor, escolha outro nome ou edite o já existente.", Toast.LENGTH_LONG).show();
+                        } else {
+                            nomeDoCimento = textInputNomeDoCimento.getText().toString();
+                        }
+                        if (textInputobservacoes.getText().toString().equals("")) {
+                            observacoes = "nenhuma";
+                        } else {
+                            observacoes = textInputobservacoes.getText().toString();
+                        }
+
+                        tempoDeCura = textInputTempoDeCura.getText().toString();
+
+                        setResult(codigosDeActivity.dadosCimentoActivty);
+
+                        Intent intentAbrirDadosCimentoActivity = new Intent(getApplicationContext(), DadosCimentoActivity.class);
+                        intentAbrirDadosCimentoActivity.putExtra("nome do cimento", nomeDoCimento);
+                        intentAbrirDadosCimentoActivity.putExtra("tempo de cura", tempoDeCura);
+                        intentAbrirDadosCimentoActivity.putExtra("observações", observacoes);
+
+                        try {
+                            List<ItemPontoCimento> listaPontosTransicao = curvaCimentoProvisoriaEditarDAO.listar();
+                            Collections.sort(listaPontosTransicao);
+                            int cont = 0;
+                            while (cont < listaPontosTransicao.size()) {
+                                curvaCimentoProvisoriaDAO.salvar(listaPontosTransicao.get(cont));
+                                Log.i("INFO", "a/c = " + listaPontosTransicao.get(cont).getValorDeAC().toString());
+                                cont += 1;
+                            }
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), "Erro ao listar pontos do cimento: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                        intentAbrirDadosCimentoActivity.putExtra("ação", "abrir cimento editado");
+
+
+                        startActivityForResult(intentAbrirDadosCimentoActivity, codigosDeActivity.adicionarEditarCimentoActivity);
+                        finish();
                     }
-                    if (textInputobservacoes.getText().toString().equals("")) {
-                        observacoes = "nenhuma";
-                    } else {
-                        observacoes = textInputobservacoes.getText().toString();
-                    }
-
-                    tempoDeCura = textInputTempoDeCura.getText().toString();
-
-                    Intent intentAbrirDadosCimentoActivity = new Intent(getApplicationContext(), DadosCimentoActivity.class);
-                    intentAbrirDadosCimentoActivity.putExtra("nome do cimento", nomeDoCimento);
-                    intentAbrirDadosCimentoActivity.putExtra("tempo de cura", tempoDeCura);
-                    intentAbrirDadosCimentoActivity.putExtra("observações", observacoes);
-                    intentAbrirDadosCimentoActivity.putExtra("ação", "criar novo cimento");
-
-                    setResult(codigosDeActivity.dadosCimentoActivty);
-                    startActivityForResult(intentAbrirDadosCimentoActivity, codigosDeActivity.adicionarEditarCimentoActivity);
-                    finish();
                 }
             }
         });
