@@ -123,9 +123,16 @@ public class DadosCimentoActivity extends AppCompatActivity {
                 // Configuração da Alert Dialog
                 AlertDialog.Builder dialogDescartarCimento = new AlertDialog.Builder(DadosCimentoActivity.this);
 
-                dialogDescartarCimento.setTitle("Descartar cimento");
-                dialogDescartarCimento.setMessage("Deseja realmente descartar este cimento (" + nomeDoCimento + ") e todas a informações contidas nele?");
-
+                if (acao.equals("abrir cimento salvo")) {
+                    dialogDescartarCimento.setTitle("Descartar cimento");
+                    dialogDescartarCimento.setMessage("Deseja realmente descartar este cimento (" + nomeDoCimento + ") e todas a informações contidas nele?");
+                } else if (acao.equals("abrir cimento editado")) {
+                    dialogDescartarCimento.setTitle("Descartar alterações");
+                    dialogDescartarCimento.setMessage("Deseja realmente descartar as alterações realizadas neste cimento (" + nomeDoCimento + ") e retornar para a tela de cimentos salvos? (isso não apagará o cimento do banco de dados)");
+                } else {
+                    dialogDescartarCimento.setTitle("Descartar cimento");
+                    dialogDescartarCimento.setMessage("Deseja realmente descartar este novo cimento (" + nomeDoCimento + ") e todas a informações contidas nele?");
+                }
                 dialogDescartarCimento.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -147,6 +154,8 @@ public class DadosCimentoActivity extends AppCompatActivity {
                             } else {
                                 Toast.makeText(getApplicationContext(), "Erro ao deletar cimento.", Toast.LENGTH_SHORT).show();
                             }
+                        } else if (acao.equals("abrir cimento editado")) {
+                            finish();
                         } else {
                             Toast.makeText(getApplicationContext(), "Sucesso ao descartar cimento não salvo.", Toast.LENGTH_SHORT).show();
                             setResult(codigosDeActivity.adicionarEditarCimentoActivity);
