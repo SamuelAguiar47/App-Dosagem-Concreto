@@ -48,7 +48,26 @@ public class CimentosSalvosDAO implements ICimentosSalvosDAO {
 
     @Override
     public boolean atualizar(ItemCimentoSalvo itemCimentoSalvo) {
-        return false;
+
+        ContentValues cv = new ContentValues();
+        cv.put("nomeDoCimento", itemCimentoSalvo.getNomeDoCimento());
+        cv.put("tempoDeCura", itemCimentoSalvo.getTempoDeCura());
+        cv.put("data", itemCimentoSalvo.getData());
+        cv.put("qtdeDePontos", itemCimentoSalvo.getQtdeDePontos());
+        cv.put("observacoes", itemCimentoSalvo.getObservacoes());
+        cv.put("K1", itemCimentoSalvo.getK1());
+        cv.put("K2", itemCimentoSalvo.getK2());
+
+        try {
+            String[] args = {itemCimentoSalvo.getNomeDoCimento().toString()};
+            escreve.update(DbCimentosSalvos.TABELA_CIMENTOS_SALVOS, cv, "nomeDoCimento=?", args);
+            Log.i("INFO", "Sucesso ao atualizar cimento.");
+        } catch (Exception e) {
+            Log.i("INFO", "Erro ao atualizar cimento.");
+            return false;
+        }
+
+        return true;
     }
 
     @Override

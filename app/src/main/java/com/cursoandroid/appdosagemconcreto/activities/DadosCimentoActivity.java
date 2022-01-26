@@ -199,9 +199,16 @@ public class DadosCimentoActivity extends AppCompatActivity {
                 //Configura Alert Dialog
                 AlertDialog.Builder dialogSalvarNovoCimento = new AlertDialog.Builder(DadosCimentoActivity.this);
 
-                dialogSalvarNovoCimento.setTitle("Salvar novo cimento");
-                dialogSalvarNovoCimento.setMessage("Deseja realmente salvar o cimento " + nomeDoCimento + " como um novo cimento?");
-
+                if (acao.equals("criar novo cimento")) {
+                    dialogSalvarNovoCimento.setTitle("Salvar novo cimento");
+                    dialogSalvarNovoCimento.setMessage("Deseja realmente salvar o cimento " + nomeDoCimento + " como um novo cimento?");
+                } else if (acao.equals("abrir cimento salvo")){
+                    dialogSalvarNovoCimento.setTitle("Salvar cimento");
+                    dialogSalvarNovoCimento.setMessage("Nenhuma alteração foi idenficada no cimento " + nomeDoCimento + ", deseja retornar à tela de cimentos salvos?");
+                } else if (acao.equals("abrir cimento editado")) {
+                    dialogSalvarNovoCimento.setTitle("Salvar alterações");
+                    dialogSalvarNovoCimento.setMessage("Deseja realmente salvar as alterações realizadas no cimento " + nomeDoCimento + "?");
+                }
                 dialogSalvarNovoCimento.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -211,25 +218,51 @@ public class DadosCimentoActivity extends AppCompatActivity {
                         itemCimentoSalvo.setData(formataData.format(data));
                         itemCimentoSalvo.setObservacoes(observacoes);
                         CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
-                        cimentosSalvosDAO.salvar(itemCimentoSalvo);
 
-                        CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext());
-                        int cont = 0;
-                        ItemPontoCimento itemPontoCimento;
-                        while (cont < listaPontosCimento.size()) {
-                            itemPontoCimento = listaPontosCimento.get(cont);
-                            itemPontoCimento.setNomeDoCimento(nomeDoCimento);
-                            curvaCimentoDAO.salvar(itemPontoCimento);
-                            cont += 1;
-                        }
-
-                        curvaCimentoProvisoriaDAO.limparTabela();
-
-                        setResult(codigosDeActivity.adicionarEditarCimentoActivity);
                         if (acao.equals("criar novo cimento")) {
+                            cimentosSalvosDAO.salvar(itemCimentoSalvo);
+
+                            CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext());
+                            int cont = 0;
+                            ItemPontoCimento itemPontoCimento;
+                            while (cont < listaPontosCimento.size()) {
+                                itemPontoCimento = listaPontosCimento.get(cont);
+                                itemPontoCimento.setNomeDoCimento(nomeDoCimento);
+                                curvaCimentoDAO.salvar(itemPontoCimento);
+                                cont += 1;
+                            }
+
                             curvaCimentoProvisoriaDAO.limparTabela();
+
+                            setResult(codigosDeActivity.adicionarEditarCimentoActivity);
+
+                            finish();
+                        } else if(acao.equals("abrir cimento salvo")) {
+                            curvaCimentoProvisoriaDAO.limparTabela();
+                            finish();
+                        } else if(acao.equals("abrir cimento editado")) {
+                            if (cimentosSalvosDAO.atualizar(itemCimentoSalvo)) {
+                                Toast.makeText(getApplicationContext(), "Sucesso ao atualizar cimento!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Erro ao atualizar cimento!", Toast.LENGTH_SHORT).show();
+                            }
+
+                            CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(getApplicationContext());
+
+                            curvaCimentoDAO.deletarLista(curvaCimentoDAO.listar(nomeDoCimento));
+
+                            int cont = 0;
+                            ItemPontoCimento itemPontoCimento;
+                            while (cont < listaPontosCimento.size()) {
+                                itemPontoCimento = listaPontosCimento.get(cont);
+                                itemPontoCimento.setNomeDoCimento(nomeDoCimento);
+                                curvaCimentoDAO.salvar(itemPontoCimento);
+                                cont += 1;
+                            }
+
+                            curvaCimentoProvisoriaDAO.limparTabela();
+                            finish();
                         }
-                        finish();
                     }
                 });
 
