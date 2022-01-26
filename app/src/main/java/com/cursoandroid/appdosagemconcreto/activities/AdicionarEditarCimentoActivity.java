@@ -131,40 +131,41 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                             Toast.makeText(AdicionarEditarCimentoActivity.this, "Já existe um outro cimento com esse nome. Por favor, escolha outro nome ou edite o já existente.", Toast.LENGTH_LONG).show();
                         } else {
                             nomeDoCimento = textInputNomeDoCimento.getText().toString();
-                        }
-                        if (textInputobservacoes.getText().toString().equals("")) {
-                            observacoes = "nenhuma";
-                        } else {
-                            observacoes = textInputobservacoes.getText().toString();
-                        }
 
-                        tempoDeCura = textInputTempoDeCura.getText().toString();
-
-                        setResult(codigosDeActivity.dadosCimentoActivty);
-
-                        Intent intentAbrirDadosCimentoActivity = new Intent(getApplicationContext(), DadosCimentoActivity.class);
-                        intentAbrirDadosCimentoActivity.putExtra("nome do cimento", nomeDoCimento);
-                        intentAbrirDadosCimentoActivity.putExtra("tempo de cura", tempoDeCura);
-                        intentAbrirDadosCimentoActivity.putExtra("observações", observacoes);
-
-                        try {
-                            List<ItemPontoCimento> listaPontosTransicao = curvaCimentoProvisoriaEditarDAO.listar();
-                            Collections.sort(listaPontosTransicao);
-                            int cont = 0;
-                            while (cont < listaPontosTransicao.size()) {
-                                curvaCimentoProvisoriaDAO.salvar(listaPontosTransicao.get(cont));
-                                Log.i("INFO", "a/c = " + listaPontosTransicao.get(cont).getValorDeAC().toString());
-                                cont += 1;
+                            if (textInputobservacoes.getText().toString().equals("")) {
+                                observacoes = "nenhuma";
+                            } else {
+                                observacoes = textInputobservacoes.getText().toString();
                             }
-                        } catch (Exception e) {
-                            Toast.makeText(getApplicationContext(), "Erro ao listar pontos do cimento: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                            tempoDeCura = textInputTempoDeCura.getText().toString();
+
+                            setResult(codigosDeActivity.dadosCimentoActivty);
+
+                            Intent intentAbrirDadosCimentoActivity = new Intent(getApplicationContext(), DadosCimentoActivity.class);
+                            intentAbrirDadosCimentoActivity.putExtra("nome do cimento", nomeDoCimento);
+                            intentAbrirDadosCimentoActivity.putExtra("tempo de cura", tempoDeCura);
+                            intentAbrirDadosCimentoActivity.putExtra("observações", observacoes);
+
+                            try {
+                                List<ItemPontoCimento> listaPontosTransicao = curvaCimentoProvisoriaEditarDAO.listar();
+                                Collections.sort(listaPontosTransicao);
+                                int cont = 0;
+                                while (cont < listaPontosTransicao.size()) {
+                                    curvaCimentoProvisoriaDAO.salvar(listaPontosTransicao.get(cont));
+                                    Log.i("INFO", "a/c = " + listaPontosTransicao.get(cont).getValorDeAC().toString());
+                                    cont += 1;
+                                }
+                            } catch (Exception e) {
+                                Toast.makeText(getApplicationContext(), "Erro ao listar pontos do cimento: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+
+                            intentAbrirDadosCimentoActivity.putExtra("ação", "abrir cimento editado");
+
+
+                            startActivityForResult(intentAbrirDadosCimentoActivity, codigosDeActivity.adicionarEditarCimentoActivity);
+                            finish();
                         }
-
-                        intentAbrirDadosCimentoActivity.putExtra("ação", "abrir cimento editado");
-
-
-                        startActivityForResult(intentAbrirDadosCimentoActivity, codigosDeActivity.adicionarEditarCimentoActivity);
-                        finish();
                     }
                 }
             }
