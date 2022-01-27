@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.Dosagem;
 import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
+import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoDAO;
 import com.cursoandroid.appdosagemconcreto.helper.TracoDAO;
 import com.cursoandroid.appdosagemconcreto.tabelaseabacos.CurvaDeAbrams;
 import com.github.mikephil.charting.charts.LineChart;
@@ -735,7 +736,7 @@ public class ResultadosActivity extends AppCompatActivity {
 
         dosagem.calcularFcj();
 
-        dosagem.determinarFatorAguaCimento();
+        dosagem.determinarFatorAguaCimento(getApplicationContext());
 
         dosagem.determinarConsumoDeAgua();
 

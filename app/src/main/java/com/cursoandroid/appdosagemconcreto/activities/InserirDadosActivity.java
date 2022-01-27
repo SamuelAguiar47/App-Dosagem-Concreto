@@ -187,6 +187,8 @@ public class InserirDadosActivity extends AppCompatActivity {
             spinnerDesvioPadrao.setSelection(spinnerPosition);
 
             String tipoDeCimento = dosagem.cimento.getEspecificacoes();
+
+
             spinnerPosition = 0;
             if (tipoDeCimento.equals("CP29")) {
                 spinnerPosition = 0;

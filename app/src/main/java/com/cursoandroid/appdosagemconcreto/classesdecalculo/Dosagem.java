@@ -1,5 +1,8 @@
 package com.cursoandroid.appdosagemconcreto.classesdecalculo;
 
+import android.content.Context;
+
+import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoDAO;
 import com.cursoandroid.appdosagemconcreto.materiais.Agua;
 import com.cursoandroid.appdosagemconcreto.materiais.Areia;
 import com.cursoandroid.appdosagemconcreto.materiais.Brita;
@@ -66,9 +69,9 @@ public class Dosagem implements Serializable {
 
     }
 
-    public void determinarFatorAguaCimento() {
+    public void determinarFatorAguaCimento(Context context) {
 
-        this.curvaDeAbrams = new CurvaDeAbrams(this.concreto.getFcj(), this.cimento.getEspecificacoes());
+        this.curvaDeAbrams = new CurvaDeAbrams(this.concreto.getFcj(), this.cimento.getEspecificacoes(), context);
         this.concreto.setFatorAguaCimento(this.curvaDeAbrams.getFatorAguaCimentoObtido());
 
     }

@@ -1,10 +1,15 @@
 package com.cursoandroid.appdosagemconcreto.tabelaseabacos;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.cursoandroid.appdosagemconcreto.activities.ResultadosActivity;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.RegressaoLinear;
+import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoDAO;
+import com.cursoandroid.appdosagemconcreto.model.ItemPontoCimento;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CurvaDeAbrams implements Serializable {
 
@@ -14,6 +19,8 @@ public class CurvaDeAbrams implements Serializable {
     private RegressaoLinear regressaoLinear;
 
     //Curvas
+    private Double[][] curvaCimento;
+
     private Double[][] curva28DiasCP29 = new Double[9][2];
     private Double[][] curva28DiasCP32 = new Double[9][2];
     private Double[][] curva28DiasCP35 = new Double[9][2];
@@ -27,6 +34,23 @@ public class CurvaDeAbrams implements Serializable {
     Double K1, K2;
 
 
+    public Double[][] getCurva(String nomeDoCimento, Context context) {
+        CurvaCimentoDAO curvaCimentoDAO = new CurvaCimentoDAO(context);
+        List<ItemPontoCimento> listaDePontosCimento = curvaCimentoDAO.listar(nomeDoCimento);
+
+        curvaCimento = new Double[listaDePontosCimento.size()][2];
+
+        int cont = 0;
+        while (cont < listaDePontosCimento.size()) {
+            curvaCimento[cont][0] = listaDePontosCimento.get(cont).getValorDeFcj();
+            curvaCimento[cont][1] = listaDePontosCimento.get(cont).getValorDeAC();
+            cont += 1;
+        }
+
+        return curvaCimento;
+    }
+
+    /*
     public Double[][] getCurva28DiasCP29() {
         curva28DiasCP29[0][0] = 31.8;
         curva28DiasCP29[0][1] = 0.4;
@@ -210,7 +234,7 @@ public class CurvaDeAbrams implements Serializable {
 
         return curva28DiasCP50;
     }
-
+    */
 
     // Métodos
 
@@ -218,8 +242,11 @@ public class CurvaDeAbrams implements Serializable {
     public CurvaDeAbrams() {
     }
 
-    public CurvaDeAbrams(Double fcj, String especific) {
+    public CurvaDeAbrams(Double fcj, String especific, Context context) {
         this.fcj = fcj;
+
+        this.fatorAguaCimentoObtido = calculoRegressaoLinear(fcj, especific, context);
+        /*
         if (especific.equals("CP29")) {
             this.fatorAguaCimentoObtido = calculoCP29_28Dias(fcj);
         } else if (especific.equals("CP32")) {
@@ -236,11 +263,17 @@ public class CurvaDeAbrams implements Serializable {
             this.fatorAguaCimentoObtido = calculoCP47_28Dias(fcj);
         }  else if (especific.equals("CP50")) {
             this.fatorAguaCimentoObtido = calculoCP50_28Dias(fcj);
-        }
+        }*/
     }
 
+    public Double calculoRegressaoLinear(Double fcj, String nomeDoCimento, Context context) {
+        Double fatorAC = calcularRegressaoLinear(fcj, getCurva(nomeDoCimento, context));
+        return (fatorAC);
+    }
+
+    /*
     public Double calculoCP29_28Dias(Double fcj) {
-        /*this.fcj = fcj;
+        this.fcj = fcj;
         int c = 0;
         Double fcjAnt = getCurva28DiasCP32()[0][0];
         Double fcjPost = getCurva28DiasCP32()[1][0];
@@ -251,7 +284,7 @@ public class CurvaDeAbrams implements Serializable {
         }
         Double fatACAnt = getCurva28DiasCP32()[c][1];
         Double fatACPost = getCurva28DiasCP32()[c+1][1];
-        return ((this.fcj - fcjAnt)/(fcjPost - fcjAnt))*(fatACPost - fatACAnt) + fatACAnt;*/
+        return ((this.fcj - fcjAnt)/(fcjPost - fcjAnt))*(fatACPost - fatACAnt) + fatACAnt;
         Double fatorAC = calcularRegressaoLinear(fcj,getCurva28DiasCP29());
         return (fatorAC);
     }
@@ -290,6 +323,7 @@ public class CurvaDeAbrams implements Serializable {
         Double fatorAC = calcularRegressaoLinear(fcj,getCurva28DiasCP50());
         return (fatorAC);
     }
+    */
 
     public Double calcularRegressaoLinear(Double fcj, Double[][] arrayCurva) {
         this.fcj = fcj;
