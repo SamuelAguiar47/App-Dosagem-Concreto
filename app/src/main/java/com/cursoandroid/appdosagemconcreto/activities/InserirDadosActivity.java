@@ -188,7 +188,23 @@ public class InserirDadosActivity extends AppCompatActivity {
 
             String tipoDeCimento = dosagem.cimento.getEspecificacoes();
 
+            CimentosSalvosDAO cimentosSalvosDAO = new CimentosSalvosDAO(getApplicationContext());
+            List<ItemCimentoSalvo> listaCimentosSalvos = cimentosSalvosDAO.listar();
 
+            String[] listaNomesCimentos = new String[listaCimentosSalvos.size()];
+
+            spinnerPosition = 0;
+
+            int cont = 0;
+            while (cont < listaCimentosSalvos.size()) {
+                listaNomesCimentos[cont] = listaCimentosSalvos.get(cont).getNomeDoCimento();
+                if (tipoDeCimento.equals(listaNomesCimentos[cont])) {
+                    spinnerPosition = cont;
+                }
+                cont += 1;
+            }
+
+            /*
             spinnerPosition = 0;
             if (tipoDeCimento.equals("CP29")) {
                 spinnerPosition = 0;
@@ -206,7 +222,8 @@ public class InserirDadosActivity extends AppCompatActivity {
                 spinnerPosition = 6;
             } else if (tipoDeCimento.equals("CP50")){
                 spinnerPosition = 7;
-            }
+            }*/
+
             spinnerTipoDeCimento.setSelection(spinnerPosition);
             textInputMassaEspecificaCimento.setText(arred3x.format(dosagem.cimento.getMassaEspecifica()));
             textInputModuloDeFinuraAreia.setText(arred3x.format(dosagem.areia.getModuloDefinura()));
