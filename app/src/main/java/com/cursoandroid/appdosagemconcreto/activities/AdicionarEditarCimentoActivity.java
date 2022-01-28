@@ -43,6 +43,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
 
     //Dados do cimento inseridos
     private String nomeDoCimento, tempoDeCura, observacoes, acao;
+    private Long id;
 
     // Helper
     private CurvaCimentoProvisoriaDAO curvaCimentoProvisoriaDAO;
@@ -75,6 +76,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
             textInputobservacoes.setText("Este é um campo destinado à descrição de detalhes do ensaio realizado," +
                     " como as características do solo utilizado no ensaio, por exemplo.");
         } else if (acao.equals("editar cimento salvo")) {
+            id = dados.getLong("id");
             nomeDoCimento = dados.getString("nome do cimento");
             tempoDeCura = dados.getString("tempo de cura");
             observacoes = dados.getString("observações");
@@ -143,6 +145,7 @@ public class AdicionarEditarCimentoActivity extends AppCompatActivity {
                             setResult(codigosDeActivity.dadosCimentoActivty);
 
                             Intent intentAbrirDadosCimentoActivity = new Intent(getApplicationContext(), DadosCimentoActivity.class);
+                            intentAbrirDadosCimentoActivity.putExtra("id", id);
                             intentAbrirDadosCimentoActivity.putExtra("nome do cimento", nomeDoCimento);
                             intentAbrirDadosCimentoActivity.putExtra("tempo de cura", tempoDeCura);
                             intentAbrirDadosCimentoActivity.putExtra("observações", observacoes);

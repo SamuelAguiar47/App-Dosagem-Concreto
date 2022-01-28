@@ -58,6 +58,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
     private LineChart graficoCurvaDeAbramsCimento;
 
     private String nomeDoCimento, tempoDeCura, observacoes, acao;
+    private Long id;
 
     SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
     Date data = new Date();
@@ -85,6 +86,10 @@ public class DadosCimentoActivity extends AppCompatActivity {
         tempoDeCura = dados.getString("tempo de cura");
         observacoes = dados.getString("observações");
         acao = dados.getString("ação");
+
+        if (acao.equals("abrir cimento salvo") || acao.equals("abrir cimento editado")) {
+            id = dados.getLong("id");
+        }
 
         //Configurar elementos de interface
         textViewRotuloDoCimento = findViewById(R.id.textViewRotuloDoCimento);
@@ -183,6 +188,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentAbrirAdicionarEditarCimentoActivity = new Intent(getApplicationContext(), AdicionarEditarCimentoActivity.class);
+                intentAbrirAdicionarEditarCimentoActivity.putExtra("id", id);
                 intentAbrirAdicionarEditarCimentoActivity.putExtra("nome do cimento", nomeDoCimento);
                 intentAbrirAdicionarEditarCimentoActivity.putExtra("tempo de cura", tempoDeCura);
                 intentAbrirAdicionarEditarCimentoActivity.putExtra("observações", observacoes);
@@ -241,6 +247,7 @@ public class DadosCimentoActivity extends AppCompatActivity {
                             curvaCimentoProvisoriaDAO.limparTabela();
                             finish();
                         } else if(acao.equals("abrir cimento editado")) {
+                            itemCimentoSalvo.setId(id);
                             if (cimentosSalvosDAO.atualizar(itemCimentoSalvo)) {
                                 Toast.makeText(getApplicationContext(), "Sucesso ao atualizar cimento!", Toast.LENGTH_SHORT).show();
                             } else {

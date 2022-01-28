@@ -59,8 +59,8 @@ public class CimentosSalvosDAO implements ICimentosSalvosDAO {
         cv.put("K2", itemCimentoSalvo.getK2());
 
         try {
-            String[] args = {itemCimentoSalvo.getNomeDoCimento().toString()};
-            escreve.update(DbCimentosSalvos.TABELA_CIMENTOS_SALVOS, cv, "nomeDoCimento=?", args);
+            String[] args = {itemCimentoSalvo.getId().toString()};
+            escreve.update(DbCimentosSalvos.TABELA_CIMENTOS_SALVOS, cv, "id=?", args);
             Log.i("INFO", "Sucesso ao atualizar cimento.");
         } catch (Exception e) {
             Log.i("INFO", "Erro ao atualizar cimento.");

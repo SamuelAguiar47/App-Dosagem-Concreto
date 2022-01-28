@@ -52,6 +52,7 @@ public class CimentosSalvosActivity extends AppCompatActivity {
                                 itemCimentoSelecionado = listaDeCimentos.get(position);
 
                                 Intent intentAbrirDadosCimentoActivity = new Intent(getApplicationContext(), DadosCimentoActivity.class);
+                                intentAbrirDadosCimentoActivity.putExtra("id", itemCimentoSelecionado.getId());
                                 intentAbrirDadosCimentoActivity.putExtra("nome do cimento", itemCimentoSelecionado.getNomeDoCimento());
                                 intentAbrirDadosCimentoActivity.putExtra("tempo de cura", itemCimentoSelecionado.getTempoDeCura());
                                 intentAbrirDadosCimentoActivity.putExtra("observações", itemCimentoSelecionado.getObservacoes());
