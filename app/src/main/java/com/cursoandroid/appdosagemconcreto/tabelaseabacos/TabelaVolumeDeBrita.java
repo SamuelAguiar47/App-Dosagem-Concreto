@@ -117,8 +117,90 @@ public class TabelaVolumeDeBrita implements Serializable {
             coluna = 4;
         }
 
-        this.setVolumeDeBritaObtido(tabelaVolumeDeBrita[linha][coluna]);
+        //Interpolação
 
+                if (this.moduloDeFinura != 1.8 &&
+                this.moduloDeFinura != 2.0 &&
+                this.moduloDeFinura != 2.2 &&
+                this.moduloDeFinura != 2.4 &&
+                this.moduloDeFinura != 2.6 &&
+                this.moduloDeFinura != 2.8 &&
+                this.moduloDeFinura != 3.0 &&
+                this.moduloDeFinura != 3.2 &&
+                this.moduloDeFinura != 3.4 &&
+                this.moduloDeFinura != 3.6
+        ) {
+            int linhaMfMenor = 0;
+            int linhaMfMaior = 0;
+            double mfMenor = 0.0;
+            double mfMaior = 0.0;
+            double vbParaMfMenor = 0.0;
+            double vbParaMfMaior = 0.0;
+            double difInterpolacao = 0.0;
+            double difMfMaioreMenor = 0.0;
+            double difVbMaioreMenor = 0.0;
+            double vbInterpolado = 0.0;
+
+            if (this.moduloDeFinura > 1.8 && this.moduloDeFinura < 2.0) {
+                linhaMfMenor = 0;
+                linhaMfMaior = 1;
+                mfMenor = 1.8;
+                mfMaior = 2.0;
+            } else if (this.moduloDeFinura > 2.0 && this.moduloDeFinura < 2.2) {
+                linhaMfMenor = 1;
+                linhaMfMaior = 2;
+                mfMenor = 2.0;
+                mfMaior = 2.2;
+            } else if (this.moduloDeFinura > 2.2 && this.moduloDeFinura < 2.4) {
+                linhaMfMenor = 2;
+                linhaMfMaior = 3;
+                mfMenor = 2.2;
+                mfMaior = 2.4;
+            } else if (this.moduloDeFinura > 2.4 && this.moduloDeFinura < 2.6) {
+                linhaMfMenor = 3;
+                linhaMfMaior = 4;
+                mfMenor = 2.4;
+                mfMaior = 2.6;
+            } else if (this.moduloDeFinura > 2.6 && this.moduloDeFinura < 2.8) {
+                linhaMfMenor = 4;
+                linhaMfMaior = 5;
+                mfMenor = 2.6;
+                mfMaior = 2.8;
+            } else if (this.moduloDeFinura > 2.8 && this.moduloDeFinura < 3.0) {
+                linhaMfMenor = 5;
+                linhaMfMaior = 6;
+                mfMenor = 2.8;
+                mfMaior = 3.0;
+            } else if (this.moduloDeFinura > 3.0 && this.moduloDeFinura < 3.2) {
+                linhaMfMenor = 6;
+                linhaMfMaior = 7;
+                mfMenor = 3.0;
+                mfMaior = 3.2;
+            } else if (this.moduloDeFinura > 3.2 && this.moduloDeFinura < 3.4) {
+                linhaMfMenor = 7;
+                linhaMfMaior = 8;
+                mfMenor = 3.2;
+                mfMaior = 3.4;
+            } else if (this.moduloDeFinura > 3.4 && this.moduloDeFinura < 3.6) {
+                linhaMfMenor = 8;
+                linhaMfMaior = 9;
+                mfMenor = 3.4;
+                mfMaior = 3.6;
+            }
+
+            vbParaMfMenor = tabelaVolumeDeBrita[linhaMfMenor][coluna];
+            vbParaMfMaior = tabelaVolumeDeBrita[linhaMfMaior][coluna];
+            difInterpolacao = this.moduloDeFinura - mfMenor;
+            difMfMaioreMenor = mfMaior - mfMenor;
+            difVbMaioreMenor = vbParaMfMaior - vbParaMfMenor;
+            vbInterpolado = ((difInterpolacao/difMfMaioreMenor)*difVbMaioreMenor)+vbParaMfMenor;
+
+            this.setVolumeDeBritaObtido(vbInterpolado);
+
+        } else {
+
+            this.setVolumeDeBritaObtido(tabelaVolumeDeBrita[linha][coluna]);
+        }
     }
 
     //Getters e Setters

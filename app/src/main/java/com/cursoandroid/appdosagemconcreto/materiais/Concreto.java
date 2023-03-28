@@ -13,6 +13,7 @@ public class Concreto implements Serializable {
     private Double desvioPadrao;
     private Double traco[];
 
+
     // Métodos
 
 

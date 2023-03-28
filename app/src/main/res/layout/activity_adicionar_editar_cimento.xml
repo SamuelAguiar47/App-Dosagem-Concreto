@@ -138,7 +138,7 @@
                     android:id="@+id/textInputValorDeFcj"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Valor de Fck"
+                    android:hint="Valor de Fcm"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>

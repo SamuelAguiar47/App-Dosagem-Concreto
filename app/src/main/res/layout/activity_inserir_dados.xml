@@ -208,8 +208,8 @@
                 android:id="@+id/textInputMassaUnitariaBrita"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Massa Uitária (kg/m³)"
-                android:inputType="numberDecimal"/>
+                android:hint="Massa Unitária (kg/m³)"
+                android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
