@@ -44,6 +44,8 @@ public class TracoAdapter extends RecyclerView.Adapter<TracoAdapter.MyViewHolder
         holder.tipoDeTraco.setText( itemTracoSalvo.traco.getTipoDeTraco() );
         holder.tracoExibido.setText( itemTracoSalvo.traco.getTracoExibido() );
 
+        holder.rotuloDoTraco.setSelected(true);
+
     }
 
     @Override

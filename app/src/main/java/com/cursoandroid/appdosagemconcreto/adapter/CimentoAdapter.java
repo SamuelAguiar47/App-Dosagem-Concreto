@@ -42,6 +42,8 @@ public class CimentoAdapter extends RecyclerView.Adapter<CimentoAdapter.MyViewHo
         holder.data.setText(itemCimentoSalvo.getData());
         holder.qtdeDePontos.setText(itemCimentoSalvo.getQtdeDePontos() + " amostras");
 
+        holder.nomeDoCimento.setSelected(true);
+
     }
 
     @Override

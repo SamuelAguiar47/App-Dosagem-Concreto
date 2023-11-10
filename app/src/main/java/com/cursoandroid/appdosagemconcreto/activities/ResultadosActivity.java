@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.cursoandroid.appdosagemconcreto.R;
 import com.cursoandroid.appdosagemconcreto.classesdecalculo.Dosagem;
 import com.cursoandroid.appdosagemconcreto.helper.CodigosDeActivity;
-import com.cursoandroid.appdosagemconcreto.helper.CurvaCimentoDAO;
 import com.cursoandroid.appdosagemconcreto.helper.TracoDAO;
 import com.cursoandroid.appdosagemconcreto.tabelaseabacos.CurvaDeAbrams;
 import com.github.mikephil.charting.charts.LineChart;
@@ -137,16 +136,16 @@ public class ResultadosActivity extends AppCompatActivity {
         textViewTipoDeCimento.setText("Tipo de cimento = " + dosagem.cimento.getEspecificacoes());
 
         TextView textViewMassaEspecificaCimento = findViewById(R.id.textViewMassaEspecificaCimento);
-        textViewMassaEspecificaCimento.setText("Massa esp. = " + arred1X.format(dosagem.cimento.getMassaEspecifica()) + " kg/m³");
+        textViewMassaEspecificaCimento.setText("Massa esp. = " + arred2x.format(dosagem.cimento.getMassaEspecifica()) + " kg/m³");
 
         TextView textViewModuloDeFinuraAreia = findViewById(R.id.textViewModuloDeFinuraAreia);
-        textViewModuloDeFinuraAreia.setText("Mód. de finura = " + arred1.format(dosagem.areia.getModuloDefinura()));
+        textViewModuloDeFinuraAreia.setText("Mód. de finura = " + arred2x.format(dosagem.areia.getModuloDefinura()));
 
         TextView textViewMassaEspecificaAreia = findViewById(R.id.textViewMassaEspecificaAreia);
-        textViewMassaEspecificaAreia.setText("Massa esp. = " + arred1X.format(dosagem.areia.getMassaEspecifica()) + " kg/m³");
+        textViewMassaEspecificaAreia.setText("Massa esp. = " + arred2x.format(dosagem.areia.getMassaEspecifica()) + " kg/m³");
 
         TextView textViewMassaUnitariaAreia = findViewById(R.id.textViewMassaUnitariaAreia);
-        textViewMassaUnitariaAreia.setText("Massa unit. = " + arred1X.format(dosagem.areia.getMassaUnitaria()) + " kg/m³");
+        textViewMassaUnitariaAreia.setText("Massa unit. = " + arred2x.format(dosagem.areia.getMassaUnitaria()) + " kg/m³");
 
         TextView textViewUmidadeAreia = findViewById(R.id.textViewUmidadeAreia);
         textViewUmidadeAreia.setText("Umidade (h) = " + arred2x.format(dosagem.areia.getUmidadeDaAreia()) + "%");
@@ -158,31 +157,36 @@ public class ResultadosActivity extends AppCompatActivity {
         textViewDiametroMaximoBrita.setText("Diâm. máx. = " + arred1.format(dosagem.brita.getDiametroMaximo()) + " mm");
 
         TextView textViewMassaEspecificaBrita = findViewById(R.id.textViewMassaEspecificaBrita);
-        textViewMassaEspecificaBrita.setText("Massa esp. = " + arred1X.format(dosagem.brita.getMassaEspecifica()) + " kg/m³");
+        textViewMassaEspecificaBrita.setText("Massa esp. = " + arred2x.format(dosagem.brita.getMassaEspecifica()) + " kg/m³");
 
         TextView textViewMassaUnitariaCompBrita = findViewById(R.id.textViewMassaUnitariaCompBrita);
-        textViewMassaUnitariaCompBrita.setText("Massa unit. comp. = " + arred1X.format(dosagem.brita.getMassaUnitariaComp()) + " kg/m³");
+        textViewMassaUnitariaCompBrita.setText("Massa unit. comp. = " + arred2x.format(dosagem.brita.getMassaUnitariaComp()) + " kg/m³");
 
         TextView textViewMassaUnitariaBrita = findViewById(R.id.textViewMassaUnitariaBrita);
-        textViewMassaUnitariaBrita.setText("Massa unit. = " + arred1X.format(dosagem.brita.getMassaUnitaria()) + " kg/m³");
+        textViewMassaUnitariaBrita.setText("Massa unit. = " + arred2x.format(dosagem.brita.getMassaUnitaria()) + " kg/m³");
 
         TextView textViewDesvioPadrao = findViewById(R.id.textViewDesvioPadrao);
         textViewDesvioPadrao.setText("Sd = " + arred1.format(dosagem.concreto.getDesvioPadrao()));
 
+        TextView textViewPadiolaTitulo = findViewById(R.id.textViewPadiolaTitulo);
+
         TextView textViewLarguraDaPadiola = findViewById(R.id.textViewLarguraDaPadiola);
-        textViewLarguraDaPadiola.setText("Larg.Pad. = " + arred1X.format(dosagem.getLarguraDaPadiola()) + " cm");
+        textViewLarguraDaPadiola.setText("Larg.Pad. = " + arred2x.format(dosagem.getLarguraDaPadiola()) + " cm");
 
         TextView textViewComprimentoDaPadiola = findViewById(R.id.textViewComprimentoDaPadiola);
-        textViewComprimentoDaPadiola.setText("Comp.Pad. = " + arred1X.format(dosagem.getComprimentoDaPadiola()) + " cm");
+        textViewComprimentoDaPadiola.setText("Comp.Pad. = " + arred2x.format(dosagem.getComprimentoDaPadiola()) + " cm");
 
         calculoDosagem();
 
-        // Cálculo Fcj
-        TextView textViewFcjCalculo = findViewById(R.id.textViewFcjCalculo);
-        textViewFcjCalculo.setText("Fcj = " + arred1X.format(dosagem.concreto.getFck()) + " + 1,65*" + arred1.format(dosagem.concreto.getDesvioPadrao()));
+        // Cálculo de Fcm e Fcj
+        TextView textViewFcmCalculo = findViewById(R.id.textViewFcmCalculo);
+        textViewFcmCalculo.setText("Fcm = " + arred1X.format(dosagem.concreto.getFck()) + " + 1,65*" + arred1.format(dosagem.concreto.getDesvioPadrao()));
+
+        TextView textViewFcmResultado = findViewById(R.id.textViewFcmResultado);
+        textViewFcmResultado.setText("Fcm = " + arred2x.format(dosagem.concreto.getFcj()) + " Mpa");
 
         TextView textViewFcjResultado = findViewById(R.id.textViewFcjResultado);
-        textViewFcjResultado.setText("Fcj = " + arred2x.format(dosagem.concreto.getFcj()) + " Mpa");
+        textViewFcjResultado.setText("Fcj ≥ Fcm → Fcj = " + arred2x.format(dosagem.concreto.getFcj()) + " Mpa");
 
         // Determinação do fator a/c
         TextView textViewDeterminacaoFatorAC = findViewById(R.id.textViewDeterminacaoFatorAC);
@@ -206,7 +210,7 @@ public class ResultadosActivity extends AppCompatActivity {
 
         // Cálculo do consumo de brita
         TextView textViewConsumoDeBritaCalculo = findViewById(R.id.textViewConsumoDeBritaCalculo);
-        textViewConsumoDeBritaCalculo.setText("Cb = " + arred3.format(dosagem.brita.getVolumeDeBritaTabela()) + " * " + dosagem.brita.getMassaUnitariaComp());
+        textViewConsumoDeBritaCalculo.setText("Cb = " + arred3.format(dosagem.brita.getVolumeDeBritaTabela()) + " * " + arred2x.format(dosagem.brita.getMassaUnitariaComp()));
 
         TextView textViewConsumoDeBritaResultado = findViewById(R.id.textViewConsumoDeBritaResultado);
         textViewConsumoDeBritaResultado.setText("Cb = " + arred2x.format(dosagem.brita.getConsumoDeBrita()) + " kg/m³");
@@ -377,6 +381,12 @@ public class ResultadosActivity extends AppCompatActivity {
             editTextTracoExibidoBrita.setText(arred2x.format(dosagem.traco.getTracoPara1M3DeConcretoEmMassa()[2]));
             editTextTracoExibidoAgua.setText(arred2x.format(dosagem.traco.getTracoPara1M3DeConcretoEmMassa()[3]));
 
+            textViewUmidadeAreia.setVisibility(View.GONE);
+            textViewInchamentoAreia.setVisibility(View.GONE);
+            textViewPadiolaTitulo.setVisibility(View.GONE);
+            textViewLarguraDaPadiola.setVisibility(View.GONE);
+            textViewComprimentoDaPadiola.setVisibility(View.GONE);
+
             LinearLayout linearLayoutCalculoTracoUnitarioEmMassa = findViewById(R.id.linearLayoutCalculoTracoUnitarioEmMassa);
             linearLayoutCalculoTracoUnitarioEmMassa.setVisibility(View.GONE);
             LinearLayout linearLayoutCalculoTracoPara1SacoDeCimentoEmMassa = findViewById(R.id.linearLayoutCalculoTracoPara1SacoDeCimentoEmMassa);
@@ -397,6 +407,12 @@ public class ResultadosActivity extends AppCompatActivity {
             editTextTracoExibidoAreia.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[1]));
             editTextTracoExibidoBrita.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[2]));
             editTextTracoExibidoAgua.setText(arred2x.format(dosagem.getTracoUnitarioEmMassa()[3]));
+
+            textViewUmidadeAreia.setVisibility(View.GONE);
+            textViewInchamentoAreia.setVisibility(View.GONE);
+            textViewPadiolaTitulo.setVisibility(View.GONE);
+            textViewLarguraDaPadiola.setVisibility(View.GONE);
+            textViewComprimentoDaPadiola.setVisibility(View.GONE);
 
             LinearLayout linearLayoutCalculoTracoPara1SacoDeCimentoEmMassa = findViewById(R.id.linearLayoutCalculoTracoPara1SacoDeCimentoEmMassa);
             linearLayoutCalculoTracoPara1SacoDeCimentoEmMassa.setVisibility(View.GONE);
@@ -424,7 +440,6 @@ public class ResultadosActivity extends AppCompatActivity {
 
             textViewUmidadeAreia.setVisibility(View.GONE);
             textViewInchamentoAreia.setVisibility(View.GONE);
-            TextView textViewPadiolaTitulo = findViewById(R.id.textViewPadiolaTitulo);
             textViewPadiolaTitulo.setVisibility(View.GONE);
             textViewLarguraDaPadiola.setVisibility(View.GONE);
             textViewComprimentoDaPadiola.setVisibility(View.GONE);
@@ -446,7 +461,6 @@ public class ResultadosActivity extends AppCompatActivity {
             LinearLayout linearLayoutCalculoTracoPara1SacoDeCimentoEmPadiolas = findViewById(R.id.linearLayoutCalculoTracoPara1SacoDeCimentoEmPadiolas);
             linearLayoutCalculoTracoPara1SacoDeCimentoEmPadiolas.setVisibility(View.GONE);
 
-            TextView textViewPadiolaTitulo = findViewById(R.id.textViewPadiolaTitulo);
             textViewPadiolaTitulo.setVisibility(View.GONE);
             textViewLarguraDaPadiola.setVisibility(View.GONE);
             textViewComprimentoDaPadiola.setVisibility(View.GONE);

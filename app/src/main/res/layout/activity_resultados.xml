@@ -453,14 +453,14 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/textViewCalculoDeFcj"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:text="- Cálculo de Fcj -"
+            android:text="- Cálculo de Fcm e Fcj -"
             android:textAllCaps="false"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -471,17 +471,27 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginLeft="28dp"
-            android:text="Fcj = fck + 1,65*sd"
+            android:text="Fcm = fck + 1,65*sd"
             android:textAllCaps="false"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/textViewFcjCalculo"
+            android:id="@+id/textViewFcmCalculo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginLeft="28dp"
-            android:text="Fcj = *calculo*"
+            android:text="Fcm = *calculo*"
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewFcmResultado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:text="Fcm = *resultado*"
             android:textAllCaps="false"
             android:textSize="16sp" />
 
@@ -491,7 +501,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginLeft="28dp"
-            android:text="Fcj = *resultado*"
+            android:text="Fcj ≥ Fcm → Fcj = *resultado*"
             android:textAllCaps="false"
             android:textColor="@color/colorAccent"
             android:textSize="16sp" />
