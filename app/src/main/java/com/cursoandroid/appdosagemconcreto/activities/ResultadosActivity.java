@@ -130,7 +130,7 @@ public class ResultadosActivity extends AppCompatActivity {
         textViewFckConcreto.setText("Fck = " + arred1X.format(dosagem.concreto.getFck()) + " MPa");
 
         TextView textViewAbatimento = findViewById(R.id.textViewAbatimento);
-        textViewAbatimento.setText("Abat. (Slump test) = " + arred1X.format(dosagem.concreto.getAbatimento()));
+        textViewAbatimento.setText("Abat. (Slump test) = " + arred1X.format(dosagem.concreto.getAbatimento()) + " mm");
 
         TextView textViewTipoDeCimento = findViewById(R.id.textViewTipoDeCimento);
         textViewTipoDeCimento.setText("Tipo de cimento = " + dosagem.cimento.getEspecificacoes());

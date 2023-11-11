@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingTop="32dp"
-    android:paddingRight="16dp"
+    android:paddingLeft="0dp"
+    android:paddingTop="12dp"
+    android:paddingRight="0dp"
     android:paddingBottom="32dp"
     tools:context=".activities.MainActivity">
 
@@ -15,35 +15,105 @@
         android:id="@+id/buttonNovoTraco"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/rounded_corner_azul"
+        android:drawableStart="@drawable/ic_betoneirabranca"
+        android:paddingStart="60dp"
+        android:paddingEnd="30dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:text="Novo Traço"
-        android:textSize="16sp" />
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:elevation="5dp"
+        android:layout_marginBottom="8dp"/>
 
-    <Button
-        android:id="@+id/buttonTracosSalvos"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Traços Salvos"
-        android:textSize="16sp" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/buttonCimentosSalvos"
+        <Button
+            android:id="@+id/buttonTracosSalvos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Traços Salvos"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            android:drawableTop="@drawable/ic_armariodearquivoazul"
+            android:background="@drawable/rounded_corner"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:elevation="5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"/>
+
+        <Button
+            android:id="@+id/buttonCimentosSalvos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cimentos"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            android:drawableTop="@drawable/ic_cimentosazul"
+            android:background="@drawable/rounded_corner"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:elevation="5dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cimentos"
-        android:textSize="16sp" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/buttonAjuda"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ajuda"
-        android:textSize="16sp" />
+        <Button
+            android:id="@+id/buttonAjuda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ajuda"
+            android:textSize="16sp"
+            android:textColor="#888"
+            android:drawableTop="@drawable/ic_ajudacinza"
+            android:background="@drawable/rounded_corner"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:elevation="5dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            />
 
-    <Button
-        android:id="@+id/buttonSobreOApp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sobre o App"
-        android:textSize="16sp" />
+        <Button
+            android:id="@+id/buttonSobreOApp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sobre o App"
+            android:textSize="16sp"
+            android:textColor="#888"
+            android:drawableTop="@drawable/ic_sobreoappcinza"
+            android:background="@drawable/rounded_corner"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:elevation="5dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>
